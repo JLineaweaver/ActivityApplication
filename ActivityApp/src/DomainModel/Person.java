@@ -2,6 +2,7 @@ package DomainModel;
 
 import java.util.ArrayList;
 
+import DataMappers.MyThreadLocal;
 import DataMappers.PersonDataMapper;
 
 /**
@@ -38,10 +39,17 @@ public class Person
 		personMapper = new PersonDataMapper();
 	}
 	
-	//public static Person findPerson(String username, String password) {
-		//ThreadLocal<PersonDataMapper> personMapper;
-		//return personMapper.findPerson(username);
-	//}
+	public static Person findPerson(String username, String password) {
+		PersonDataMapper pdm;
+		try{
+		pdm = MyThreadLocal.get();
+		}
+		catch(Exception e) {
+			MyThreadLocal.set(new PersonDataMapper());
+			pdm = MyThreadLocal.get();
+		}
+		return pdm.findPerson("Lonny","pw");
+	}
 	
 	
 
