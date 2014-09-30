@@ -12,43 +12,44 @@ import DataMappers.PersonDataMapper;
 public class Person
 {
 	FriendsList myFriends;
-	GoalList myGoals;
 	PendingFriendsList myPendingFriends;
-	PersonDataMapper personMapper;
 	
 	/**
 	 * Constructor
 	 */
 	public Person() {
 		myFriends = new FriendsList();
-		myGoals = new GoalList();
 		myPendingFriends = new PendingFriendsList();
-		personMapper = new PersonDataMapper();
 	}
 	
 	/**
 	 * Constructor with parameters
 	 * @param myFriends
-	 * @param myGoals
-	 * @param myPendingFriends
+	 * @param myPendingFriends 
 	 */
-	public Person(FriendsList myFriends, GoalList myGoals, PendingFriendsList myPendingFriends) {
+	public Person(FriendsList myFriends, PendingFriendsList myPendingFriends) {
 		this.myFriends = myFriends;
-		this.myGoals = myGoals;
 		this.myPendingFriends = myPendingFriends;
-		personMapper = new PersonDataMapper();
 	}
 	
+	/**
+	 * Static find method for persisting a person
+	 * @param username
+	 * @param password
+	 * @return
+	 */
 	public static Person findPerson(String username, String password) {
 		PersonDataMapper pdm;
-		try{
-		pdm = MyThreadLocal.get();
-		}
-		catch(Exception e) {
-			MyThreadLocal.set(new PersonDataMapper());
+		if(MyThreadLocal.get() != null) {
 			pdm = MyThreadLocal.get();
+		return pdm.findPerson(username,password);
 		}
-		return pdm.findPerson("Lonny","pw");
+		else {
+			pdm = new PersonDataMapper();
+			MyThreadLocal.set(pdm);
+			return pdm.findPerson(username,password);
+		}
+		
 	}
 	
 	
