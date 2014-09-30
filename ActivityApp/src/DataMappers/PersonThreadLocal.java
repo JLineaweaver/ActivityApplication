@@ -4,7 +4,7 @@ package DataMappers;
  * @author josh
  *
  */
-public class MyThreadLocal
+public class PersonThreadLocal
 {
 	private static final ThreadLocal<PersonDataMapper> userThreadLocal = new ThreadLocal<PersonDataMapper>();
 	
