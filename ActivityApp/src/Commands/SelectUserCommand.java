@@ -1,3 +1,5 @@
+package Commands;
+
 /**
  * Retrieve a specified user from the database into the domain model
  */

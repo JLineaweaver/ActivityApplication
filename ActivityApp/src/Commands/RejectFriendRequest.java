@@ -1,3 +1,5 @@
+package Commands;
+
 /**
  * Reject a friend request from one user to another
  * @author merlin

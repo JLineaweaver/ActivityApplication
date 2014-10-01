@@ -1,3 +1,5 @@
+package Commands;
+
 /**
  * Cancels a friend request between two users
  * @author merlin

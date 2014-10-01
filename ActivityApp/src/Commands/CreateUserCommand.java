@@ -1,3 +1,5 @@
+package Commands;
+
 
 /**
  * Creates a new user in the system

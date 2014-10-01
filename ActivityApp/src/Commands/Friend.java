@@ -1,3 +1,4 @@
+package Commands;
 /**
  * Holds enough information about a user to have them in a friend list
  * @author merlin

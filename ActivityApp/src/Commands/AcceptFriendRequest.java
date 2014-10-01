@@ -1,3 +1,5 @@
+package Commands;
+
 /**
  * Accept a friend request from one user to another
  * @author merlin
