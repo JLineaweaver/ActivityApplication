@@ -21,9 +21,16 @@ public class PersonThreadLocal
 	}
 	 
 	/**
+	 * Checks to see if the threadlocal has been set and if not sets it with a new 
+	 * PersonDataMapper.  Then it returns the set PersonDataMapper.
 	 * @return the pdm
 	 */
 	public static PersonDataMapper get() {
+		if ((PersonDataMapper) getUserthreadlocal().get() == null)
+		{
+			PersonDataMapper dm = new PersonDataMapper();
+			getUserthreadlocal().set(dm);
+		}
 	return (PersonDataMapper) getUserthreadlocal().get();
 	}
 
