@@ -11,6 +11,10 @@ import DataMappers.PersonThreadLocal;
  */
 public class Person
 {
+	private String username;
+	private String password;
+	private String displayName;
+	
 	FriendsList myFriends;
 	PendingFriendsList myPendingFriends;
 	
@@ -31,6 +35,57 @@ public class Person
 		this.myFriends = myFriends;
 		this.myPendingFriends = myPendingFriends;
 	}
+	
+	/**
+	 * @return username
+	 */
+	public String getUsername()
+	{
+		return username;
+	}
+
+	/**
+	 * @param username
+	 */
+	public void setUsername(String username)
+	{
+		this.username = username;
+	}
+
+	/**
+	 * @return password
+	 */
+	public String getPassword()
+	{
+		return password;
+	}
+
+	/**
+	 * @param password
+	 */
+	public void setPassword(String password)
+	{
+		this.password = password;
+	}
+
+	/**
+	 * @return displayName
+	 */
+	public String getDisplayName()
+	{
+		return displayName;
+	}
+
+	/**
+	 * @param displayName
+	 */
+	public void setDisplayName(String displayName)
+	{
+		this.displayName = displayName;
+	}
+
+
+
 	
 	/**
 	 * Static find method for persisting a person
