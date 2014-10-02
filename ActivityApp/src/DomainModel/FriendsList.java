@@ -13,7 +13,8 @@ public class FriendsList
 	/**
 	 * Constructor
 	 */
-	public FriendsList() {
+	public FriendsList() 
+	{
 		friends = new ArrayList<Person>();
 	}
 	
@@ -21,7 +22,18 @@ public class FriendsList
 	 * Constructor with parameter
 	 * @param friends
 	 */
-	public FriendsList(ArrayList<Person> friends) {
+	public FriendsList(ArrayList<Person> friends) 
+	{
 		this.friends = friends;
+	}
+	
+	public ArrayList<Person> getFriendList()
+	{
+		return friends;
+	}
+
+	public void add(Person friend) {
+		friends.add(friend);
+		
 	}
 }

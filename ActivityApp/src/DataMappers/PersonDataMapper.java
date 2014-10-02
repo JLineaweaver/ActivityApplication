@@ -38,4 +38,8 @@ public class PersonDataMapper
 		MockPersonRowDataGateway mprdg = new MockPersonRowDataGateway();
 		return mprdg.findPerson(ID);
 	}
+	public Person findPerson(String userNameOfRequester) {
+		MockPersonRowDataGateway mprdg = new MockPersonRowDataGateway();
+		return mprdg.findPerson(userNameOfRequester);
+	}
 }

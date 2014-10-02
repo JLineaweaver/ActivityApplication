@@ -98,7 +98,8 @@ public class Person extends DomainObject
 		return pdm.findPerson(username, password);
 	}
 
-	public static Person findPerson(int ID) {
+	public static Person findPerson(int ID) 
+	{
 		PersonDataMapper pdm = PersonThreadLocal.get();
 		return pdm.findPerson(ID);
 	}
@@ -107,6 +108,16 @@ public class Person extends DomainObject
 	{
 		Person friend = new Person();
 		friend = findPerson(userIDOfRequestee);
+		Person requester = new Person();
+		requester = findPerson(userNameOfRequester);
+		friend.myFriends.add(requester);
+		requester.myFriends.add(friend);
+		
 		this.markDirty();
+	}
+
+	private Person findPerson(String userNameOfRequester) {
+		PersonDataMapper  dm = PersonThreadLocal.get();
+		return dm.findPerson(userNameOfRequester);
 	}
 }
