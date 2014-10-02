@@ -1,8 +1,10 @@
 package DataMappers;
 
+import java.sql.SQLException;
+
 import DomainModel.Person;
 import Gateways.FriendsTableDataGateway;
-import Gateways.PendingFriendsTableDataGateway;
+import Gateways.OutgoingPendingFriendsTableDataGateway;
 import Gateways.PersonRowDataGateway;
 import MockGateways.MockPersonRowDataGateway;
 
@@ -14,14 +16,26 @@ import MockGateways.MockPersonRowDataGateway;
 public class PersonDataMapper
 {
 	FriendsTableDataGateway friendsGateway;
-	PendingFriendsTableDataGateway pendingFriendsGateway;
+	OutgoingPendingFriendsTableDataGateway pendingFriendsGateway;
 	PersonRowDataGateway personGateway;
 	public PersonDataMapper() {
-		personGateway = new PersonRowDataGateway();
+		try
+		{
+			personGateway = new PersonRowDataGateway();
+		} catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	public Person findPerson(String username, String password) {
 		MockPersonRowDataGateway mprdg = new MockPersonRowDataGateway();
 		return mprdg.findPerson(username,password);
 		//return personGateway.findPerson(username, password);
+	}
+	
+	public Person findPerson(int ID) {
+		MockPersonRowDataGateway mprdg = new MockPersonRowDataGateway();
+		return mprdg.findPerson(ID);
 	}
 }

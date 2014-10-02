@@ -13,4 +13,7 @@ public class MockPersonRowDataGateway
 	public Person findPerson(String Username, String password) {
 		return new Person();
 	}
+	public Person findPerson(int ID) {
+		return new Person();
+	}
 }
