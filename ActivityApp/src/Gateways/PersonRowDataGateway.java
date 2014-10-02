@@ -22,8 +22,8 @@ public class PersonRowDataGateway
 
 	public PersonRowDataGateway() throws SQLException {
 	
-		con = DriverManager.getConnection(url,user,password);
-		
+		//con = DriverManager.getConnection(url,user,password);
+		//Currently can't connect
 		
 	}
 	
