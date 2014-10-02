@@ -94,19 +94,14 @@ public class Person
 	 * @return
 	 */
 	public static Person findPerson(String username, String password) {
-		PersonDataMapper pdm;
-		if(PersonThreadLocal.get() != null) {
-			pdm = PersonThreadLocal.get();
+		PersonDataMapper pdm = PersonThreadLocal.get();
 		return pdm.findPerson(username,password);
-		}
-		else {
-			pdm = new PersonDataMapper();
-			PersonThreadLocal.set(pdm);
-			return pdm.findPerson(username,password);
-		}
-		
 	}
 	
+	public static Person findPerson(int ID) {
+		PersonDataMapper pdm = PersonThreadLocal.get();
+		return pdm.findPerson(ID);
+	}
 	
 
 }
