@@ -1,5 +1,7 @@
 package Commands;
 
+import DomainModel.Person;
+
 
 /**
  * Creates a new user in the system

@@ -1,5 +1,7 @@
 package Commands;
 
+import DomainModel.Person;
+
 /**
  * Retrieve a specified user from the database into the domain model
  */
