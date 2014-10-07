@@ -6,24 +6,25 @@ public class DomainObject
 {
 	private String isObjectNull;
 	
-	protected void markNew()
+	
+	protected void markNew(DomainObject obj)
 	{
-		UnitOfWork.getCurrent().registerNew(this);
+		UnitOfWork.getCurrent().registerNew(obj);
 	}
 	
-	protected void markClean()
+	protected void markClean(DomainObject obj)
 	{
-		UnitOfWork.getCurrent().registerClean(this);
+		UnitOfWork.getCurrent().registerClean(obj);
 	}
 	
-	protected void markDirty()
+	protected void markDirty(DomainObject obj)
 	{
-		UnitOfWork.getCurrent().registerDirty(this);
+		UnitOfWork.getCurrent().registerDirty(obj);
 	}
 	
-	protected void markRemoved()
+	protected void markRemoved(DomainObject obj)
 	{
-		UnitOfWork.getCurrent().registerRemoved(this);
+		UnitOfWork.getCurrent().registerRemoved(obj);
 	}
 
 	public String getIsObjectNull() 

@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 import DomainModel.Person;
 import Gateways.FriendsTableDataGateway;
-import Gateways.OutgoingPendingFriendsTableDataGateway;
+import Gateways.PendingFriendsTableDataGateway;
 import Gateways.PersonRowDataGateway;
 import MockGateways.MockPersonRowDataGateway;
 
@@ -16,7 +16,7 @@ import MockGateways.MockPersonRowDataGateway;
 public class PersonDataMapper
 {
 	FriendsTableDataGateway friendsGateway;
-	OutgoingPendingFriendsTableDataGateway pendingFriendsGateway;
+	PendingFriendsTableDataGateway pendingFriendsGateway;
 	PersonRowDataGateway personGateway;
 	public PersonDataMapper() {
 		try

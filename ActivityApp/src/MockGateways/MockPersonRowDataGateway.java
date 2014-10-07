@@ -16,13 +16,13 @@ public class MockPersonRowDataGateway
 	}
 	public Person findPerson(int ID) 
 	{
-		Person Croft = new Person("Croft", "CroftPassword", "CroftUserName");
+		Person Croft = new Person("Croft", "CroftPassword", "CroftUserName", -1);
 		return Croft;
 	}
 	
 	public Person findPerson(String Username) 
 	{
-		Person Matthew = new Person("Kujawski", "KujawskiPassword", "KujawskiUserName");
+		Person Matthew = new Person("Kujawski", "KujawskiPassword", "KujawskiUserName", -2);
 		return Matthew;
 	}
 }

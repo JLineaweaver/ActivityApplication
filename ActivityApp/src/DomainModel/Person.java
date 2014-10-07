@@ -27,11 +27,14 @@ public class Person extends DomainObject
 		myPendingFriends = new PendingFriendsList();
 	}
 	
-	public Person(String name, String password, String username)
+	public Person(String name, String password, String username, int id)
 	{
 		displayName = name;
 		this.password = password;
 		this.username = username;
+		ID = id;
+		myFriends = new FriendsList();
+		myPendingFriends = new PendingFriendsList();
 	}
 	
 	/**
@@ -139,7 +142,8 @@ public class Person extends DomainObject
 		friend.myFriends.add(requester);
 		requester.myFriends.add(friend);
 		
-		this.markDirty();
+		this.markDirty(friend);
+		this.markDirty(requester);
 	}
 	
 	/**
