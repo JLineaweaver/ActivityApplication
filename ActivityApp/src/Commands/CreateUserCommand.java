@@ -1,5 +1,7 @@
 package Commands;
 
+import DomainModel.Person;
+
 
 /**
  * Creates a new user in the system
@@ -45,7 +47,6 @@ public class CreateUserCommand implements Command
 	@Override
 	public Person getResult()
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
 

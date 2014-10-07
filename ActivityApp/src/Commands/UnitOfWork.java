@@ -18,7 +18,7 @@ public class UnitOfWork
 	
 	public void registerNew(DomainObject obj)
 	{
-		Assert.notNull("id not null", obj.getId());
+		Assert.assertNotNull("id not null", obj.getId());
 		Assert.assertTrue("object not dirty", !dirtyObjects.contains(obj));
 		Assert.assertTrue("object not removed", !removedObjects.contains(obj));
 		Assert.assertTrue("object not already registered new", !newObjects.contains(obj));
