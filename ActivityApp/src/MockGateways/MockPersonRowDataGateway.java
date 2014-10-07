@@ -10,14 +10,19 @@ public class MockPersonRowDataGateway
 		
 	}
 	
-	public Person findPerson(String Username, String password) {
+	public Person findPerson(String Username, String password) 
+	{
 		return new Person();
 	}
-	public Person findPerson(int ID) {
-		return new Person();
+	public Person findPerson(int ID) 
+	{
+		Person Croft = new Person("Croft", "CroftPassword", "CroftUserName");
+		return Croft;
 	}
 	
-	public Person findPerson(String Username) {
-		return new Person();
+	public Person findPerson(String Username) 
+	{
+		Person Matthew = new Person("Kujawski", "KujawskiPassword", "KujawskiUserName");
+		return Matthew;
 	}
 }

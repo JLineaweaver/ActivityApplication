@@ -13,6 +13,7 @@ public class Person extends DomainObject
 	private String username;
 	private String password;
 	private String displayName;
+	private int ID; // If ID is not auto generated
 	
 	FriendsList myFriends;
 	PendingFriendsList myPendingFriends;
@@ -24,6 +25,13 @@ public class Person extends DomainObject
 	{
 		myFriends = new FriendsList();
 		myPendingFriends = new PendingFriendsList();
+	}
+	
+	public Person(String name, String password, String username)
+	{
+		displayName = name;
+		this.password = password;
+		this.username = username;
 	}
 	
 	/**
@@ -103,7 +111,25 @@ public class Person extends DomainObject
 		PersonDataMapper pdm = PersonThreadLocal.get();
 		return pdm.findPerson(ID);
 	}
+	
+	/**
+	 * 
+	 * @param userNameOfRequester 
+	 * Find the person based on the Username
+	 * @return the person
+	 */
+	private Person findPerson(String userNameOfRequester) {
+		PersonDataMapper  dm = PersonThreadLocal.get();
+		return dm.findPerson(userNameOfRequester);
+	}
 
+	/**
+	 * 
+	 * @param userIDOfRequestee is the person that is being as to be someone's friend
+	 * @param userNameOfRequester is the person asking to be someone's friend
+	 * 
+	 * Find both people, add each other to their friends list, mark person as dirty.
+	 */
 	public void acceptFriendRequest(int userIDOfRequestee, String userNameOfRequester)
 	{
 		Person friend = new Person();
@@ -115,9 +141,32 @@ public class Person extends DomainObject
 		
 		this.markDirty();
 	}
+	
+	/**
+	 * @return the array list of friends for that person
+	 */
+	public FriendsList getFriends()
+	{
+		return myFriends;
+	}
+	
+	/**
+	 * @return get the number of friends
+	 */
+	public int getNumberOfFriends()
+	{
+		int size = myFriends.getFriendList().size();
+		return size;
+	}
 
-	private Person findPerson(String userNameOfRequester) {
-		PersonDataMapper  dm = PersonThreadLocal.get();
-		return dm.findPerson(userNameOfRequester);
+	
+	public void setID(int ID) 
+	{
+		this.ID = ID;
+	}
+	
+	public int getID()
+	{
+		return ID;
 	}
 }

@@ -47,7 +47,6 @@ public class CreateUserCommand implements Command
 	@Override
 	public Person getResult()
 	{
-		// TODO Auto-generated method stub
 		return null;
 	}
 

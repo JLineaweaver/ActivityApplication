@@ -4,6 +4,8 @@ import Commands.UnitOfWork;
 
 public class DomainObject 
 {
+	private String ID;
+	
 	protected void markNew()
 	{
 		UnitOfWork.getCurrent().registerNew(this);
@@ -22,5 +24,16 @@ public class DomainObject
 	protected void markRemoved()
 	{
 		UnitOfWork.getCurrent().registerRemoved(this);
+	}
+
+	public String getId() 
+	{
+		ID = "id not null";
+		return ID;
+	}
+	
+	public void setID(String newID)
+	{
+		ID = newID;
 	}
 }
