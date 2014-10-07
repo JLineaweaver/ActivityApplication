@@ -14,6 +14,8 @@ public class TestPerson
 	{
 		Person myPerson = Person.findPerson("Lonny", "password");
 		assertTrue(myPerson != null);
+		myPerson = Person.findPerson(12);
+		assertTrue(myPerson != null);
 	}
 
 }
