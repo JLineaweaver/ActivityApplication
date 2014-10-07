@@ -1,5 +1,7 @@
 package Commands;
 
+import DomainModel.Person;
+
 /**
  * Accept a friend request from one user to another
  * @author merlin
@@ -7,7 +9,7 @@ package Commands;
  */
 public class AcceptFriendRequest implements Command
 {
-
+	
 	private int userIDOfRequestee;
 	private String userNameOfRequester;
 
@@ -22,6 +24,7 @@ public class AcceptFriendRequest implements Command
 		this.userIDOfRequestee = userIDOfRequestee;
 		this.userNameOfRequester = userNameOfRequester;
 		
+		
 	}
 	
 	/**
@@ -31,7 +34,8 @@ public class AcceptFriendRequest implements Command
 	@Override
 	public void execute()
 	{
-		// TODO Auto-generated method stub
+		Person p = new Person();
+		p.acceptFriendRequest(userIDOfRequestee, userNameOfRequester);
 
 	}
 

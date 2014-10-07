@@ -21,5 +21,4 @@ public interface Command
 	 * @return the net affect of the command.
 	 */
 	public Object getResult();
-
 }

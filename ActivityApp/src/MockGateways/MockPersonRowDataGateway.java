@@ -5,7 +5,8 @@ import DomainModel.Person;
 public class MockPersonRowDataGateway
 {
 
-	public MockPersonRowDataGateway() {
+	public MockPersonRowDataGateway() 
+	{
 		
 	}
 	
@@ -13,6 +14,10 @@ public class MockPersonRowDataGateway
 		return new Person();
 	}
 	public Person findPerson(int ID) {
+		return new Person();
+	}
+	
+	public Person findPerson(String Username) {
 		return new Person();
 	}
 }

@@ -1,6 +1,5 @@
 package DomainModel;
 
-import java.util.ArrayList;
 
 import DataMappers.PersonDataMapper;
 import DataMappers.PersonThreadLocal;
@@ -9,7 +8,7 @@ import DataMappers.PersonThreadLocal;
  * @author josh
  *
  */
-public class Person
+public class Person extends DomainObject
 {
 	private String username;
 	private String password;
@@ -21,7 +20,8 @@ public class Person
 	/**
 	 * Constructor
 	 */
-	public Person() {
+	public Person() 
+	{
 		myFriends = new FriendsList();
 		myPendingFriends = new PendingFriendsList();
 	}
@@ -31,7 +31,8 @@ public class Person
 	 * @param myFriends
 	 * @param myPendingFriends 
 	 */
-	public Person(FriendsList myFriends, PendingFriendsList myPendingFriends) {
+	public Person(FriendsList myFriends, PendingFriendsList myPendingFriends) 
+	{
 		this.myFriends = myFriends;
 		this.myPendingFriends = myPendingFriends;
 	}
@@ -84,8 +85,6 @@ public class Person
 		this.displayName = displayName;
 	}
 
-
-
 	
 	/**
 	 * Static find method for persisting a person
@@ -93,15 +92,32 @@ public class Person
 	 * @param password
 	 * @return
 	 */
-	public static Person findPerson(String username, String password) {
-		PersonDataMapper pdm = PersonThreadLocal.get();
-		return pdm.findPerson(username,password);
+	public static Person findPerson(String username, String password) 
+	{
+		PersonDataMapper pdm = PersonThreadLocal.get(); 
+		return pdm.findPerson(username, password);
 	}
-	
-	public static Person findPerson(int ID) {
+
+	public static Person findPerson(int ID) 
+	{
 		PersonDataMapper pdm = PersonThreadLocal.get();
 		return pdm.findPerson(ID);
 	}
-	
 
+	public void acceptFriendRequest(int userIDOfRequestee, String userNameOfRequester)
+	{
+		Person friend = new Person();
+		friend = findPerson(userIDOfRequestee);
+		Person requester = new Person();
+		requester = findPerson(userNameOfRequester);
+		friend.myFriends.add(requester);
+		requester.myFriends.add(friend);
+		
+		this.markDirty();
+	}
+
+	private Person findPerson(String userNameOfRequester) {
+		PersonDataMapper  dm = PersonThreadLocal.get();
+		return dm.findPerson(userNameOfRequester);
+	}
 }
