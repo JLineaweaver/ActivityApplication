@@ -4,7 +4,7 @@ import Commands.UnitOfWork;
 
 public class DomainObject 
 {
-	private String ID;
+	private String isObjectNull;
 	
 	protected void markNew()
 	{
@@ -26,14 +26,10 @@ public class DomainObject
 		UnitOfWork.getCurrent().registerRemoved(this);
 	}
 
-	public String getId() 
+	public String getIsObjectNull() 
 	{
-		ID = "id not null";
-		return ID;
+		isObjectNull = "id not null";
+		return isObjectNull;
 	}
 	
-	public void setID(String newID)
-	{
-		ID = newID;
-	}
 }

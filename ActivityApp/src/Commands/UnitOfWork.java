@@ -18,7 +18,7 @@ public class UnitOfWork
 	
 	public void registerNew(DomainObject obj)
 	{
-		Assert.assertNotNull("id not null", obj.getId());
+		Assert.assertNotNull("id not null", obj.getIsObjectNull());
 		Assert.assertTrue("object not dirty", !dirtyObjects.contains(obj));
 		Assert.assertTrue("object not removed", !removedObjects.contains(obj));
 		Assert.assertTrue("object not already registered new", !newObjects.contains(obj));
@@ -27,7 +27,7 @@ public class UnitOfWork
 	
 	public void registerDirty(DomainObject obj)
 	{
-		Assert.assertNotNull("id not null", obj.getId());
+		Assert.assertNotNull("id not null", obj.getIsObjectNull());
 		Assert.assertTrue("object not removed", !removedObjects.contains(obj));
 		if(!dirtyObjects.contains(obj) && !newObjects.contains(obj))
 		{
@@ -37,7 +37,7 @@ public class UnitOfWork
 	
 	public void registerRemoved(DomainObject obj)
 	{
-		Assert.assertNotNull("id not null", obj.getId());
+		Assert.assertNotNull("id not null", obj.getIsObjectNull());
 		if(newObjects.remove(obj)) return;
 		dirtyObjects.remove(obj);
 		if(!removedObjects.contains(obj))
