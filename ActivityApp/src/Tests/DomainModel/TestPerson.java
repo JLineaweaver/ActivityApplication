@@ -17,7 +17,7 @@ public class TestPerson
 		assertTrue(myPerson != null);
 		myPerson = Person.findPerson(12);
 		assertTrue(myPerson != null);
-		FriendsList myFL = myPerson.getFriends();
+		FriendsList myFL = myPerson.findFriends();
 		assertTrue(myFL != null);
 	}
 
