@@ -1,7 +1,7 @@
 package MockGateways;
 
-import DomainModel.FriendsList;
-import DomainModel.Person;
+import domainLogic.FriendsList;
+import domainLogic.Person;
 
 public class MockFriendsTableDataGateway
 {

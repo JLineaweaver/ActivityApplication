@@ -1,4 +1,4 @@
-package DomainModel;
+package domainLogic;
 
 public class PendingFriendsList
 {

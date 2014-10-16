@@ -2,8 +2,8 @@ package DataMappers;
 
 import java.sql.SQLException;
 
-import DomainModel.FriendsList;
-import DomainModel.Person;
+import domainLogic.FriendsList;
+import domainLogic.Person;
 import Gateways.FriendsTableDataGateway;
 import Gateways.PendingFriendsTableDataGateway;
 import Gateways.PersonRowDataGateway;

@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 import org.junit.Assert;
 
-import DomainModel.DomainObject;
-
 
 public class UnitOfWork 
 {

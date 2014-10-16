@@ -4,8 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import DomainModel.FriendsList;
-import DomainModel.Person;
+import domainLogic.FriendsList;
+import domainLogic.Person;
 
 public class TestPerson
 {

@@ -1,6 +1,5 @@
-package DomainModel;
+package domainLogic;
 
-import domainLogic.UnitOfWork;
 
 public class DomainObject 
 {

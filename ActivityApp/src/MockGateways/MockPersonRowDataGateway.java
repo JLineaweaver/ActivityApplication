@@ -1,6 +1,7 @@
 package MockGateways;
 
-import DomainModel.Person;
+import domainLogic.Person;
+
 
 public class MockPersonRowDataGateway
 {
