@@ -4,11 +4,21 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class TestPerson {
+import DomainModel.FriendsList;
+import DomainModel.Person;
+
+public class TestPerson
+{
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void test()
+	{
+		Person myPerson = Person.findPerson("Lonny", "password");
+		assertTrue(myPerson != null);
+		myPerson = Person.findPerson(12);
+		assertTrue(myPerson != null);
+		FriendsList myFL = myPerson.findFriends();
+		assertTrue(myFL != null);
 	}
 
 }
