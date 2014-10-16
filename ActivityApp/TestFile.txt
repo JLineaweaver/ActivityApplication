@@ -12,3 +12,33 @@ CommandToRetrieveFriendList <userID>;
 CommandToPersistChanges;
 CommandToSelectUser josh pw;
 CommandToRetrieveFriendList <userID>;
+
+CommandToCreateUser josh pw josh78; josh:pw:josh78
+CommandToCreateUser frank pw1 noShoes12; frank:pw:noShoes12
+CommandToSelectUser josh pw;
+CommandToMakeFriendRequest <userID> frank;
+CommandToGetPendingOutgoingFriendList <userID>; frank
+CommandToPersistChanges;
+CommandToSelectUser frank pw1;
+CommandToGetPendingIncomingFriendList <userID>; josh
+CommandToAcceptFriendList <userID> josh;
+CommandToGetPendingIncomingFriendList <userID>;
+CommandToRetrieveFriendList <userID>; josh
+CommandToPersistChanges;
+CommandToSelectUser josh pw;
+CommandToRetrieveFriendList <userID>; frank
+CommandToUnFriend <userID> frank;
+CommandToPersistChanges
+CommandToRetrieveFriendList <userID>;
+
+CommandToCreateUser josh pw josh78; josh:pw:josh78
+CommandToCreateUser frank pw1 noShoes12; frank:pw:noShoes12
+CommandToSelectUser josh pw;
+CommandToMakeFriendRequest <userID> frank;
+CommandToMakeFriendRequest <userID> frank;
+CommandToMakeFriendRequest <userID> frank;
+CommandToMakeFriendRequest <userID> frank;
+CommandToGetPendingOutgoingFriendList <userID>; frank
+CommandToPersistChanges;
+CommandToSelectUser frank pw1;
+CommandToGetPendingIncomingFriendList <userID>; josh
