@@ -1,4 +1,4 @@
-package Commands;
+package domainLogic;
 
 import java.util.ArrayList;
 
