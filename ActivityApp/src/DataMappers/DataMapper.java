@@ -7,6 +7,7 @@ import DomainModel.Person;
 import Gateways.FriendsTableDataGateway;
 import Gateways.PendingFriendsTableDataGateway;
 import Gateways.PersonRowDataGateway;
+import MockGateways.MockFriendsTableDataGateway;
 import MockGateways.MockPersonRowDataGateway;
 
 /**

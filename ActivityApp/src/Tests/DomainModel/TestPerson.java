@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import DomainModel.FriendsList;
 import DomainModel.Person;
 
 public class TestPerson
@@ -16,7 +17,8 @@ public class TestPerson
 		assertTrue(myPerson != null);
 		myPerson = Person.findPerson(12);
 		assertTrue(myPerson != null);
-		myPerson.find
+		FriendsList myFL = myPerson.getFriends();
+		assertTrue(myFL != null);
 	}
 
 }

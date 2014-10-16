@@ -100,8 +100,8 @@ public class Person extends DomainObject
 	/**
 	 * Static find method for persisting a person
 	 * @param username
-	 * @param password
-	 * @return
+	 * @param password 
+	 * @return Person
 	 */
 	public static Person findPerson(String username, String password) 
 	{
@@ -109,6 +109,10 @@ public class Person extends DomainObject
 		return pdm.findPerson(username, password);
 	}
 
+	/**
+	 * @param ID
+	 * @return Person
+	 */
 	public static Person findPerson(int ID) 
 	{
 		DataMapper pdm = MyThreadLocal.get();
@@ -149,10 +153,12 @@ public class Person extends DomainObject
 	/**
 	 * @return the array list of friends for that person
 	 */
-	public FriendsList getFriends()
+	public FriendsList findFriends()
 	{
-		return myFriends;
+		DataMapper pdm = MyThreadLocal.get();
+		return pdm.findFriends(ID);
 	}
+	
 	
 	/**
 	 * @return get the number of friends

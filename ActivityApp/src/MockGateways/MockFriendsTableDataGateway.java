@@ -1,6 +1,7 @@
 package MockGateways;
 
 import DomainModel.FriendsList;
+import DomainModel.Person;
 
 public class MockFriendsTableDataGateway
 {
@@ -10,6 +11,16 @@ public class MockFriendsTableDataGateway
 	}
 	
 	public FriendsList findFriends(int ID) {
-		return new FriendsList();
+		FriendsList myFL = new FriendsList();
+		Person p = new Person();
+		myFL.add(p);
+		return myFL;
+	}
+	
+	public FriendsList findFriends(String username) {
+		FriendsList myFL = new FriendsList();
+		Person p = new Person();
+		myFL.add(p);
+		return myFL;
 	}
 }
