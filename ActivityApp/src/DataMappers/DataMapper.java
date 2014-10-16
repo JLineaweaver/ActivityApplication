@@ -2,6 +2,7 @@ package DataMappers;
 
 import java.sql.SQLException;
 
+import DomainModel.FriendsList;
 import DomainModel.Person;
 import Gateways.FriendsTableDataGateway;
 import Gateways.PendingFriendsTableDataGateway;
@@ -22,6 +23,8 @@ public class DataMapper
 		try
 		{
 			personGateway = new PersonRowDataGateway();
+			friendsGateway = new FriendsTableDataGateway();
+			pendingFriendsGateway = new PendingFriendsTableDataGateway();
 		} catch (SQLException e)
 		{
 			// TODO Auto-generated catch block
@@ -41,6 +44,10 @@ public class DataMapper
 	public Person findPerson(String userNameOfRequester) {
 		MockPersonRowDataGateway mprdg = new MockPersonRowDataGateway();
 		return mprdg.findPerson(userNameOfRequester);
+	}
+	public FriendsList findFriends(int ID) {
+		MockFriendsTableDataGateway mftdg = new MockFriendsTableDataGateway();
+		return mftdg.findFriends(ID);
 	}
 	
 }

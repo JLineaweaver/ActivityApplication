@@ -1,8 +1,8 @@
 package DomainModel;
 
 
-import DataMappers.PersonDataMapper;
-import DataMappers.PersonThreadLocal;
+import DataMappers.DataMapper;
+import DataMappers.MyThreadLocal;
 
 /**
  * @author josh
@@ -105,13 +105,13 @@ public class Person extends DomainObject
 	 */
 	public static Person findPerson(String username, String password) 
 	{
-		PersonDataMapper pdm = PersonThreadLocal.get(); 
+		DataMapper pdm = MyThreadLocal.get(); 
 		return pdm.findPerson(username, password);
 	}
 
 	public static Person findPerson(int ID) 
 	{
-		PersonDataMapper pdm = PersonThreadLocal.get();
+		DataMapper pdm = MyThreadLocal.get();
 		return pdm.findPerson(ID);
 	}
 	
@@ -122,7 +122,7 @@ public class Person extends DomainObject
 	 * @return the person
 	 */
 	private Person findPerson(String userNameOfRequester) {
-		PersonDataMapper  dm = PersonThreadLocal.get();
+		DataMapper  dm = MyThreadLocal.get();
 		return dm.findPerson(userNameOfRequester);
 	}
 

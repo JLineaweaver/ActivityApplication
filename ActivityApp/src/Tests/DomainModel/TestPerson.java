@@ -16,6 +16,7 @@ public class TestPerson
 		assertTrue(myPerson != null);
 		myPerson = Person.findPerson(12);
 		assertTrue(myPerson != null);
+		myPerson.find
 	}
 
 }
