@@ -1,6 +1,7 @@
 package domainLogic;
 
 import java.util.ArrayList;
+import domainLogic.Person;
 
 /**
  * @author josh
