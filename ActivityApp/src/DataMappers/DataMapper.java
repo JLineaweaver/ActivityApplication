@@ -13,12 +13,12 @@ import MockGateways.MockPersonRowDataGateway;
  * Class for the person data mapper
  * Should run in a thread local
  */
-public class PersonDataMapper
+public class DataMapper
 {
 	FriendsTableDataGateway friendsGateway;
 	PendingFriendsTableDataGateway pendingFriendsGateway;
 	PersonRowDataGateway personGateway;
-	public PersonDataMapper() {
+	public DataMapper() {
 		try
 		{
 			personGateway = new PersonRowDataGateway();
@@ -42,4 +42,5 @@ public class PersonDataMapper
 		MockPersonRowDataGateway mprdg = new MockPersonRowDataGateway();
 		return mprdg.findPerson(userNameOfRequester);
 	}
+	
 }
