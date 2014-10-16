@@ -1,5 +1,8 @@
 package MockGateways;
 
+import DomainModel.PendingFriendsList;
+import Gateways.PendingFriendsTableDataGateway;
+
 /**
  * @author josh
  * The firstID is always the initial person making the request
@@ -43,5 +46,9 @@ public class MockPendingFriendsTableDataGateway
 	public boolean declineFriend(int firstID, int secondID) {
 		//Remove from table
 		return true;
+	}
+	
+	public PendingFriendsList findPendingFriends(int ID) {
+		return new PendingFriendsList();
 	}
 }

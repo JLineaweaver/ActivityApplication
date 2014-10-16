@@ -3,11 +3,13 @@ package DataMappers;
 import java.sql.SQLException;
 
 import DomainModel.FriendsList;
+import DomainModel.PendingFriendsList;
 import DomainModel.Person;
 import Gateways.FriendsTableDataGateway;
 import Gateways.PendingFriendsTableDataGateway;
 import Gateways.PersonRowDataGateway;
 import MockGateways.MockFriendsTableDataGateway;
+import MockGateways.MockPendingFriendsTableDataGateway;
 import MockGateways.MockPersonRowDataGateway;
 
 /**
@@ -49,6 +51,10 @@ public class DataMapper
 	public FriendsList findFriends(int ID) {
 		MockFriendsTableDataGateway mftdg = new MockFriendsTableDataGateway();
 		return mftdg.findFriends(ID);
+	}
+	public PendingFriendsList findPendingFriends(int ID) {
+		MockPendingFriendsTableDataGateway mpftdg = new MockPendingFriendsTableDataGateway();
+		return mpftdg.findPendingFriends(ID);
 	}
 	
 }

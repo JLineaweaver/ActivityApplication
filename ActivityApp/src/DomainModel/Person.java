@@ -159,6 +159,10 @@ public class Person extends DomainObject
 		return pdm.findFriends(ID);
 	}
 	
+	public PendingFriendsList findPendingFriends(int ID) {
+		DataMapper pdm = MyThreadLocal.get();
+		return pdm.findPendingFriends(ID);
+	}
 	
 	/**
 	 * @return get the number of friends
@@ -168,7 +172,6 @@ public class Person extends DomainObject
 		int size = myFriends.getFriendList().size();
 		return size;
 	}
-
 	
 	public void setID(int ID) 
 	{
