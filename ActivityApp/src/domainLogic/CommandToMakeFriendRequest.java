@@ -9,6 +9,7 @@ public class CommandToMakeFriendRequest implements Command
 
 	private int userIDOfRequester;
 	private String userNameOfRequestee;
+	private Person person = new Person();
 
 
 	/**
@@ -30,18 +31,31 @@ public class CommandToMakeFriendRequest implements Command
 	@Override
 	public void execute()
 	{
-		// TODO Auto-generated method stub
-
+		person.MakeFriendRequest(userIDOfRequester, userNameOfRequestee);
 	}
 
 	/**
 	 * Nothing needs to be retrieved from this command
 	 * @see Command#getResult()
+	 * 
+	 * I have this return requester for testing purposes.
+	 * This allows me to see the requester's pending friends
 	 */
 	@Override
-	public Object getResult()
+	public Person getResult()
 	{
-		return null;
+		Person result = person.getUser();
+		return result;
+	}
+	
+	public int getIDOfRequester()
+	{
+		return userIDOfRequester;
+	}
+	
+	public String getUserNameOfRequestee()
+	{
+		return userNameOfRequestee;
 	}
 
 }

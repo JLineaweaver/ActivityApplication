@@ -119,14 +119,14 @@ public class Person extends DomainObject
 	
 	/**
 	 * 
-	 * @param userNameOfRequester 
+	 * @param userNameOfRequestee
 	 * Find the person based on the Username
 	 * @return the person
 	 */
-	private Person findPerson(String userNameOfRequester) 
+	public static Person findPerson(String userNameOfRequestee) 
 	{
 		DataMapper  dm = MyThreadLocal.get();
-		return dm.findPerson(userNameOfRequester);
+		return dm.findPerson(userNameOfRequestee);
 	}
 
 	/**
@@ -168,7 +168,7 @@ public class Person extends DomainObject
 		return size;
 	}
 	
-	public int getID()
+	public int getUserID()
 	{
 		return userID;
 	}
@@ -180,7 +180,7 @@ public class Person extends DomainObject
 		user = new Person(userName, password, displayName, userID);
 	}
 	
-	public Person getPerson()
+	public Person getUser()
 	{
 		return user;
 	}
@@ -189,6 +189,15 @@ public class Person extends DomainObject
 	public void SelectUser(String userName, String pw) 
 	{
 		user = Person.findPerson(userName, pw);
+	}
+
+
+	public void MakeFriendRequest(int userIDOfRequester, String userNameOfRequestee) 
+	{
+		user = Person.findPerson(userIDOfRequester);
+		Person requestee = new Person();
+		requestee = Person.findPerson(userNameOfRequestee);
+		user.myPendingFriends.add(requestee);
 	}
 
 }

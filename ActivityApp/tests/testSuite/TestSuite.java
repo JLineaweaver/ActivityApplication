@@ -4,6 +4,7 @@ import org.junit.runners.Suite;
 import org.junit.runner.RunWith;
 
 import domainLogic.TestCommandToCreateUser;
+import domainLogic.TestCommandToMakeFriendRequest;
 import domainLogic.TestCommandToSelectUser;
 import domainLogic.TestPerson;
 
@@ -11,7 +12,8 @@ import domainLogic.TestPerson;
 @Suite.SuiteClasses({
 	TestCommandToSelectUser.class, 
 	TestCommandToCreateUser.class,
-	TestPerson.class})
+	TestPerson.class,
+	TestCommandToMakeFriendRequest.class})
 public class TestSuite {
 }
 
