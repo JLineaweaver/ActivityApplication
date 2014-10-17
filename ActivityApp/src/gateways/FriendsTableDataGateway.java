@@ -1,4 +1,4 @@
-package Gateways;
+package gateways;
 
 public class FriendsTableDataGateway
 {

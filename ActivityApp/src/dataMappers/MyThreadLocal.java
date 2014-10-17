@@ -1,4 +1,4 @@
-package DataMappers;
+package dataMappers;
 
 /**
  * @author josh

@@ -1,10 +1,11 @@
-package DataMappers;
+package dataMappers;
+
+import gateways.FriendsTableDataGateway;
+import gateways.PendingFriendsTableDataGateway;
+import gateways.PersonRowDataGateway;
 
 import java.sql.SQLException;
 
-import Gateways.FriendsTableDataGateway;
-import Gateways.PendingFriendsTableDataGateway;
-import Gateways.PersonRowDataGateway;
 import MockGateways.MockFriendsTableDataGateway;
 import MockGateways.MockPendingFriendsTableDataGateway;
 import MockGateways.MockPersonRowDataGateway;

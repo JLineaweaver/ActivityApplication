@@ -1,4 +1,4 @@
-package DomainModel;
+package domainLogic;
 
 import static org.junit.Assert.*;
 

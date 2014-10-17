@@ -7,6 +7,7 @@ public class CommandToSelectUser implements Command
 {
 	private String userName;
 	private String password;
+	private Person person = new Person();
 
 	/**
 	 * @param userName
@@ -29,7 +30,7 @@ public class CommandToSelectUser implements Command
 	@Override
 	public void execute()
 	{
-		// TODO Auto-generated method stub
+		person.SelectUser(userName, password);
 	}
 
 	/**
@@ -51,8 +52,8 @@ public class CommandToSelectUser implements Command
 	@Override
 	public Person getResult()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		Person result = person.getPerson();
+		return result;
 	}
 
 	/**

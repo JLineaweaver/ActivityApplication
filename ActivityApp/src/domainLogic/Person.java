@@ -1,7 +1,7 @@
 package domainLogic;
 
-import DataMappers.DataMapper;
-import DataMappers.MyThreadLocal;
+import dataMappers.DataMapper;
+import dataMappers.MyThreadLocal;
 
 /**
  * You all will have one of these.
@@ -15,7 +15,7 @@ public class Person extends DomainObject
 	private String password;
 	private String displayName;
 	private int userID;
-	private Person person;
+	private Person user;
 	
 	FriendsList myFriends;
 	PendingFriendsList myPendingFriends;
@@ -177,11 +177,18 @@ public class Person extends DomainObject
 	public void CreateUser(String userName, String password, String displayName) 
 	{
 		userID = (int) Math.random();
-		person = new Person(userName, password, displayName, userID);
+		user = new Person(userName, password, displayName, userID);
 	}
 	
 	public Person getPerson()
 	{
-		return person;
+		return user;
 	}
+
+
+	public void SelectUser(String userName, String pw) 
+	{
+		user = Person.findPerson(userName, pw);
+	}
+
 }
