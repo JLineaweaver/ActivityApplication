@@ -15,6 +15,7 @@ public class Person extends DomainObject
 	private String password;
 	private String displayName;
 	private int userID;
+	private Person person;
 	
 	FriendsList myFriends;
 	PendingFriendsList myPendingFriends;
@@ -33,15 +34,13 @@ public class Person extends DomainObject
 	 */
 	public Person() 
 	{
-		myFriends = new FriendsList();
-		myPendingFriends = new PendingFriendsList();
 	}
 	
-	public Person(String name, String pw, String username, int ID)
+	public Person(String uName, String pw, String dName, int ID)
 	{
-		displayName = name;
+		displayName = dName;
 		password = pw;
-		userName = username;
+		userName = uName;
 		userID = ID;
 		myFriends = new FriendsList();
 		myPendingFriends = new PendingFriendsList();
@@ -50,7 +49,7 @@ public class Person extends DomainObject
 	/**
 	 * @return username
 	 */
-	public String getUsername()
+	public String getUserName()
 	{
 		return userName;
 	}
@@ -58,7 +57,7 @@ public class Person extends DomainObject
 	/**
 	 * @param username
 	 */
-	public void setUsername(String username)
+	public void setUserName(String username)
 	{
 		userName = username;
 	}
@@ -168,14 +167,21 @@ public class Person extends DomainObject
 		int size = myFriends.getFriendList().size();
 		return size;
 	}
-
-	public void setID(int ID) 
-	{
-		userID = ID;
-	}
 	
 	public int getID()
 	{
 		return userID;
+	}
+
+
+	public void CreateUser(String userName, String password, String displayName) 
+	{
+		userID = (int) Math.random();
+		person = new Person(userName, password, displayName, userID);
+	}
+	
+	public Person getPerson()
+	{
+		return person;
 	}
 }

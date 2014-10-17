@@ -14,6 +14,8 @@ public class CommandToCreateUser implements Command
 	private String password;
 
 	private String displayName;
+	
+	private Person person = new Person();
 
 	/**
 	 * Create a command that will add a new user to the system
@@ -39,8 +41,7 @@ public class CommandToCreateUser implements Command
 	@Override
 	public void execute()
 	{
-		// TODO Auto-generated method stub
-
+		person.CreateUser(userName, password, displayName);
 	}
 	
 	/**
@@ -70,8 +71,8 @@ public class CommandToCreateUser implements Command
 	@Override
 	public Person getResult()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		Person result = person.getPerson();
+		return result;
 	}
 
 	/**
