@@ -6,9 +6,9 @@ import gateways.PersonRowDataGateway;
 
 import java.sql.SQLException;
 
-import MockGateways.MockFriendsTableDataGateway;
-import MockGateways.MockPendingFriendsTableDataGateway;
-import MockGateways.MockPersonRowDataGateway;
+import mockGateways.MockFriendsTableDataGateway;
+import mockGateways.MockPendingFriendsTableDataGateway;
+import mockGateways.MockPersonRowDataGateway;
 import domainLogic.FriendsList;
 import domainLogic.PendingFriendsList;
 import domainLogic.Person;

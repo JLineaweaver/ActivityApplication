@@ -1,4 +1,4 @@
-package MockGateways;
+package mockGateways;
 
 import domainLogic.FriendsList;
 import domainLogic.Person;
