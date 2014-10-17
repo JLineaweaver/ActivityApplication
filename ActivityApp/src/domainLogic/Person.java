@@ -14,7 +14,7 @@ public class Person extends DomainObject
 	private String userName;
 	private String password;
 	private String displayName;
-	private int ID; // If ID is not auto generated
+	private int userID;
 	
 	FriendsList myFriends;
 	PendingFriendsList myPendingFriends;
@@ -37,12 +37,12 @@ public class Person extends DomainObject
 		myPendingFriends = new PendingFriendsList();
 	}
 	
-	public Person(String name, String password, String username, int id)
+	public Person(String name, String pw, String username, int ID)
 	{
 		displayName = name;
-		this.password = password;
+		password = pw;
 		userName = username;
-		ID = id;
+		userID = ID;
 		myFriends = new FriendsList();
 		myPendingFriends = new PendingFriendsList();
 	}
@@ -124,7 +124,8 @@ public class Person extends DomainObject
 	 * Find the person based on the Username
 	 * @return the person
 	 */
-	private Person findPerson(String userNameOfRequester) {
+	private Person findPerson(String userNameOfRequester) 
+	{
 		DataMapper  dm = MyThreadLocal.get();
 		return dm.findPerson(userNameOfRequester);
 	}
@@ -136,18 +137,18 @@ public class Person extends DomainObject
 	 * 
 	 * Find both people, add each other to their friends list, mark person as dirty.
 	 */
-	public void acceptFriendRequest(int userIDOfRequestee, String userNameOfRequester)
-	{
-		Person friend = new Person();
-		friend = findPerson(userIDOfRequestee);
-		Person requester = new Person();
-		requester = findPerson(userNameOfRequester);
-		friend.myFriends.add(requester);
-		requester.myFriends.add(friend);
-		
-		this.markDirty(friend);
-		this.markDirty(requester);
-	}
+//	public void CommandToAcceptFriendRequest(int userIDOfRequestee, String userNameOfRequester)
+//	{
+//		Person friend = new Person();
+//		friend = findPerson(userIDOfRequestee);
+//		Person requester = new Person();
+//		requester = findPerson(userNameOfRequester);
+//		friend.myFriends.add(requester);
+//		requester.myFriends.add(friend);
+//		
+//		this.markDirty(friend);
+//		this.markDirty(requester);
+//	}
 	
 	/**
 	 * @return the array list of friends for that person
@@ -155,7 +156,7 @@ public class Person extends DomainObject
 	public FriendsList findFriends()
 	{
 		DataMapper pdm = MyThreadLocal.get();
-		return pdm.findFriends(ID);
+		return pdm.findFriends(userID);
 	}
 	
 	
@@ -168,14 +169,13 @@ public class Person extends DomainObject
 		return size;
 	}
 
-	
 	public void setID(int ID) 
 	{
-		this.ID = ID;
+		userID = ID;
 	}
 	
 	public int getID()
 	{
-		return ID;
+		return userID;
 	}
 }

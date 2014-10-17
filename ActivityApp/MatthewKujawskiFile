@@ -1,0 +1,66 @@
+CommandToCreateUser matt pw matt40; matt:pw:matt40
+CommandToSelectUser matt pw;
+CommandToModifyUser <userID> MattyMatt;
+CommandToPersistChanges;
+
+
+CommandToCreateUser matt pw matt40; matt:pw:matt40
+CommandToCreateUser IronMan pw2 IronManOrNothing; IronMan:pw2:IronManOrNothing
+CommandToSelectUser matt pw;
+CommandToMakeFriendRequest <userID> IronMan;
+CommandToSelectUser IronMan pw2;
+CommandToGetPendingIncomingFriendList <userID>; matt
+CommandToCancelChanges;
+CommandToPersistChanges;
+CommandToSelectUser IronMan pw2;
+CommandToGetPendingIncomingFriendList <userID>; 
+
+
+CommandToCreateUser matt pw matt40; matt:pw:matt40
+CommandToCreateUser SteelMan pw2 ManOfSteel; SteelMan:pw2:ManOfSteel
+CommandToCreateUser BronzeMan pw3 ManOfBronze; BronzeMan:pw3:ManOfBronze
+CommandToSelectUser matt pw;
+CommandToMakeFriendRequest <userID> SteelMan;
+CommandToSelectUser SteelMan pw2;
+CommandToGetPendingIncomingFriendList <userID>; matt
+CommandToPersistChanges;
+CommandToSelectUser SteelMan pw2;
+CommandToAcceptFriendRequest <userID> matt;
+CommandToPersistChanges;
+CommandToSelectUser SteelMan pw2;
+CommandToRetrieveFriendList <userID>; matt
+CommandToSelectUser BronzeMan pw3;
+CommandToMakeFriendRequest <userID> SteelMan;
+CommandToSelectUser SteelMan pw2;
+CommandToGetPendingIncomingFriendList <userID>; BronzeMan
+CommandToCancelChanges;
+CommandToPersistChanges;
+CommandToSelectUser SteelMan pw2;
+CommandToGetPendingIncomingFriendList <userID>; 
+
+
+CommandToCreateUser matt pw matt40; matt:pw:matt40
+CommandToCreateUser SteelMan pw2 ManOfSteel; SteelMan:pw2:ManOfSteel
+CommandToSelectUser matt pw;
+CommandToMakeFriendRequest <userID> SteelMan;
+CommandToSelectUser SteelMan pw2;
+CommandToGetPendingIncomingFriendList <userID>; matt
+CommandToPersistChanges;
+CommandToSelectUser SteelMan pw2;
+CommandToAcceptFriendRequest <userID> matt;
+CommandToPersistChanges;
+CommandToSelectUser matt pw;
+CommandToRetrieveFriendList <userID>; SteelMan
+CommandToUnFriend <userID> SteelMan;
+CommandToPersistChanges;
+CommandToSelectUser matt pw;
+CommandToRetrieveFriendList <userID>; 
+CommandToMakeFriendRequest <userID> SteelMan;
+CommandToSelectUser SteelMan pw2;
+CommandToGetPendingIncomingFriendList <userID>; matt
+CommandToPersistChanges;
+CommandToSelectUser SteelMan pw2;
+CommandToAcceptFriendRequest <userID> matt;
+CommandToPersistChanges;
+CommandToSelectUser matt pw;
+CommandToRetrieveFriendList <userID>; SteelMan
