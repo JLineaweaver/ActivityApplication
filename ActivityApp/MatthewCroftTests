@@ -1,0 +1,30 @@
+CommandToCreateUser matthew pw1 Matt78; matthew:pw1:Matt78
+CommandToCreateUser bob pw2 Bobby12; bob:pw2:Bobby12
+CommandToSelectUser bob pw2;
+CommandToMakeFriendRequest <userID> matthew;
+CommandToPersistChanges;
+CommandToSelectUser matthew pw1;
+CommandToGetPendingIncomingFriendList <userID>; bob
+CommandToAcceptFriendRequest <userID> bob;
+CommandToRetrieveFriendList <userID>; bob
+CommandToPresistChanges;
+
+CommandToCreateUser phil pw1 Phil78; phil:pw1:Phil78
+CommandToCreateUser mark pw2 Mark12; mark:pw2:Mark12
+CommandToSelectUser mark pw2;
+CommandToMakeFriendRequest <userID> phil;
+CommandToGetOutgoingFriendsList <userID>; phil
+CommandToPresistChanges;
+CommandToCancelChanges;
+CommandToGetOutgoingFriendsList <userID>;
+
+CommandToCreateUser lenny pw1 Len78; lenny:pw1:Len78
+CommandToCreateUser dad pw2 Dad12; dad:pw2:Dad12
+CommandToSelectUser dad pw2;
+CommandToMakeFriendRequest <userID> lenny;
+CommandToPersistChanges;
+CommandToSelectUser lenny pw1;
+CommandToGetPendingIncomingFriendList <userID>; bob
+CommandToRejectFriendRequest <userID> dad;
+CommandToRetrieveFriendList <userID>;
+CommandToPresistChanges;
