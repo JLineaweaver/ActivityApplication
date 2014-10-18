@@ -136,18 +136,17 @@ public class Person extends DomainObject
 	 * 
 	 * Find both people, add each other to their friends list, mark person as dirty.
 	 */
-//	public void CommandToAcceptFriendRequest(int userIDOfRequestee, String userNameOfRequester)
-//	{
-//		Person friend = new Person();
-//		friend = findPerson(userIDOfRequestee);
-//		Person requester = new Person();
-//		requester = findPerson(userNameOfRequester);
-//		friend.myFriends.add(requester);
-//		requester.myFriends.add(friend);
-//		
+	public void AcceptFriendRequest(int userIDOfRequestee, String userNameOfRequester)
+	{
+		user = Person.findPerson(userIDOfRequestee);
+		Person requester = new Person();
+		requester = Person.findPerson(userNameOfRequester);
+		user.myFriends.add(requester);
+		requester.myFriends.add(user);
+		
 //		this.markDirty(friend);
 //		this.markDirty(requester);
-//	}
+	}
 	
 	/**
 	 * @return the array list of friends for that person

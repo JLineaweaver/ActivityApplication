@@ -5,6 +5,7 @@ import domainLogic.Person;
 
 public class MockPersonRowDataGateway
 {
+	private Person person;
 
 	public MockPersonRowDataGateway() 
 	{
@@ -13,18 +14,25 @@ public class MockPersonRowDataGateway
 	
 	public Person findPerson(String Username, String password) 
 	{
-		Person user = new Person("MockUserName", "MockPassword", "MockDisplayName", -1);
-		return user;
+		person = new Person("MockUserName", "MockPassword", "MockDisplayName", -1);
+		return person;
 	}
 	public Person findPerson(int ID) 
 	{
-		Person Croft = new Person("CroftUserName", "CroftPassword", "CroftDisplayName", -1);
-		return Croft;
+		person = new Person("CroftUserName", "CroftPassword", "CroftDisplayName", -1);
+		return person;
 	}
 	
 	public Person findPerson(String Username) 
 	{
-		Person Matthew = new Person("KujawskiUserName", "KujawskiPassword", "KujawskiDisplayName", -1);
-		return Matthew;
+		person = new Person("KujawskiUserName", "KujawskiPassword", "KujawskiDisplayName", -1);
+		return person;
 	}
+	
+	public Person getPerson()
+	{
+		return person;
+	}
+	
+	
 }

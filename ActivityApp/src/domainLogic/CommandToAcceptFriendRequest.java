@@ -11,6 +11,7 @@ public class CommandToAcceptFriendRequest implements Command
 
 	private int userIDOfRequestee;
 	private String userNameOfRequester;
+	private Person person = new Person();
 
 	/**
 	 * 
@@ -33,19 +34,22 @@ public class CommandToAcceptFriendRequest implements Command
 	@Override
 	public void execute()
 	{
-		// TODO Auto-generated method stub
-
+		person.AcceptFriendRequest(userIDOfRequestee, userNameOfRequester);
 	}
 
 	/**
 	 * Nothing needs to be retrieved from this command
 	 * 
 	 * @see Command#getResult()
+	 * 
+	 * I have this return requester for testing purposes.
+	 * This allows me to see the requester's pending friends
 	 */
 	@Override
-	public Object getResult()
+	public Person getResult()
 	{
-		return null;
+		Person result = person.getUser();
+		return result;
 	}
 
 	/**

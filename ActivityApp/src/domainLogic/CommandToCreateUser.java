@@ -71,7 +71,7 @@ public class CommandToCreateUser implements Command
 	@Override
 	public Person getResult()
 	{
-		Person result = person.getPerson();
+		Person result = person.getUser();
 		return result;
 	}
 
