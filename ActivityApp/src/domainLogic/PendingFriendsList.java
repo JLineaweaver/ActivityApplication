@@ -32,4 +32,9 @@ public class PendingFriendsList
 	{
 		pendingFriends.add(friend);
 	}
+
+	public void remove(Person requestee)
+	{
+		pendingFriends.remove(requestee);
+	}
 }

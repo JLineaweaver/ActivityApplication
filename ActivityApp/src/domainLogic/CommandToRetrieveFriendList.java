@@ -29,7 +29,8 @@ public class CommandToRetrieveFriendList implements Command
 	@Override
 	public void execute()
 	{
-		// TODO Auto-generated method stub
+		Person person = new Person();
+		person.retrieveFriendList(userID);
 
 	}
 

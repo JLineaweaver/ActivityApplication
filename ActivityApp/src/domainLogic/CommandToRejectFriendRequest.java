@@ -30,7 +30,8 @@ public class CommandToRejectFriendRequest implements Command
 	@Override
 	public void execute()
 	{
-		// TODO Auto-generated method stub
+		Person person = new Person();
+		person.rejectFriendRequest(userIDOfRequestee, userNameOfRequester);
 
 	}
 

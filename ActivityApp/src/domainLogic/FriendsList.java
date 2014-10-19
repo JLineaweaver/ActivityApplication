@@ -37,4 +37,9 @@ public class FriendsList
 		friends.add(friend);
 		
 	}
+
+	public void remove(Person requestee)
+	{
+		friends.remove(requestee);	
+	}
 }
