@@ -247,4 +247,22 @@ public class Person extends DomainObject
 	{
 		return newPendingIncomingFriendList;
 	}
+
+
+	public void cancelChanges()
+	{
+		if(user.myPendingFriends != null)
+		{
+			user.myPendingFriends = null;
+		}
+	}
+
+
+	public void modifyUser(int userID, String newDisplayName)
+	{
+		user = Person.findPerson(userID);
+		user.setDisplayName(newDisplayName);
+		
+	}
+	
 }
