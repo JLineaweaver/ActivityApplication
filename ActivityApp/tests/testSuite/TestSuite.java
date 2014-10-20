@@ -8,6 +8,7 @@ import domainLogic.TestCommandToCreateUser;
 import domainLogic.TestCommandToMakeFriendRequest;
 import domainLogic.TestCommandToSelectUser;
 import domainLogic.TestPerson;
+import domainLogic.TestUnitOfWork;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
@@ -15,7 +16,8 @@ import domainLogic.TestPerson;
 	TestCommandToCreateUser.class,
 	TestPerson.class,
 	TestCommandToMakeFriendRequest.class,
-	TestCommandToAcceptFriendRequest.class})
+	TestCommandToAcceptFriendRequest.class,
+	TestUnitOfWork.class})
 public class TestSuite {
 }
 

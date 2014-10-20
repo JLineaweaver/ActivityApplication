@@ -16,7 +16,7 @@ public class Person extends DomainObject
 	private String userName;
 	private String password;
 	private String displayName;
-	private int userID;
+	private int userID = -1;
 	private Person user;
 	
 	FriendsList myFriends;
@@ -147,8 +147,8 @@ public class Person extends DomainObject
 		user.myFriends.add(requester);
 		requester.myFriends.add(user);
 		
-//		this.markDirty(friend);
-//		this.markDirty(requester);
+		this.markDirty(user);
+		this.markDirty(requester);
 	}
 	
 	/**
@@ -178,8 +178,9 @@ public class Person extends DomainObject
 
 	public void CreateUser(String userName, String password, String displayName) 
 	{
-		userID = (int) Math.random();
 		user = new Person(userName, password, displayName, userID);
+		
+		this.markNew(user);
 	}
 	
 	public Person getUser()
@@ -200,6 +201,9 @@ public class Person extends DomainObject
 		Person requestee = new Person();
 		requestee = Person.findPerson(userNameOfRequestee);
 		user.myPendingFriends.add(requestee);
+		
+		this.markDirty(user);
+		this.markDirty(requestee);
 	}
 
 

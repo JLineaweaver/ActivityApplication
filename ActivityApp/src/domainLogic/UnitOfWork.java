@@ -16,7 +16,7 @@ public class UnitOfWork
 	
 	public void registerNew(DomainObject obj)
 	{
-		Assert.assertNotNull("id not null", obj.getIsObjectNull());
+		//Assert.assertNotNull("id not null", obj.getIsObjectNull());
 		Assert.assertTrue("object not dirty", !dirtyObjects.contains(obj));
 		Assert.assertTrue("object not removed", !removedObjects.contains(obj));
 		Assert.assertTrue("object not already registered new", !newObjects.contains(obj));
@@ -25,19 +25,35 @@ public class UnitOfWork
 	
 	public void registerDirty(DomainObject obj)
 	{
-		Assert.assertNotNull("id not null", obj.getIsObjectNull());
+		//Assert.assertNotNull("id not null", obj.getIsObjectNull());
 		Assert.assertTrue("object not removed", !removedObjects.contains(obj));
-		if(!dirtyObjects.contains(obj) && !newObjects.contains(obj))
+		if(!dirtyObjects.contains(obj))
 		{
-			dirtyObjects.add(obj);
+			if(newObjects.contains(obj))
+			{
+				newObjects.remove(obj);
+				dirtyObjects.add(obj); 
+			}else
+			{
+				dirtyObjects.add(obj);
+			}
+		}else
+		{
+			dirtyObjects.remove(obj); //Want the most recent object (Person)
 		}
 	}
 	
 	public void registerRemoved(DomainObject obj)
 	{
-		Assert.assertNotNull("id not null", obj.getIsObjectNull());
-		if(newObjects.remove(obj)) return;
-		dirtyObjects.remove(obj);
+		//Assert.assertNotNull("id not null", obj.getIsObjectNull());
+		if(dirtyObjects.contains(obj))
+		{
+			dirtyObjects.remove(obj);
+		}else if(newObjects.contains(obj))
+		{
+			newObjects.remove(obj);
+		}
+
 		if(!removedObjects.contains(obj))
 		{
 			removedObjects.add(obj);
@@ -90,5 +106,20 @@ public class UnitOfWork
 	{
 		return (UnitOfWork)current.get();
 	}
-		
+	
+	public ArrayList<DomainObject> getNewObjects()
+	{
+		return newObjects;
+	}
+	
+	public ArrayList<DomainObject> getDirtyObjects()
+	{
+		return dirtyObjects;
+	}
+	
+	public ArrayList<DomainObject> getRemovedObjects()
+	{
+		return removedObjects;
+	}
+	
 }
