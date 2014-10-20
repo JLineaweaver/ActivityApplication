@@ -1,5 +1,7 @@
 package domainLogic;
 
+import java.util.ArrayList;
+
 import dataMappers.DataMapper;
 import dataMappers.MyThreadLocal;
 
@@ -19,6 +21,7 @@ public class Person extends DomainObject
 	
 	FriendsList myFriends;
 	PendingFriendsList myPendingFriends;
+	String newPendingIncomingFriendList = "";
 
 	/**
 	 * @see java.lang.Object#toString()
@@ -199,4 +202,19 @@ public class Person extends DomainObject
 		user.myPendingFriends.add(requestee);
 	}
 
+	public void getPendingIncomingFriendList(int userID) 
+	{
+		user = Person.findPerson(userID);
+		ArrayList<Person> incomingFriendsList = new ArrayList<Person>();
+		incomingFriendsList = user.myPendingFriends.getPendingFriendList();
+		for(int i = 0; i < incomingFriendsList.size(); i++)
+		{
+			newPendingIncomingFriendList = newPendingIncomingFriendList + "," + incomingFriendsList.get(i);
+		}
+	}
+	
+	public String getPendingIncomingFriendListString()
+	{
+		return newPendingIncomingFriendList;
+	}
 }

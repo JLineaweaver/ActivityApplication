@@ -12,6 +12,7 @@ public class CommandToGetPendingIncomingFriendList implements Command
 {
 
 	private int userID;
+	private Person person = new Person();
 
 	/**
 	 * The userID of the current user
@@ -31,7 +32,7 @@ public class CommandToGetPendingIncomingFriendList implements Command
 	@Override
 	public void execute()
 	{
-		// TODO Auto-generated method stub
+		person.getPendingIncomingFriendList(userID);
 	}
 
 	/**
@@ -42,8 +43,8 @@ public class CommandToGetPendingIncomingFriendList implements Command
 	@Override
 	public String getResult()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		String result = person.getPendingIncomingFriendListString();
+		return result;
 	}
 
 	/**
