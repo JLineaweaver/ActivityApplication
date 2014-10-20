@@ -9,7 +9,7 @@ public class CommandToUnFriend implements Command
 
 	private int userIDOfRequester;
 	private String userNameOfRequestee;
-
+	Person person = new Person();
 
 	/**
 	 * 
@@ -30,8 +30,7 @@ public class CommandToUnFriend implements Command
 	@Override
 	public void execute()
 	{
-		// TODO Auto-generated method stub
-
+		person.UnFriend(userIDOfRequester, userNameOfRequestee);
 	}
 
 	/**
