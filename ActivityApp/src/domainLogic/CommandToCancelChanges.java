@@ -15,7 +15,8 @@ public class CommandToCancelChanges implements Command
 	@Override
 	public void execute()
 	{
-		
+		Person person = new Person();
+		person.cancelChanges();
 
 	}
 
