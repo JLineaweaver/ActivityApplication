@@ -46,17 +46,17 @@ public class DataMapper
 		MockPersonRowDataGateway mprdg = new MockPersonRowDataGateway();
 		return mprdg.findPerson(ID);
 	}
-	public Person findPerson(String userNameOfRequester) {
+	public Person findPerson(String userName) {
 		MockPersonRowDataGateway mprdg = new MockPersonRowDataGateway();
 		return mprdg.findPerson(userNameOfRequester);
 	}
-	public FriendsList findFriends(int ID) {
-		MockFriendsTableDataGateway mftdg = new MockFriendsTableDataGateway();
-		return mftdg.findFriends(ID);
+	
+	public boolean storePerson(Person myPerson) {
+		return true;
 	}
 	
-	
-	
-	
+	public boolean deletePerson(Person myPerson) {
+		return true;
+	}
 	
 }
