@@ -48,7 +48,7 @@ public class DataMapper
 	}
 	public Person findPerson(String userName) {
 		MockPersonRowDataGateway mprdg = new MockPersonRowDataGateway();
-		return mprdg.findPerson(userNameOfRequester);
+		return mprdg.findPerson(userName);
 	}
 	
 	public boolean storePerson(Person myPerson) {
