@@ -34,6 +34,8 @@ public class DataMapper
 			e.printStackTrace();
 		}
 	}
+
+	
 	public Person findPerson(String username, String password) {
 		MockPersonRowDataGateway mprdg = new MockPersonRowDataGateway();
 		return mprdg.findPerson(username,password);
@@ -52,9 +54,9 @@ public class DataMapper
 		MockFriendsTableDataGateway mftdg = new MockFriendsTableDataGateway();
 		return mftdg.findFriends(ID);
 	}
-	public PendingFriendsList findPendingFriends(int ID) {
-		MockPendingFriendsTableDataGateway mpftdg = new MockPendingFriendsTableDataGateway();
-		return mpftdg.findPendingFriends(ID);
-	}
+	
+	
+	
+	
 	
 }

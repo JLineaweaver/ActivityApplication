@@ -17,9 +17,10 @@ public class PersonRowDataGateway
 	Statement st = null;
 	ResultSet rs = null;
 	
+	 //lsagroup2.cbzhjl6tpflt.us-east-1.rds.amazonaws.com
 	String url = "lsagroup2.cbzhjl6tpflt.us-east-1.rds.amazonaws.com:3306";
-	String user = "jl3828";
-	String password = "redfred78";
+	String user = "lsagroup2";
+	String password = "lsagroup2";
 
 	public PersonRowDataGateway() throws SQLException {
 	
