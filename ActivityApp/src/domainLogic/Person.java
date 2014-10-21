@@ -12,7 +12,7 @@ import dataMappers.MyThreadLocal;
  */
 public class Person extends DomainObject
 {
-
+	static ArrayList<Person> mockDB = new ArrayList<Person>();
 	private String userName;
 	private String password;
 	private String displayName;
@@ -50,6 +50,50 @@ public class Person extends DomainObject
 		myFriends = new FriendsList();
 		myIncomingPendingFriends = new IncomingPendingFriendsList();
 		myOutgoingPendingFriends = new OutgoingPendingFriendList();
+		mockDB.add(this);
+	}
+	
+	
+//	private void addPeople() {
+//		Person per = new Person(userName, password, displayName, userID);
+//		mockDB.add(per);
+//		
+//	}
+	public static Person findUser1(int id)
+	{
+		for(int i = 0; i < mockDB.size(); i++)
+		{
+			if(mockDB.get(i).userID == id)
+			{
+				return mockDB.get(i);
+			}
+		}
+		return null;
+	}
+	public static Person findUser1(String userName)
+	{
+		for(int i = 0; i < mockDB.size(); i++)
+		{
+			if(mockDB.get(i).userName == userName)
+			{
+				return mockDB.get(i);
+			}
+		}
+		return null;
+	}
+	public static Person findUser1(String userName, int id)
+	{
+		for(int i = 0; i < mockDB.size(); i++)
+		{
+			if(mockDB.get(i).userName == userName)
+			{
+				if(mockDB.get(i).userID == id)
+				{
+					return mockDB.get(i);
+				}
+			}
+		}
+		return null;
 	}
 	
 	/**
@@ -218,9 +262,11 @@ public class Person extends DomainObject
 
 	public void UnFriend(int userIDOfRequester, String userNameOfRequestee)
 	{
-		user = Person.findPerson(userIDOfRequester);
+		//user = Person.findPerson(userIDOfRequester);
+		user = Person.findUser1(userIDOfRequester);
 		Person requestee = new Person();
-		requestee = Person.findPerson(userNameOfRequestee);
+		requestee = Person.findUser1(userNameOfRequestee);
+		//requestee = Person.findPerson(userNameOfRequestee);
 		user.myFriends.remove(requestee);
 		
 	}
