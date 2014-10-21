@@ -33,6 +33,8 @@ public class TestCommandToAcceptFriendRequest
 		int uIDOfRequestee = -1;// Person("CroftUserName", "CroftPassword", "CroftDisplayName", -1)
 		String uName = "userNameOfRequester"; // Person("KujawskiUserName", "KujawskiPassword", "KujawskiDisplayName", -1)
 		CommandToAcceptFriendRequest cmd = new CommandToAcceptFriendRequest(uIDOfRequestee, uName);
+		
+		UnitOfWork.newCurrent();
 		cmd.execute();
 		Person result = cmd.getResult(); // This is the requestee
 		ArrayList<Person> friends = new ArrayList<Person>();
@@ -50,6 +52,8 @@ public class TestCommandToAcceptFriendRequest
 		CommandToAcceptFriendRequest cmd = new CommandToAcceptFriendRequest(uIDOfRequestee, uName);
 		CommandToAcceptFriendRequest cmd2 = new CommandToAcceptFriendRequest(uIDOfRequestee, uName2);
 		ArrayList<Person> friends = new ArrayList<Person>();
+		
+		UnitOfWork.newCurrent();
 		cmd.execute();
 		Person result = cmd.getResult(); // This is the requestee
 		friends = result.myFriends.getFriendList(); //friends of the requestee

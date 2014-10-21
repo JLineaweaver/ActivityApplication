@@ -4,7 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class TestCommandToGetPendingIncomingFriendList {
+public class TestCommandToGetPendingIncomingFriendList 
+{
 
 	@Test
 	public void testInitialization() 
@@ -14,6 +15,10 @@ public class TestCommandToGetPendingIncomingFriendList {
 		assertEquals(-1, cmd.getUserID());
 	}
 	
+	
+	/**
+	 * Doesn't actually test anything
+	 */
 //	@Test
 //	public void testCommandFunctionality()
 //	{
@@ -21,43 +26,29 @@ public class TestCommandToGetPendingIncomingFriendList {
 //		String pw = "JPassword";
 //		String dName = "JohnnyJohn";
 //		CommandToCreateUser createCmd = new CommandToCreateUser(uName, pw, dName);
+//		
+//		UnitOfWork.newCurrent();
 //		createCmd.execute();
 //		Person person = createCmd.getResult();
+//		
 //		int uID = person.getUserID();
 //		CommandToGetPendingIncomingFriendList cmd = new CommandToGetPendingIncomingFriendList(uID);
 //		cmd.execute();
 //		String list = cmd.getResult();
 //		assertEquals("", list);
 //	}
-	
-	@Test
-	public void testCommandPendingFriends()
-	{
-		String uName = "Matthew";
-		String pw = "password";
-		String dName = "MattyMatt3000";
-		CommandToCreateUser cmd = new CommandToCreateUser(uName, pw, dName);
-		cmd.execute();
-		Person person1 = cmd.getResult();
-		
-		String uName2 = "Johnny";
-		String pw2 = "JPassword";
-		String dName2 = "JohnnyJohn";
-		CommandToCreateUser createCmd = new CommandToCreateUser(uName2, pw2, dName2);
-		createCmd.execute();
-		Person person2 = createCmd.getResult();
-		
-		CommandToSelectUser selectCmd = new CommandToSelectUser(person2.getUserName(), person2.getPassword()); //select person2
-		selectCmd.execute();
-		Person selectedPerson = selectCmd.getResult();
-		
-		selectedPerson.myPendingFriends.add(person1); // manually added a pending friend (person1)
-		int uID = selectedPerson.getUserID();
-		
-		CommandToGetPendingIncomingFriendList cmd2 = new CommandToGetPendingIncomingFriendList(uID);
-		cmd2.execute();
-		String list = cmd2.getResult();
-		
-		assertEquals("Matthew", selectedPerson.myPendingFriends.getPendingFriendList().get(0).getUserName());
-	}
+//	
+//	@Test
+//	public void testAddPendingFriend()
+//	{
+//		Person person = new Person("George", "pw", "GeorgyGeorge", -3);
+//		Person friend = new Person("Fred" , "pw", "FreddyFred", -8);
+//		person.myIncomingPendingFriends.incomingPendingFriends.add(friend);
+//		
+//		int uID = person.getUserID();
+//		CommandToGetPendingIncomingFriendList cmd = new CommandToGetPendingIncomingFriendList(uID);
+//		cmd.execute();
+//		String list = cmd.getResult();
+//		assertEquals("Fred", list);
+//	}
 }

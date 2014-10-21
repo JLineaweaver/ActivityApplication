@@ -10,7 +10,7 @@ import mockGateways.MockFriendsTableDataGateway;
 import mockGateways.MockPendingFriendsTableDataGateway;
 import mockGateways.MockPersonRowDataGateway;
 import domainLogic.FriendsList;
-import domainLogic.PendingFriendsList;
+import domainLogic.IncomingPendingFriendsList;
 import domainLogic.Person;
 /**
  * @author josh
@@ -52,7 +52,7 @@ public class DataMapper
 		MockFriendsTableDataGateway mftdg = new MockFriendsTableDataGateway();
 		return mftdg.findFriends(ID);
 	}
-	public PendingFriendsList findPendingFriends(int ID) {
+	public IncomingPendingFriendsList findPendingFriends(int ID) {
 		MockPendingFriendsTableDataGateway mpftdg = new MockPendingFriendsTableDataGateway();
 		return mpftdg.findPendingFriends(ID);
 	}

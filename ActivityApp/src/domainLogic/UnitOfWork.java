@@ -72,12 +72,14 @@ public class UnitOfWork
 		deleteRemoved();
 	}
 
-	private void deleteRemoved() {
+	private void deleteRemoved() 
+	{
 		// TODO Auto-generated method stub
 		
 	}
 
-	private void updateDirty() {
+	private void updateDirty() 
+	{
 		// TODO Auto-generated method stub
 		
 	}
