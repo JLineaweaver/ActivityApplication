@@ -10,7 +10,7 @@ import mockGateways.MockFriendsTableDataGateway;
 import mockGateways.MockPendingFriendsTableDataGateway;
 import mockGateways.MockPersonRowDataGateway;
 import domainLogic.FriendsList;
-import domainLogic.PendingFriendsList;
+import domainLogic.IncomingPendingFriendsList;
 import domainLogic.Person;
 /**
  * @author josh

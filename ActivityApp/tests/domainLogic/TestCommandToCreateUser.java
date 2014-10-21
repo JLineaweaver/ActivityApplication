@@ -25,6 +25,8 @@ public class TestCommandToCreateUser {
 		String pw = "JPassword";
 		String dName = "JohnnyJohn";
 		CommandToCreateUser cmd = new CommandToCreateUser(uName, pw, dName);
+		
+		UnitOfWork.newCurrent();
 		cmd.execute();
 		Person person = cmd.getResult();
 		assertEquals("Johnny", person.getUserName());

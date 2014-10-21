@@ -56,6 +56,7 @@ public class TestCommandToSelectUser
 		String pw = "JPassword";
 		String dName = "JohnnyJohn";
 		CommandToCreateUser cmd = new CommandToCreateUser(uName, pw, dName);
+		UnitOfWork.newCurrent();
 		cmd.execute();
 		String uName2 = "Matthew";
 		String pw2 = "password";

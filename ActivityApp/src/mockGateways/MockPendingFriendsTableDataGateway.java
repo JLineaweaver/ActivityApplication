@@ -1,6 +1,6 @@
 package mockGateways;
 
-import domainLogic.PendingFriendsList;
+import domainLogic.IncomingPendingFriendsList;
 
 /**
  * @author josh
@@ -47,7 +47,7 @@ public class MockPendingFriendsTableDataGateway
 		return true;
 	}
 	
-	public PendingFriendsList findPendingFriends(int ID) {
-		return new PendingFriendsList();
+	public IncomingPendingFriendsList findPendingFriends(int ID) {
+		return new IncomingPendingFriendsList();
 	}
 }

@@ -13,6 +13,7 @@ public class CommandToGetPendingOutgoingFriendList implements Command
 {
 
 	private int userID;
+	private Person person = new Person();
 
 	/**
 	 * The userID of the current user
@@ -32,7 +33,7 @@ public class CommandToGetPendingOutgoingFriendList implements Command
 	@Override
 	public void execute()
 	{
-		// TODO Auto-generated method stub
+		person.PendingOutgoingFriendList(userID);
 
 	}
 
@@ -42,10 +43,10 @@ public class CommandToGetPendingOutgoingFriendList implements Command
 	 * @see Command#getResult()
 	 */
 	@Override
-	public ArrayList<Friend> getResult()
+	public ArrayList<Person> getResult()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Person> result = person.getOutgoingPendingFriendList();
+		return result;
 	}
 
 }

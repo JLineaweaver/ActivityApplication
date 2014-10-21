@@ -32,7 +32,7 @@ public class CommandToGetPendingIncomingFriendList implements Command
 	@Override
 	public void execute()
 	{
-		person.getPendingIncomingFriendList(userID);
+		person.PendingIncomingFriendList(userID);
 	}
 
 	/**
