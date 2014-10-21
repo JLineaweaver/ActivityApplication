@@ -99,6 +99,11 @@ public class Person extends DomainObject
 	{
 		this.displayName = displayName;
 	}
+	public void setID(int i) 
+	{
+		userID = i;
+		
+	}
 
 	
 	/**
