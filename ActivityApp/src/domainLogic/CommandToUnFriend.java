@@ -38,9 +38,9 @@ public class CommandToUnFriend implements Command
 	 * @see Command#getResult()
 	 */
 	@Override
-	public Object getResult()
+	public Person getResult()
 	{
-		return null;
+		return person.getUser();
 	}
 
 }

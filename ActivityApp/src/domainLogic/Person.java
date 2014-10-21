@@ -18,7 +18,7 @@ public class Person extends DomainObject
 	private String displayName;
 	private int userID = -1;
 	private Person user;
-	
+	private int size = 0;
 	FriendsList myFriends;
 	IncomingPendingFriendsList myIncomingPendingFriends;
 	OutgoingPendingFriendList myOutgoingPendingFriends;
@@ -174,7 +174,7 @@ public class Person extends DomainObject
 	 */
 	public int getNumberOfFriends()
 	{
-		int size = myFriends.getFriendList().size();
+		size = this.myFriends.getFriendList().size();
 		return size;
 	}
 	

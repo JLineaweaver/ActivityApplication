@@ -6,7 +6,7 @@ package domainLogic;
  */
 public class CommandToModifyUser implements Command
 {
-
+	Person person = new Person();
 	private int userID;
 	private String newDisplayName;
 
@@ -28,7 +28,6 @@ public class CommandToModifyUser implements Command
 	@Override
 	public void execute()
 	{
-		Person person = new Person();
 		person.modifyUser(userID, newDisplayName);
 	}
 
@@ -39,9 +38,9 @@ public class CommandToModifyUser implements Command
 	 * @see Command#getResult()
 	 */
 	@Override
-	public Object getResult()
+	public Person getResult()
 	{
-		// TODO Auto-generated method stub
-		return null;
+
+		return person.getUser();
 	}
 }

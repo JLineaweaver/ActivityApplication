@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class CommandToRetrieveFriendList implements Command
 {
-
+	Person person = new Person();
 	private int userID;
 
 	/**
@@ -29,7 +29,6 @@ public class CommandToRetrieveFriendList implements Command
 	@Override
 	public void execute()
 	{
-		Person person = new Person();
 		person.retrieveFriendList(userID);
 
 	}
@@ -42,7 +41,7 @@ public class CommandToRetrieveFriendList implements Command
 	public ArrayList<Friend> getResult()
 	{
 		// TODO Auto-generated method stub
-		return null;
+		return person.getUser().myFriends.getFriendList();
 	}
 
 }
