@@ -58,5 +58,11 @@ public class DataMapper
 	public boolean deletePerson(Person myPerson) {
 		return true;
 	}
+
+
+	public FriendsList findFriends(int userID) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

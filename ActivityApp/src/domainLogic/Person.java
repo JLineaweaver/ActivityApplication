@@ -96,6 +96,12 @@ public class Person extends DomainObject
 		return null;
 	}
 	
+	public static void emptyMockDB()
+	{
+		mockDB.clear();
+	}
+	
+	
 	/**
 	 * @return username
 	 */
@@ -193,11 +199,17 @@ public class Person extends DomainObject
 	 */
 	public void AcceptFriendRequest(int userIDOfRequestee, String userNameOfRequester)
 	{
-		user = Person.findPerson(userIDOfRequestee);
-		Person requester = new Person();
-		requester = Person.findPerson(userNameOfRequester);
-		user.myFriends.add(requester);
+		//user = Person.findPerson(userIDOfRequestee);
+		//requester = Person.findPerson(userNameOfRequester);
+		//user.myFriends.add(requester);
+		
+		user = Person.findUser1(userIDOfRequestee);
+		Person requester = Person.findUser1(userNameOfRequester);
 		requester.myFriends.add(user);
+		user.myFriends.add(requester);
+		
+		user.myIncomingPendingFriends.incomingPendingFriends.remove(requester);
+		requester.myOutgoingPendingFriends.outgoingPendingFriends.remove(user);
 		
 		this.markDirty(user);
 		this.markDirty(requester);
@@ -249,12 +261,17 @@ public class Person extends DomainObject
 
 	public void MakeFriendRequest(int userIDOfRequester, String userNameOfRequestee) 
 	{
-		user = Person.findPerson(userIDOfRequester);
-		Person requestee = new Person();
-		requestee = Person.findPerson(userNameOfRequestee);
+//		user = Person.findPerson(userIDOfRequester);
+//		Person requestee = new Person();
+//		requestee = Person.findPerson(userNameOfRequestee);
+
+		
+		user = Person.findUser1(userIDOfRequester);
+		Person requestee = Person.findUser1(userNameOfRequestee);
+		
 		user.myIncomingPendingFriends.add(requestee);
 		requestee.myOutgoingPendingFriends.add(user);
-		
+
 		this.markDirty(user);
 		this.markDirty(requestee);
 	}
@@ -289,13 +306,21 @@ public class Person extends DomainObject
 
 	public void PendingIncomingFriendList(int userID) 
 	{
-		user = Person.findPerson(userID);
+		//user = Person.findPerson(userID);
+		user = Person.findUser1(userID);
 		ArrayList<Person> incomingFriendsList = new ArrayList<Person>();
 		incomingFriendsList = user.myIncomingPendingFriends.getPendingFriendList();
 		for(int i = 0; i < incomingFriendsList.size(); i++)
 		{
-			newPendingIncomingFriendList = newPendingIncomingFriendList + "," + incomingFriendsList.get(i);
+			if(i == 0)
+			{
+				newPendingIncomingFriendList = incomingFriendsList.get(i).getUserName();
+			}else
+			{
+				newPendingIncomingFriendList = newPendingIncomingFriendList + "," + newPendingIncomingFriendList;
+			}
 		}
+		
 	}
 	
 	public String getPendingIncomingFriendListString()
@@ -323,7 +348,8 @@ public class Person extends DomainObject
 
 	public void PendingOutgoingFriendList(int userID) 
 	{
-		user = Person.findPerson(userID);
+		//user = Person.findPerson(userID);
+		user = Person.findUser1(userID);
 		outgoingPendingFriendsList = user.myOutgoingPendingFriends.getPendingFriendList();
 	}
 	

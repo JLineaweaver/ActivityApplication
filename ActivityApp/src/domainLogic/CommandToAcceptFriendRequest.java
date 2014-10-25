@@ -48,8 +48,8 @@ public class CommandToAcceptFriendRequest implements Command
 	@Override
 	public Person getResult()
 	{
-		Person result = person.getUser();
-		return result;
+		return person;
+		
 	}
 
 	/**

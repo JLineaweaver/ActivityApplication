@@ -24,77 +24,39 @@ public class TestCommandToMakeFriendRequest
 	@Test
 	public void testOnePendingFriend()
 	{
-		int idOfRequester = -3;
-		String userNameOfRequestee = "Smith";
-		CommandToMakeFriendRequest cmd = new CommandToMakeFriendRequest(idOfRequester, userNameOfRequestee);
+		
+		Person person1 = new Person("Matt", "","mattyc", 1);
+		Person person2 = new Person("John", "","Jonny", 2);
+		assertEquals(0, person1.myIncomingPendingFriends.incomingPendingFriends.size());
+		
+		CommandToMakeFriendRequest cmd = new CommandToMakeFriendRequest(person1.getUserID(), person2.getUserName());
 		
 		UnitOfWork.newCurrent();
 		cmd.execute();
 		Person result = cmd.getResult();
-		ArrayList<Person> pendingFriends = new ArrayList<Person>();
-		pendingFriends = result.myIncomingPendingFriends.getPendingFriendList();
-		//Person Matthew = new Person("KujawskiUserName", "KujawskiPassword", "KujawskiDisplayName", -1)  
-		//This is what MockPersonRowDataGateway will return (above) and will add him to the requesters pending friend list
-		assertEquals("KujawskiUserName", pendingFriends.get(0).getUserName());
-		assertEquals("KujawskiPassword", pendingFriends.get(0).getPassword());
-		assertEquals("KujawskiDisplayName", pendingFriends.get(0).getDisplayName());
+		
+		assertEquals(1, person1.myIncomingPendingFriends.incomingPendingFriends.size());
+		assertEquals(1, result.myIncomingPendingFriends.incomingPendingFriends.size());
+		Person.emptyMockDB();
 	}
 	
 	@Test
 	public void testMultiplePendingFrinds()
 	{
-		int idOfRequester = -3;
-		String userNameOfRequestee = "Smith";
-		CommandToMakeFriendRequest cmd = new CommandToMakeFriendRequest(idOfRequester, userNameOfRequestee);
-		ArrayList<Person> pendingFriends = new ArrayList<Person>();
+		Person person1 = new Person("Matt", "","mattyc", 1);
+		Person person2 = new Person("John", "","Jonny", 2);
+		Person person3 = new Person("George", "","Georgy", 3);
+		
+		CommandToMakeFriendRequest cmd = new CommandToMakeFriendRequest(person1.getUserID(), person2.getUserName());
+		CommandToMakeFriendRequest cmd2 = new CommandToMakeFriendRequest(person1.getUserID(), person3.getUserName());
 		
 		UnitOfWork.newCurrent();
+		cmd.execute();
 		cmd.execute();
 		Person result = cmd.getResult();
-		pendingFriends = result.myIncomingPendingFriends.getPendingFriendList();
-		//Person Matthew = new Person("KujawskiUserName", "KujawskiPassword", "KujawskiDisplayName", -1)  
-		//This is what MockPersonRowDataGateway will return (above) and will add him to the requesters pending friend list
-		//***The mock creates a new person every time the command is executed.***
-		assertEquals("KujawskiUserName", pendingFriends.get(0).getUserName());
-		cmd.execute();
-		result = cmd.getResult();
-		pendingFriends = result.myIncomingPendingFriends.getPendingFriendList();
-		assertEquals("KujawskiUserName", pendingFriends.get(0).getUserName());
-		cmd.execute();
-		result = cmd.getResult();
-		pendingFriends = result.myIncomingPendingFriends.getPendingFriendList();
-		assertEquals("KujawskiUserName", pendingFriends.get(0).getUserName());		
+		
+		assertEquals(2, person1.myIncomingPendingFriends.incomingPendingFriends.size());
+		assertEquals(2, result.myIncomingPendingFriends.incomingPendingFriends.size());
+		Person.emptyMockDB();
 	}
-	
-	@Test
-	public void testCreateSelectAndMakeFriendRequests()
-	{
-		String uName = "Hertz";
-		String pw = "HPassword";
-		String dName = "PartyBoy112";
-		CommandToCreateUser createCmd = new CommandToCreateUser(uName, pw, dName);
-		
-		UnitOfWork.newCurrent();
-		createCmd.execute();
-		Person requestee = createCmd.getResult(); //Hertz
-		
-		String uName2 = "Kujo";
-		String pw2 = "mPassword";
-		String dName2 = "WinnaNinna";
-		CommandToCreateUser createCmd2 = new CommandToCreateUser(uName2, pw2, dName2);
-		createCmd2.execute();
-		
-		CommandToSelectUser selectCmd = new CommandToSelectUser(createCmd2.getUserName(), createCmd2.getPassword()); //selects Kujo
-		selectCmd.execute();
-		
-		Person selectedPerson = createCmd2.getResult();//gets Kujo
-		CommandToMakeFriendRequest friendRequestCmd = new CommandToMakeFriendRequest(selectedPerson.getUserID(),  requestee.getUserName()); //Kujo makes request to Hertz
-		friendRequestCmd.execute();
-		
-		Person result = friendRequestCmd.getResult(); //Should return Kujo which is equivalent to CroftUserName from the Mock Gateway
-		if(result.getUserName() == "CroftUserName")
-			result.myIncomingPendingFriends.getPendingFriendList().get(0).setUserName("Hertz"); // pending friend is Hertz which is equivalent KujawskiUserName from the Mock Gateway
-		assertEquals("Hertz", result.myIncomingPendingFriends.getPendingFriendList().get(0).getUserName());
-	}
-
 }
