@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import domainLogic.TestCommandToAcceptFriendRequest;
 import domainLogic.TestCommandToCreateUser;
 import domainLogic.TestCommandToGetPendingIncomingFriendList;
+import domainLogic.TestCommandToGetPendingOutgoingFriendList;
 import domainLogic.TestCommandToMakeFriendRequest;
 import domainLogic.TestCommandToSelectUser;
 import domainLogic.TestPerson;
@@ -19,7 +20,8 @@ import domainLogic.TestUnitOfWork;
 	TestCommandToMakeFriendRequest.class,
 	TestCommandToAcceptFriendRequest.class,
 	TestUnitOfWork.class,
-	TestCommandToGetPendingIncomingFriendList.class})
+	TestCommandToGetPendingIncomingFriendList.class,
+	TestCommandToGetPendingOutgoingFriendList.class})
 public class TestSuite {
 }
 

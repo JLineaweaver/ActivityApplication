@@ -34,7 +34,6 @@ public class CommandToGetPendingOutgoingFriendList implements Command
 	public void execute()
 	{
 		person.PendingOutgoingFriendList(userID);
-
 	}
 
 	/**
