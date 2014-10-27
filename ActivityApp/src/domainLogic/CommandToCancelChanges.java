@@ -8,6 +8,7 @@ package domainLogic;
 public class CommandToCancelChanges implements Command
 {
 
+
 	/**
 	 * 
 	 * @see Command#execute()

@@ -331,16 +331,17 @@ public class Person extends DomainObject
 
 	public void cancelChanges()
 	{
-		if(user.myIncomingPendingFriends != null)
+		if(myIncomingPendingFriends.incomingPendingFriends != null)
 		{
-			user.myIncomingPendingFriends = null;
+			myIncomingPendingFriends.incomingPendingFriends = null;
 		}
 	}
 
 
 	public void modifyUser(int userID, String newDisplayName)
 	{
-		user = Person.findPerson(userID);
+		//user = Person.findPerson(userID);
+		user = Person.findUser1(userID);
 		user.setDisplayName(newDisplayName);
 		
 	}
