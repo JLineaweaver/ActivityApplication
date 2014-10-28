@@ -31,8 +31,7 @@ public class CommandToMakeFriendRequest implements Command
 	@Override
 	public void execute()
 	{
-		Person selectedPerson = SelectedPerson.getInstance();
-		person.MakeFriendRequest(selectedPerson.getUserID(), userNameOfRequestee);
+		person.MakeFriendRequest(userNameOfRequestee);
 	}
 
 	/**

@@ -50,10 +50,9 @@ public class CommandToSelectUser implements Command
 	 * @see Command#getResult()
 	 */
 	@Override
-	public Person getResult()
+	public Object getResult()
 	{
-		Person result = SelectedPerson.getInstance();
-		return result;
+		return null;
 	}
 
 	/**

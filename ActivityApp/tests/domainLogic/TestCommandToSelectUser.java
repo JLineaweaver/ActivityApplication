@@ -18,20 +18,6 @@ public class TestCommandToSelectUser
 	}
 	
 	@Test
-	public void testCommandFunctionality()
-	{
-		Person person = new Person("Harry", "pw", "Potter", -1);
-		CommandToSelectUser cmd = new CommandToSelectUser(person.getUserName(), person.getPassword());
-		cmd.execute();
-		Person selectedPerson = cmd.getResult();// This will return the mock person and it's information
-		assertEquals("Harry", selectedPerson.getUserName());
-		assertEquals("pw", selectedPerson.getPassword());
-		
-		Person.emptyMockDB();
-		SelectedPerson.resetInstance();
-	}
-	
-	@Test
 	public void testSelectOneFromTwoPeople()
 	{
 		String uName = "Johnny";

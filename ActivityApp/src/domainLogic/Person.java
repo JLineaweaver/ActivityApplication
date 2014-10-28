@@ -255,7 +255,15 @@ public class Person extends DomainObject
 		return userID;
 	}
 
-
+	/**
+	 * 
+	 * @param userName
+	 * @param password
+	 * @param displayName
+	 * 
+	 * Creates a new user with the above parameters.
+	 * marks the user as new in the unit of work.
+	 */
 	public void CreateUser(String userName, String password, String displayName) 
 	{
 		user = new Person(userName, password, displayName, userID);
@@ -270,25 +278,29 @@ public class Person extends DomainObject
 	
 	public void SelectUser(String userName, String pw) 
 	{
-		Person selectedUser = Person.findUser1(userName, pw);
-		//selectedUser = new Person("fred", "pw1" ,"happyFred" , -1);
-		if(selectedUser != SelectedPerson.getInstance())
+		//user = Person.findPerson(userName, pw);
+		user = Person.findUser1(userName, pw);
+		if(user != SelectedPerson.getInstance())
 		{
 			SelectedPerson.resetInstance();
-			SelectedPerson.initializeInstance(selectedUser);
-		}
-		//user = Person.findPerson(userName, pw);
-			
+			SelectedPerson.initializeInstance(user);
+		}			
 	}
 
 
-	public void MakeFriendRequest(int userIDOfRequester, String userNameOfRequestee) 
+	/**
+	 * 
+	 * @param userIDOfRequester of the selected person
+	 * @param userNameOfRequestee 
+	 * Finds the requestee.
+	 * Adds each other to one another's pending friend lists
+	 * Mark both people as dirty in the unit of work.
+	 */
+	public void MakeFriendRequest(String userNameOfRequestee) 
 	{
 //		user = Person.findPerson(userIDOfRequester);
-//		Person requestee = new Person();
-//		requestee = Person.findPerson(userNameOfRequestee);
+//		Person requestee = Person.findPerson(userNameOfRequestee);
 
-		
 		//user = Person.findUser1(userIDOfRequester);
 		user = SelectedPerson.getInstance();
 		Person requestee = Person.findUser1(userNameOfRequestee);
@@ -333,10 +345,18 @@ public class Person extends DomainObject
 		return user.myFriends.getFriendList();
 	}
 
-	public void PendingIncomingFriendList(int userID) 
+	/**
+	 * 
+	 * @param userID of the selected person
+	 * Already found that person, so I don't need to find that person again.
+	 * Goes through that person's pending incoming friend list and toStrings it.
+	 */
+	public void PendingIncomingFriendList() 
 	{
 		//user = Person.findPerson(userID);
-		user = Person.findUser1(userID);
+		//user = Person.findUser1(userID);
+		
+		user = SelectedPerson.getInstance();
 		ArrayList<Person> incomingFriendsList = new ArrayList<Person>();
 		incomingFriendsList = user.myIncomingPendingFriends.getPendingFriendList();
 		for(int i = 0; i < incomingFriendsList.size(); i++)
@@ -352,6 +372,9 @@ public class Person extends DomainObject
 		
 	}
 	
+	/**
+	 * @return the list of pending incoming friend list as a string
+	 */
 	public String getPendingIncomingFriendListString()
 	{
 		return PendingIncomingFriendList;
@@ -374,7 +397,15 @@ public class Person extends DomainObject
 	}
 
 
-	public void PendingOutgoingFriendList(int userID) 
+	/**
+	 * 
+	 * @param userID of the selected person
+	 * Already found that person, so I do not need to find that person again.
+	 * Set user = to the selected person.
+	 * Then I can call getTheOutgoingPendingFriendList to grab the user's/ selected person's 
+	 * outgoing pending friends.
+	 */
+	public void PendingOutgoingFriendList() 
 	{
 		//user = Person.findPerson(userID);
 		//user = Person.findUser1(userID);
