@@ -38,7 +38,8 @@ public class CommandToRetrieveFriendList implements Command
 	 * @see Command#getResult()
 	 */
 	@Override
-	public ArrayList<Friend> getResult()
+	////FRIEND
+	public ArrayList<Person> getResult()
 	{
 		// TODO Auto-generated method stub
 		return person.getUser().myFriends.getFriendList();
