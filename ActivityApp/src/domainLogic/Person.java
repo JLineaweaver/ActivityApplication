@@ -218,10 +218,9 @@ public class Person extends DomainObject
 	/**
 	 * @return the array list of friends for that person
 	 */
-	public FriendsList findFriends()
+	public FriendsList getFriends()
 	{
-		DataMapper pdm = MyThreadLocal.get();
-		return pdm.findFriends(userID);
+		return myFriends;
 	}
 	
 	
@@ -354,9 +353,13 @@ public class Person extends DomainObject
 		outgoingPendingFriendsList = user.myOutgoingPendingFriends.getPendingFriendList();
 	}
 	
-	public ArrayList<Person> getOutgoingPendingFriendList()
-	{
-		return outgoingPendingFriendsList;
+	//public ArrayList<Person> getOutgoingPendingFriendList()
+	//{
+		//return outgoingPendingFriendsList;
+	//}
+	
+	public OutgoingPendingFriendList getOutgoingPendingFriendList() {
+		return myOutgoingPendingFriends;
 	}
 	
 }
