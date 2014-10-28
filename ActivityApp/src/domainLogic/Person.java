@@ -1,6 +1,8 @@
 package domainLogic;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+
 import dataMappers.DataMapper;
 import dataMappers.MyThreadLocal;
 
@@ -174,8 +176,9 @@ public class Person extends DomainObject
 	 * @param username
 	 * @param password 
 	 * @return Person
+	 * @throws SQLException 
 	 */
-	public static Person findPerson(String username, String password) 
+	public static Person findPerson(String username, String password) throws SQLException 
 	{
 		DataMapper pdm = MyThreadLocal.get(); 
 		return pdm.findPerson(username, password);
@@ -184,8 +187,9 @@ public class Person extends DomainObject
 	/**
 	 * @param ID
 	 * @return Person
+	 * @throws SQLException 
 	 */
-	public static Person findPerson(int ID) 
+	public static Person findPerson(int ID) throws SQLException 
 	{
 		DataMapper pdm = MyThreadLocal.get();
 		return pdm.findPerson(ID);

@@ -32,7 +32,8 @@ public class CommandToGetPendingIncomingFriendList implements Command
 	@Override
 	public void execute()
 	{
-		person.PendingIncomingFriendList(userID);
+		Person selectedPerson = SelectedPerson.getInstance();
+		person.PendingIncomingFriendList(selectedPerson.getUserID());
 	}
 
 	/**

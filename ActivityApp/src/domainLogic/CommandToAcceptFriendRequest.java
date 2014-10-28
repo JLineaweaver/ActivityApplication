@@ -34,7 +34,8 @@ public class CommandToAcceptFriendRequest implements Command
 	@Override
 	public void execute()
 	{
-		person.AcceptFriendRequestCommand(userIDOfRequestee, userNameOfRequester);
+		Person selectedPerson = SelectedPerson.getInstance();
+		person.AcceptFriendRequestCommand(selectedPerson.getUserID(), userNameOfRequester);
 	}
 
 	/**

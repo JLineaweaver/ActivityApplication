@@ -41,13 +41,16 @@ public class TestCommandToGetPendingIncomingFriendList
 		
 		assertEquals(0, person1.myIncomingPendingFriends.incomingPendingFriends.size());
 		
+		SelectedPerson.initializeInstance(person1);
 		person1.myIncomingPendingFriends.incomingPendingFriends.add(person2); //manually added a person to the list
 		CommandToGetPendingIncomingFriendList pendingIncomingCmd = new CommandToGetPendingIncomingFriendList(person1.getUserID());
 		pendingIncomingCmd.execute();
 		String result = pendingIncomingCmd.getResult();
 		
 		assertEquals("George", result);
+		
 		Person.emptyMockDB();
+		SelectedPerson.resetInstance();
 	}
 	
 	@Test
@@ -74,11 +77,14 @@ public class TestCommandToGetPendingIncomingFriendList
 		person1.myIncomingPendingFriends.incomingPendingFriends.add(person2); //manually added a person to the list
 		person1.myIncomingPendingFriends.incomingPendingFriends.add(person3); //manually added a person to the list
 		
+		SelectedPerson.initializeInstance(person1); // simulates selecting a person
 		CommandToGetPendingIncomingFriendList pendingIncomingCmd = new CommandToGetPendingIncomingFriendList(person1.getUserID());
 		pendingIncomingCmd.execute();
 		String result = pendingIncomingCmd.getResult();
 		
 		assertEquals("George,George", result);
+		
 		Person.emptyMockDB();
+		SelectedPerson.resetInstance();
 	}
 }
