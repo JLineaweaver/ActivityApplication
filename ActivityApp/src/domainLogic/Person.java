@@ -212,15 +212,16 @@ public class Person extends DomainObject
 	 * @param userIDOfRequestee is the person that is being as to be someone's friend
 	 * @param userNameOfRequester is the person asking to be someone's friend
 	 * 
-	 * Find both people, add each other to their friends list, mark person as dirty.
+	 * Find the requester, add each other to their friends list, mark person as dirty.
 	 */
-	public void AcceptFriendRequestCommand(int userIDOfRequestee, String userNameOfRequester)
+	public void AcceptFriendRequestCommand(String userNameOfRequester)
 	{
 		//user = Person.findPerson(userIDOfRequestee);
 		//requester = Person.findPerson(userNameOfRequester);
 		//user.myFriends.add(requester);
+		//user = Person.findUser1(userIDOfRequestee);
 		
-		user = Person.findUser1(userIDOfRequestee);
+		user = SelectedPerson.getInstance();
 		Person requester = Person.findUser1(userNameOfRequester);
 		requester.myFriends.add(user);
 		user.myFriends.add(requester);
