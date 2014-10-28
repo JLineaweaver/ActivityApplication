@@ -292,9 +292,10 @@ public class Person extends DomainObject
 	public void rejectFriendRequest(int userIDOfRequestee, String userNameOfRequester)
 	{
 		Person requestee = new Person();
-		requestee = Person.findPerson(userIDOfRequestee);
-		user = Person.findPerson(userNameOfRequester);
-		user.myIncomingPendingFriends.remove(requestee);
+		//requestee = Person.findPerson(userIDOfRequestee);
+		requestee = Person.findUser1(userIDOfRequestee);
+		user = Person.findUser1(userNameOfRequester);
+		requestee.myIncomingPendingFriends.incomingPendingFriends.remove(user);
 	}
 
 
