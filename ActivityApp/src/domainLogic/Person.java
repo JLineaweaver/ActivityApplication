@@ -285,6 +285,8 @@ public class Person extends DomainObject
 		requestee = Person.findUser1(userNameOfRequestee);
 		//requestee = Person.findPerson(userNameOfRequestee);
 		user.myFriends.remove(requestee);
+		this.markDirty(requestee);
+		this.markDirty(user);
 		
 	}
 
@@ -296,6 +298,8 @@ public class Person extends DomainObject
 		requestee = Person.findUser1(userIDOfRequestee);
 		user = Person.findUser1(userNameOfRequester);
 		requestee.myIncomingPendingFriends.incomingPendingFriends.remove(user);
+		this.markDirty(requestee);
+		this.markDirty(user);
 	}
 
 
@@ -332,10 +336,8 @@ public class Person extends DomainObject
 
 	public void cancelChanges()
 	{
-		if(myIncomingPendingFriends.incomingPendingFriends != null)
-		{
-			myIncomingPendingFriends.incomingPendingFriends = null;
-		}
+		UnitOfWork unit = UnitOfWork.getCurrent();
+		unit.emptyArrayLists();
 	}
 
 

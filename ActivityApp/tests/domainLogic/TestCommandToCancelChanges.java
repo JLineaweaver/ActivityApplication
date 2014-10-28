@@ -12,15 +12,24 @@ public class TestCommandToCancelChanges {
 		Person person1 = new Person("Matt", "","mattyc", 1);
 		Person person2 = new Person("John", "","Jonny", 2);
 		assertEquals(0, person1.getNumberOfFriends());
-		person1.myOutgoingPendingFriends.outgoingPendingFriends.add(person2);
-		CommandToGetPendingOutgoingFriendList cmd1 = new CommandToGetPendingOutgoingFriendList(person1.getUserID());
-		cmd1.execute();
-		assertEquals(1, cmd1.getResult().size());
-		CommandToCancelChanges cmd = new CommandToCancelChanges();
+		
+		UnitOfWork.newCurrent();
+		UnitOfWork unit = UnitOfWork.getCurrent();
+		assertEquals(0, person1.myIncomingPendingFriends.incomingPendingFriends.size());
+		
+		CommandToMakeFriendRequest cmd = new CommandToMakeFriendRequest(person1.getUserID(), person2.getUserName());
+		
 		cmd.execute();
-//		assertEquals(1, person1.getOutgoingPendingFriendList());
-//		assertEquals("Matt", un.getResult().getUserName());
-//		assertEquals(0, un.getResult().myFriends.getFriendList().size());
+		Person result = cmd.getResult();
+		
+		assertEquals(1, person1.myIncomingPendingFriends.incomingPendingFriends.size());
+		assertEquals(1, result.myIncomingPendingFriends.incomingPendingFriends.size());
+
+		assertEquals(2, unit.getDirtyObjects().size());
+		CommandToCancelChanges cmd1 = new CommandToCancelChanges();
+		cmd1.execute();
+		
+		assertEquals(0, unit.getDirtyObjects().size());
 		
 	}
 
