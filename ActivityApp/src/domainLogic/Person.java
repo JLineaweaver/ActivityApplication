@@ -299,10 +299,10 @@ public class Person extends DomainObject
 	}
 
 
-	public void retrieveFriendList(int userID)
+	public ArrayList<Person> retrieveFriendList(int userID)
 	{
-		user = Person.findPerson(userID);
-		user.myFriends.getFriendList();
+		user = Person.findUser1(userID);
+		return user.myFriends.getFriendList();
 	}
 
 	public void PendingIncomingFriendList(int userID) 
