@@ -23,7 +23,6 @@ public class Person extends DomainObject
 	FriendsList myFriends;
 	IncomingPendingFriendsList myIncomingPendingFriends;
 	OutgoingPendingFriendList myOutgoingPendingFriends;
-	String PendingIncomingFriendList;
 
 	/**
 	 * @see java.lang.Object#toString()
@@ -357,28 +356,15 @@ public class Person extends DomainObject
 		//user = Person.findPerson(userID);
 		//user = Person.findUser1(userID);
 		
-		user = SelectedPerson.getInstance();
-		ArrayList<Person> incomingFriendsList = new ArrayList<Person>();
-		incomingFriendsList = user.myIncomingPendingFriends.getPendingFriendList();
-		for(int i = 0; i < incomingFriendsList.size(); i++)
-		{
-			if(i == 0)
-			{
-				PendingIncomingFriendList = incomingFriendsList.get(i).getUserName();
-			}else
-			{
-				PendingIncomingFriendList = PendingIncomingFriendList + "," + PendingIncomingFriendList;
-			}
-		}
-		
+		user = SelectedPerson.getInstance();		
 	}
 	
 	/**
 	 * @return the list of pending incoming friend list as a string
 	 */
-	public String getPendingIncomingFriendListString()
+	public ArrayList<Person> getPendingIncomingFriendList()
 	{
-		return PendingIncomingFriendList;
+		return user.myIncomingPendingFriends.incomingPendingFriends;
 	}
 
 

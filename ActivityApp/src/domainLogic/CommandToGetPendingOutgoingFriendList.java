@@ -14,6 +14,7 @@ public class CommandToGetPendingOutgoingFriendList implements Command
 
 	private int userID;
 	private Person person = new Person();
+	private ArrayList<Person> result;
 
 	/**
 	 * The userID of the current user
@@ -44,8 +45,25 @@ public class CommandToGetPendingOutgoingFriendList implements Command
 	@Override
 	public ArrayList<Person> getResult()
 	{
-		ArrayList<Person> result = person.getTheOutgoingPendingFriendList();
+		result = person.getTheOutgoingPendingFriendList();
 		return result;
+	}
+	
+	public String toString()
+	{
+		String str = "";
+		result = this.getResult();
+		for(int i = 0; i < result.size(); i++)
+		{
+			if(i == 0)
+			{
+				str = result.get(i).getUserName();
+			}else
+			{
+				str = str + "," + result.get(i).getUserName();
+			}
+		}
+		return str;
 	}
 
 }

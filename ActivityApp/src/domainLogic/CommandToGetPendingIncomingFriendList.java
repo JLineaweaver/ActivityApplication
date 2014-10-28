@@ -1,5 +1,7 @@
 package domainLogic;
 
+import java.util.ArrayList;
+
 /**
  * Cause the list of friend requests from other user to this user to be fetched
  * from the domain model (may or may not cause reading from the DB depending on
@@ -13,6 +15,7 @@ public class CommandToGetPendingIncomingFriendList implements Command
 
 	private int userID;
 	private Person person = new Person();
+	private ArrayList<Person> result; 
 
 	/**
 	 * The userID of the current user
@@ -41,21 +44,32 @@ public class CommandToGetPendingIncomingFriendList implements Command
 	 * @see Command#getResult()
 	 */
 	@Override
-	public String getResult()
+	public ArrayList<Person> getResult()
 	{
-		String result = person.getPendingIncomingFriendListString();
+		result = person.getPendingIncomingFriendList();
 		return result;
 	}
+	
+	public String toString()
+	{
+		String str = "";
+		result = this.getResult();
+		for(int i = 0; i < result.size(); i++)
+		{
+			if(i == 0)
+			{
+				str = result.get(i).getUserName();
+			}else
+			{
+				str = str + "," + result.get(i).getUserName();
+			}
+		}
+		
+		return str;
+	}
 
-	/**
-	 * For testing purposes - to check that the constructor correctly remembered
-	 * the userID of the requestor
-	 * 
-	 * @return the userID that was given to the constructor
-	 */
-	public int getUserID()
+	public int getUserID() 
 	{
 		return userID;
 	}
-
 }
