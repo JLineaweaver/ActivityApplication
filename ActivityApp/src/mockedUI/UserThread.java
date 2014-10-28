@@ -188,7 +188,7 @@ public class UserThread implements Runnable
 		cmd.execute();
 		if (parts.length == 2)
 		{
-			String result = (String) cmd.getResult();
+			String result = cmd.getResult().toString();
 			if (result == null)
 			{
 				return false;
@@ -214,8 +214,7 @@ public class UserThread implements Runnable
 			if (!executeInstruction(input))
 			{
 				allIsWell = false;
-				System.out.println(Thread.currentThread().getName() + " failed when executing this instruction: "
-						+ input);
+				System.out.println(Thread.currentThread().getName() + " failed when executing this instruction: " + input);
 			} else
 			{
 				if (commandReader.hasNextLine())

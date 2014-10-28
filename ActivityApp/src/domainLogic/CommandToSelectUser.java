@@ -52,7 +52,7 @@ public class CommandToSelectUser implements Command
 	@Override
 	public Person getResult()
 	{
-		Person result = person.getUser();
+		Person result = SelectedPerson.getInstance();
 		return result;
 	}
 

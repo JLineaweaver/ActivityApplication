@@ -122,6 +122,5 @@ public class UnitOfWork
 	public ArrayList<DomainObject> getRemovedObjects()
 	{
 		return removedObjects;
-	}
-	
+	}	
 }

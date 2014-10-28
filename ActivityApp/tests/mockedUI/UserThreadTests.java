@@ -12,6 +12,9 @@ import domainLogic.CommandToCreateUser;
 import domainLogic.CommandToGetPendingIncomingFriendList;
 import domainLogic.CommandToPersistChanges;
 import domainLogic.CommandToSelectUser;
+import domainLogic.Person;
+import domainLogic.SelectedPerson;
+import domainLogic.UnitOfWork;
 
 /**
  * Tests related to the processing of commands by the UserThread class.  Note that many of these tests use
@@ -104,4 +107,16 @@ public class UserThreadTests
 		t.setCurrentUserID(5);
 		assertTrue( t.executeInstruction("MockCommand <userID> mymessage; 5 mymessage worked"));
 	}
+	
+//	@Test
+//	public void testExecution() throws FileNotFoundException
+//	{
+//		Person person = new Person("fred", "pw1" ,"happyFred" , -1);
+//		Person person2 = new Person("henry" , "pw2", "sadHenry", -2);
+//		UserThread t = new UserThread("CreateUserTest");
+//		UnitOfWork.newCurrent();
+//		t.run();
+//		Person.emptyMockDB();
+//		SelectedPerson.resetInstance();
+//	}
 }
