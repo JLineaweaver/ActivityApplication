@@ -231,10 +231,9 @@ public class Person extends DomainObject
 	/**
 	 * @return the array list of friends for that person
 	 */
-	public FriendsList findFriends()
+	public FriendsList getFriends()
 	{
-		DataMapper pdm = MyThreadLocal.get();
-		return pdm.findFriends(userID);
+		return myFriends;
 	}
 	
 	
@@ -256,7 +255,6 @@ public class Person extends DomainObject
 	public void CreateUser(String userName, String password, String displayName) 
 	{
 		user = new Person(userName, password, displayName, userID);
-		mockDB.add(user);
 		this.markNew(user);
 	}
 	
@@ -307,6 +305,8 @@ public class Person extends DomainObject
 		requestee = Person.findUser1(userNameOfRequestee);
 		//requestee = Person.findPerson(userNameOfRequestee);
 		user.myFriends.remove(requestee);
+		this.markDirty(requestee);
+		this.markDirty(user);
 		
 	}
 
@@ -314,16 +314,19 @@ public class Person extends DomainObject
 	public void rejectFriendRequest(int userIDOfRequestee, String userNameOfRequester)
 	{
 		Person requestee = new Person();
-		requestee = Person.findPerson(userIDOfRequestee);
-		user = Person.findPerson(userNameOfRequester);
-		user.myIncomingPendingFriends.remove(requestee);
+		//requestee = Person.findPerson(userIDOfRequestee);
+		requestee = Person.findUser1(userIDOfRequestee);
+		user = Person.findUser1(userNameOfRequester);
+		requestee.myIncomingPendingFriends.incomingPendingFriends.remove(user);
+		this.markDirty(requestee);
+		this.markDirty(user);
 	}
 
 
-	public void retrieveFriendList(int userID)
+	public ArrayList<Person> retrieveFriendList(int userID)
 	{
-		user = Person.findPerson(userID);
-		user.myFriends.getFriendList();
+		user = Person.findUser1(userID);
+		return user.myFriends.getFriendList();
 	}
 
 	public void PendingIncomingFriendList(int userID) 
@@ -353,16 +356,15 @@ public class Person extends DomainObject
 
 	public void cancelChanges()
 	{
-		if(user.myIncomingPendingFriends != null)
-		{
-			user.myIncomingPendingFriends = null;
-		}
+		UnitOfWork unit = UnitOfWork.getCurrent();
+		unit.emptyArrayLists();
 	}
 
 
 	public void modifyUser(int userID, String newDisplayName)
 	{
-		user = Person.findPerson(userID);
+		//user = Person.findPerson(userID);
+		user = Person.findUser1(userID);
 		user.setDisplayName(newDisplayName);
 		
 	}
@@ -375,9 +377,13 @@ public class Person extends DomainObject
 		user = SelectedPerson.getInstance();
 	}
 	
-	public ArrayList<Person> getOutgoingPendingFriendList()
+	public ArrayList<Person> getTheOutgoingPendingFriendList()
 	{
 		return user.myOutgoingPendingFriends.getPendingFriendList();
+	}
+	
+	public OutgoingPendingFriendList getOutgoingPendingFriendList() {
+		return myOutgoingPendingFriends;
 	}
 	
 }

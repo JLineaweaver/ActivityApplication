@@ -19,14 +19,18 @@ public class PersonRowDataGateway
 	
 	 //lsagroup2.cbzhjl6tpflt.us-east-1.rds.amazonaws.com
 	String url = "lsagroup2.cbzhjl6tpflt.us-east-1.rds.amazonaws.com:3306";
-	String user = "lsagroup2";
-	String password = "lsagroup2";
+	String dbUser = "lsagroup2";
+	String dbPassword = "lsagroup2";
 
-	public PersonRowDataGateway() throws SQLException {
+	public PersonRowDataGateway(int id) throws SQLException {
 	
-		//con = DriverManager.getConnection(url,user,password);
+		con = DriverManager.getConnection(url,dbUser,dbPassword);
 		//Currently can't connect
 		
+	}
+	
+	public PersonRowDataGateway(String username, String password) throws SQLException {
+		con = DriverManager.getConnection(url,dbUser,dbPassword);
 	}
 	
 	public Person findPerson(String username, String password) {

@@ -44,7 +44,7 @@ public class CommandToGetPendingOutgoingFriendList implements Command
 	@Override
 	public ArrayList<Person> getResult()
 	{
-		ArrayList<Person> result = person.getOutgoingPendingFriendList();
+		ArrayList<Person> result = person.getTheOutgoingPendingFriendList();
 		return result;
 	}
 

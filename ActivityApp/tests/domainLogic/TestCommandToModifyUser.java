@@ -11,15 +11,11 @@ public class TestCommandToModifyUser
 	public void testModify()
 	{
 		//This test is mocked up not data base tested
-		Person person = new Person();
-		person.setDisplayName("Matthew123");
-		person.setID(2);
-		assertEquals("Matthew123", person.getDisplayName());
-		CommandToModifyUser cmd = new CommandToModifyUser(person.getUserID(), "Matthew170");
+		Person person = new Person("Mattyc", "mat12", "Matthew170", 2);
+		assertEquals("Matthew170", person.getDisplayName());
+		CommandToModifyUser cmd = new CommandToModifyUser(person.getUserID(), "Matt170");
 		cmd.execute();
-//		assertEquals(2, cmd.getResult().getUserID());
-		assertEquals("Matthew170", cmd.getResult().getDisplayName());
-		
+		assertEquals("Matt170", person.getDisplayName());
 	}
 
 }

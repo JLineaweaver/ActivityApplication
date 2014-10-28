@@ -123,4 +123,11 @@ public class UnitOfWork
 	{
 		return removedObjects;
 	}	
+
+	public void emptyArrayLists()
+	{
+		newObjects.clear();
+		dirtyObjects.clear();
+		removedObjects.clear();
+	}
 }

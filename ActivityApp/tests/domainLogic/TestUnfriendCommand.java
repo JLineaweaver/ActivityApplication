@@ -16,6 +16,7 @@ public class TestUnfriendCommand {
 		assertEquals(1, person1.getNumberOfFriends());
 		CommandToUnFriend un = new CommandToUnFriend(person1.getUserID(), person2.getUserName());
 		un.execute();
+		assertEquals(0, person1.getNumberOfFriends());
 		assertEquals("Matt", un.getResult().getUserName());
 		assertEquals(0, un.getResult().myFriends.getFriendList().size());
 
