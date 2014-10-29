@@ -336,10 +336,10 @@ public class Person extends DomainObject
 
 	public void rejectFriendRequest(int userIDOfRequestee, String userNameOfRequester)
 	{
+		Person requestee = new Person();
 		//requestee = Person.findPerson(userIDOfRequestee);
-		Person requestee = Person.findUser1(userIDOfRequestee);
-		//user = Person.findUser1(userNameOfRequester);
-		user = SelectedPerson.getSelectedPerson();
+		requestee = Person.findUser1(userIDOfRequestee);
+		user = Person.findUser1(userNameOfRequester);
 		requestee.myIncomingPendingFriends.incomingPendingFriends.remove(user);
 		this.markDirty(requestee);
 		this.markDirty(user);
@@ -385,9 +385,9 @@ public class Person extends DomainObject
 	public void modifyUser(int userID, String newDisplayName)
 	{
 		//user = Person.findPerson(userID);
-		//user = Person.findUser1(userID);
-		user = SelectedPerson.getSelectedPerson();
+		user = Person.findUser1(userID);
 		user.setDisplayName(newDisplayName);
+		this.markDirty(user);
 		
 	}
 
