@@ -319,8 +319,11 @@ public class Person extends DomainObject
 		user = Person.findUser1(userIDOfRequester);
 		Person requestee = new Person();
 		requestee = Person.findUser1(userNameOfRequestee);
+		Friend req = new Friend(requestee.userName, requestee.displayName);
 		//requestee = Person.findPerson(userNameOfRequestee);
-		user.myFriends.remove(requestee);
+		user.myFriends.remove(req);
+		Friend req2 = new Friend(user.userName, user.displayName);
+		requestee.myFriends.remove(req2);
 		this.markDirty(requestee);
 		this.markDirty(user);
 		
@@ -339,7 +342,7 @@ public class Person extends DomainObject
 	}
 
 
-	public ArrayList<Person> retrieveFriendList(int userID)
+	public ArrayList<Friend> retrieveFriendList(int userID)
 	{
 		user = Person.findUser1(userID);
 		return user.myFriends.getFriendList();
