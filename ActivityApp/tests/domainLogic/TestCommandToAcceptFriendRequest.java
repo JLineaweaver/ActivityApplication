@@ -32,7 +32,7 @@ public class TestCommandToAcceptFriendRequest
 	{
 		Person person1 = new Person("Matt", "","mattyc", 1);
 		Person person2 = new Person("John", "","Jonny", 2);
-		SelectedPerson.initializeInstance(person1); // simulates creating a person
+		SelectedPerson.initializeSelectedPerson(person1); // simulates creating a person
 		
 		CommandToAcceptFriendRequest cmd = new CommandToAcceptFriendRequest(person1.getUserID(), person2.getUserName());
 		
@@ -42,7 +42,7 @@ public class TestCommandToAcceptFriendRequest
 		assertEquals(1, person1.getNumberOfFriends());
 		
 		Person.emptyMockDB();
-		SelectedPerson.resetInstance();
+		SelectedPerson.resetSelectedPerson();
 	}
 	
 	@Test
@@ -52,7 +52,7 @@ public class TestCommandToAcceptFriendRequest
 		Person person1 = new Person("Matt", "","mattyc", 1);
 		Person person2 = new Person("John", "","Jonny", 2);
 		Person person3 = new Person("George","", "GeorgeyGeorge", 3);
-		SelectedPerson.initializeInstance(person1); //simulates selecting a person
+		SelectedPerson.initializeSelectedPerson(person1); //simulates selecting a person
 		
 		CommandToAcceptFriendRequest cmd = new CommandToAcceptFriendRequest(person1.getUserID(), person2.getUserName());
 		CommandToAcceptFriendRequest cmd2 = new CommandToAcceptFriendRequest(person1.getUserID(), person3.getUserName());
@@ -68,7 +68,7 @@ public class TestCommandToAcceptFriendRequest
 		assertEquals(0, person1.myIncomingPendingFriends.incomingPendingFriends.size());
 		
 		Person.emptyMockDB();
-		SelectedPerson.resetInstance();
+		SelectedPerson.resetSelectedPerson();
 	}
 
 }

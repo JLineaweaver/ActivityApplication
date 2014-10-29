@@ -37,7 +37,7 @@ public class TestCommandToSelectUser
 		assertEquals("Johnny", selectedPerson.getUserName());	
 		
 		Person.emptyMockDB();
-		SelectedPerson.resetInstance();
+		SelectedPerson.resetSelectedPerson();
 	}
 	
 	@Test
@@ -60,6 +60,6 @@ public class TestCommandToSelectUser
 		assertEquals("Matthew", selectedPerson.getUserName());	
 		
 		Person.emptyMockDB();
-		SelectedPerson.resetInstance();
+		SelectedPerson.resetSelectedPerson();
 	}
 }

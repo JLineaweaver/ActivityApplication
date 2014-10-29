@@ -17,7 +17,7 @@ public class SelectedPerson extends Person
 	
 	/**
 	 */
-	public static void initializeInstance(Person sPerson)
+	public static void initializeSelectedPerson(Person sPerson)
 	{
 		if(selectedPerson == null)
 		{
@@ -29,12 +29,12 @@ public class SelectedPerson extends Person
 	/**
 	 * @return the instance of the ride
 	 */
-	public static Person getInstance()
+	public static Person getSelectedPerson()
 	{
 		return selectedPerson;
 	}
 	
-	public static void resetInstance()
+	public static void resetSelectedPerson()
 	{
 		selectedPerson = null;
 	}

@@ -220,7 +220,7 @@ public class Person extends DomainObject
 		//user.myFriends.add(requester);
 		//user = Person.findUser1(userIDOfRequestee);
 		
-		user = SelectedPerson.getInstance();
+		user = SelectedPerson.getSelectedPerson();
 		Person requester = Person.findUser1(userNameOfRequester);
 		requester.myFriends.add(user);
 		user.myFriends.add(requester);
@@ -280,10 +280,10 @@ public class Person extends DomainObject
 	{
 		//user = Person.findPerson(userName, pw);
 		user = Person.findUser1(userName, pw);
-		if(user != SelectedPerson.getInstance())
+		if(user != SelectedPerson.getSelectedPerson())
 		{
-			SelectedPerson.resetInstance();
-			SelectedPerson.initializeInstance(user);
+			SelectedPerson.resetSelectedPerson();
+			SelectedPerson.initializeSelectedPerson(user);
 		}			
 	}
 
@@ -302,7 +302,7 @@ public class Person extends DomainObject
 //		Person requestee = Person.findPerson(userNameOfRequestee);
 
 		//user = Person.findUser1(userIDOfRequester);
-		user = SelectedPerson.getInstance();
+		user = SelectedPerson.getSelectedPerson();
 		Person requestee = Person.findUser1(userNameOfRequestee);
 		
 		user.myIncomingPendingFriends.add(requestee);
@@ -356,7 +356,7 @@ public class Person extends DomainObject
 		//user = Person.findPerson(userID);
 		//user = Person.findUser1(userID);
 		
-		user = SelectedPerson.getInstance();		
+		user = SelectedPerson.getSelectedPerson();		
 	}
 	
 	/**
@@ -396,7 +396,7 @@ public class Person extends DomainObject
 	{
 		//user = Person.findPerson(userID);
 		//user = Person.findUser1(userID);
-		user = SelectedPerson.getInstance();
+		user = SelectedPerson.getSelectedPerson();
 	}
 	
 	public ArrayList<Person> getTheOutgoingPendingFriendList()
