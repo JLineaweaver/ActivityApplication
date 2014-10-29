@@ -11,6 +11,7 @@ public class TestCommandToCancelChanges {
 	{
 		Person person1 = new Person("Matt", "","mattyc", 1);
 		Person person2 = new Person("John", "","Jonny", 2);
+		SelectedPerson.initializeSelectedPerson(person1); // simulates selecting person1
 		assertEquals(0, person1.getNumberOfFriends());
 		
 		UnitOfWork.newCurrent();
@@ -30,6 +31,7 @@ public class TestCommandToCancelChanges {
 		cmd1.execute();
 		
 		assertEquals(0, unit.getDirtyObjects().size());
+		SelectedPerson.resetSelectedPerson();
 		
 	}
 

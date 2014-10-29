@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class TestPersistChangesCommand {
+public class TestCommandToPersistChanges {
 
 	@Test
 	public void test() 
@@ -34,6 +34,7 @@ public class TestPersistChangesCommand {
 		cmd1.execute();
 		
 		assertEquals(0, unit.getDirtyObjects().size());
+		SelectedPerson.resetSelectedPerson();
 	}
 
 }

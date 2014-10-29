@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-public class TestRetrieveFriendsListCommand {
+public class TestCommandToRetrieveFriendsList {
 
 	@Test
 	public void testRetrieve() 

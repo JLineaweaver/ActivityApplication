@@ -40,7 +40,6 @@ public class CommandToModifyUser implements Command
 	@Override
 	public Person getResult()
 	{
-///////////
 		return person.getUser();
 	}
 }

@@ -70,13 +70,10 @@ public class UnitOfWork
 	
 	public void commit()
 	{
-		/**
-		 *Empty for testing purposes
-		 */
 		insertNew();
 		updateDirty();
 		deleteRemoved();
-		this.emptyArrayLists();
+		this.emptyArrayLists(); //Empty for testing purposes
 	}
 
 	private void deleteRemoved() 
