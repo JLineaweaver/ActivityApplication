@@ -221,9 +221,11 @@ public class Person extends DomainObject
 		//user = Person.findUser1(userIDOfRequestee);
 		
 		user = SelectedPerson.getSelectedPerson();
+		Friend fr1 = new Friend(user.userName, user.displayName);
 		Person requester = Person.findUser1(userNameOfRequester);
-		requester.myFriends.add(user);
-		user.myFriends.add(requester);
+		Friend fr = new Friend(requester.userName, requester.displayName);
+		requester.myFriends.add(fr1);
+		user.myFriends.add(fr);
 		
 		user.myIncomingPendingFriends.incomingPendingFriends.remove(requester);
 		requester.myOutgoingPendingFriends.outgoingPendingFriends.remove(user);
@@ -411,6 +413,13 @@ public class Person extends DomainObject
 	
 	public OutgoingPendingFriendList getOutgoingPendingFriendList() {
 		return myOutgoingPendingFriends;
+	}
+
+
+	public void persistChanges() 
+	{
+		UnitOfWork unit = UnitOfWork.getCurrent();
+		unit.commit();
 	}
 	
 }

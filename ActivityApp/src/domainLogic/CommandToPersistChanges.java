@@ -7,7 +7,7 @@ package domainLogic;
  */
 public class CommandToPersistChanges implements Command
 {
-
+	Person person = new Person();
 	/**
 	 * 
 	 * @see Command#execute()
@@ -15,7 +15,7 @@ public class CommandToPersistChanges implements Command
 	@Override
 	public void execute()
 	{
-		// TODO Auto-generated method stub
+		person.persistChanges();
 
 	}
 

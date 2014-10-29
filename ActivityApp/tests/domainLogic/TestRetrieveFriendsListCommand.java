@@ -16,10 +16,19 @@ public class TestRetrieveFriendsListCommand {
 		 */
 		Person person1 = new Person("Matt", "","mattyc", 1);
 		Person person2 = new Person("John", "","Jonny", 2);
-		person1.myFriends.add(person2);
-		CommandToRetrieveFriendList cmd = new CommandToRetrieveFriendList(person1.getUserID());
+		SelectedPerson.initializeSelectedPerson(person1); // simulates creating a person
+		
+		CommandToAcceptFriendRequest cmd = new CommandToAcceptFriendRequest(person1.getUserID(), person2.getUserName());
+		
+		UnitOfWork.newCurrent();
 		cmd.execute();
-		assertEquals(person1.myFriends.getFriendList(), cmd.getResult());
+		assertEquals(1, person1.getNumberOfFriends());
+		CommandToRetrieveFriendList cmd1 = new CommandToRetrieveFriendList(person1.getUserID());
+		cmd1.execute();
+		assertEquals("John", cmd1.toString());
+		
+	//	Person.emptyMockDB();
+	//	SelectedPerson.resetSelectedPerson();
 		
 	}
 

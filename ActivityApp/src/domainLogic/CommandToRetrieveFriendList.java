@@ -10,6 +10,7 @@ import java.util.ArrayList;
  */
 public class CommandToRetrieveFriendList implements Command
 {
+	ArrayList<Friend> result;
 	Person person = new Person();
 	private int userID;
 
@@ -32,17 +33,32 @@ public class CommandToRetrieveFriendList implements Command
 		person.retrieveFriendList(userID);
 
 	}
-
+	public String toString()
+	{
+		String str = "";
+		result = this.getResult();
+		for(int i = 0; i < result.size(); i++)
+		{
+			if(i == 0)
+			{
+				str = result.get(i).getUserName();
+			}else
+			{
+				str = str + "," + result.get(i).getUserName();
+			}
+		}
+		
+		return str;
+	}
 	/**
 	 * A list of the friends associated with the given user
 	 * @see Command#getResult()
 	 */
 	@Override
-	////FRIEND
 	public ArrayList<Friend> getResult()
 	{
-		// TODO Auto-generated method stub
-		return person.getUser().myFriends.getFriendList();
+		result = person.getUser().myFriends.getFriendList();
+		return result;
 	}
 
 }
