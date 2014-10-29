@@ -279,7 +279,8 @@ public class Person extends DomainObject
 	public void SelectUser(String userName, String pw) 
 	{
 		//user = Person.findPerson(userName, pw);
-		user = Person.findUser1(userName, pw);
+		user = Person.findUser1(userName, pw); // Use this
+		//user = new Person("fred", "pw1", "happyFred" , -1); // Just for testing for the CreateUserTest file
 		if(user != SelectedPerson.getSelectedPerson())
 		{
 			SelectedPerson.resetSelectedPerson();
@@ -303,7 +304,8 @@ public class Person extends DomainObject
 
 		//user = Person.findUser1(userIDOfRequester);
 		user = SelectedPerson.getSelectedPerson();
-		Person requestee = Person.findUser1(userNameOfRequestee);
+		Person requestee = Person.findUser1(userNameOfRequestee); //use this
+		//Person requestee = new Person("henry", "pw2", "sadHenry", -1); // For testing CreateUserTest file
 		
 		user.myIncomingPendingFriends.add(requestee);
 		requestee.myOutgoingPendingFriends.add(user);

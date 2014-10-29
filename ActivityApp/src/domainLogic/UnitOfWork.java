@@ -4,7 +4,10 @@ import java.util.ArrayList;
 
 import org.junit.Assert;
 
-
+/**
+ * There is a unit of work for the commands per session/file.
+ * It will keep track of all the manipulation, creation, and deletion of the users.
+ */
 public class UnitOfWork 
 {
 	private ArrayList<DomainObject> newObjects = new ArrayList<DomainObject>();

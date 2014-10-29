@@ -117,6 +117,6 @@ public class UserThreadTests
 //		UnitOfWork.newCurrent();
 //		t.run();
 //		Person.emptyMockDB();
-//		SelectedPerson.resetInstance();
+//		SelectedPerson.resetSelectedPerson();
 //	}
 }
