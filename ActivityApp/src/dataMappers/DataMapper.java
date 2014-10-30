@@ -36,9 +36,7 @@ public class DataMapper
 		}
 		try {
 			pendingFriendsGateway = new PendingFriendsTableDataGateway();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (SQLException e){
 		}
 	}
 
@@ -66,14 +64,14 @@ public class DataMapper
 	public boolean storePerson(Person myPerson) throws SQLException {
 		Person oldPerson = findPerson(myPerson.getUserID());
 		PersonRowDataGateway prdg = new PersonRowDataGateway(myPerson.getUserID());
-		updatePassword(myPerson, oldPerson, prdg);
+		updateDisplayName(myPerson, oldPerson, prdg);
 		updateFriends(myPerson, oldPerson, friendsGateway);
 		//updatePendingFriends(myPerson,oldPerson, pendingFriendsGateway);
 		
 		return true;
 	}
 	
-	private boolean updatePassword(Person myPerson, Person oldPerson, PersonRowDataGateway prdg) {
+	private boolean updateDisplayName(Person myPerson, Person oldPerson, PersonRowDataGateway prdg) {
 		if(!myPerson.getPassword().equals(oldPerson.getPassword()))
 		{
 			prdg.updateDisplayName(myPerson.getDisplayName());
