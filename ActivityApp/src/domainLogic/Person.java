@@ -210,8 +210,7 @@ public class Person extends DomainObject
 	public static void CreatePerson(Person p) throws SQLException 
 	{
 		DataMapper pdm = MyThreadLocal.get();
-		pdm.storePerson(p);
-		//pdm.createPerson(p);
+		pdm.createPerson(p);
 	}
 	
 	/**
