@@ -32,6 +32,7 @@ public class TestCommandToAcceptFriendRequest
 	{
 		Person person1 = new Person("Matt", "","mattyc", 1);
 		Person person2 = new Person("John", "","Jonny", 2);
+		SelectedPerson.initializeSelectedPerson(person1); // simulates creating a person
 		
 		CommandToAcceptFriendRequest cmd = new CommandToAcceptFriendRequest(person1.getUserID(), person2.getUserName());
 		
@@ -39,7 +40,9 @@ public class TestCommandToAcceptFriendRequest
 		cmd.execute();
 		
 		assertEquals(1, person1.getNumberOfFriends());
+		
 		Person.emptyMockDB();
+		SelectedPerson.resetSelectedPerson();
 	}
 	
 	@Test
@@ -49,6 +52,7 @@ public class TestCommandToAcceptFriendRequest
 		Person person1 = new Person("Matt", "","mattyc", 1);
 		Person person2 = new Person("John", "","Jonny", 2);
 		Person person3 = new Person("George","", "GeorgeyGeorge", 3);
+		SelectedPerson.initializeSelectedPerson(person1); //simulates selecting a person
 		
 		CommandToAcceptFriendRequest cmd = new CommandToAcceptFriendRequest(person1.getUserID(), person2.getUserName());
 		CommandToAcceptFriendRequest cmd2 = new CommandToAcceptFriendRequest(person1.getUserID(), person3.getUserName());
@@ -62,7 +66,44 @@ public class TestCommandToAcceptFriendRequest
 		
 		assertEquals(2, person1.getNumberOfFriends());	
 		assertEquals(0, person1.myIncomingPendingFriends.incomingPendingFriends.size());
+		
 		Person.emptyMockDB();
+		SelectedPerson.resetSelectedPerson();
+	}
+	
+	@Test
+	public void testSelectingMultipleTimesAndAcceptingFriendRequest()
+	{
+		Person person1 = new Person("Matt", "","mattyc", 1);
+		Person person2 = new Person("John", "","Jonny", 2);
+		Person person3 = new Person("George","", "GeorgeyGeorge", 3);
+		
+		CommandToAcceptFriendRequest cmd = new CommandToAcceptFriendRequest(person1.getUserID(), person2.getUserName());
+		CommandToAcceptFriendRequest cmd2 = new CommandToAcceptFriendRequest(person2.getUserID(), person3.getUserName());
+		CommandToAcceptFriendRequest cmd3 = new CommandToAcceptFriendRequest(person1.getUserID(), person3.getUserName());
+		person1.myIncomingPendingFriends.incomingPendingFriends.add(person2);
+		person2.myIncomingPendingFriends.incomingPendingFriends.add(person3);
+		
+		
+		UnitOfWork.newCurrent();
+		
+		SelectedPerson.initializeSelectedPerson(person1); //simulates selecting a person
+		cmd.execute();
+		SelectedPerson.resetSelectedPerson();
+		
+		SelectedPerson.initializeSelectedPerson(person2); //simulates selecting a person
+		cmd2.execute();
+		SelectedPerson.resetSelectedPerson();
+		
+		assertEquals(2, person2.getNumberOfFriends());
+		
+		SelectedPerson.initializeSelectedPerson(person1); // selected person 1 again
+		cmd3.execute();
+		
+		assertEquals(2, person1.getNumberOfFriends());
+		
+		Person.emptyMockDB();
+		SelectedPerson.resetSelectedPerson();
 	}
 
 }

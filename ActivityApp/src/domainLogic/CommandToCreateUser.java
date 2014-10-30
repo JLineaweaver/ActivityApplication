@@ -16,6 +16,8 @@ public class CommandToCreateUser implements Command
 	private String displayName;
 	
 	private Person person = new Person();
+	
+	private Person result = new Person();
 
 	/**
 	 * Create a command that will add a new user to the system
@@ -70,8 +72,13 @@ public class CommandToCreateUser implements Command
 	@Override
 	public Person getResult()
 	{
-		Person result = person.getUser();
+		result = person.getUser();
 		return result;
+	}
+	
+	public String toString()
+	{
+		return result.getUserName() + ":" + result.getPassword() + ":" + result.getDisplayName();
 	}
 
 	/**

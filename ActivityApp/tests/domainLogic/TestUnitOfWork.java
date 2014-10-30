@@ -54,6 +54,7 @@ public class TestUnitOfWork {
 	{
 		Person person1 = new Person("Matt", "","mattyc", 1);
 		Person person2 = new Person("John", "","Jonny", 2);
+		SelectedPerson.initializeSelectedPerson(person1); //simulates selecting a person
 		CommandToMakeFriendRequest cmd = new CommandToMakeFriendRequest(person1.getUserID(), person2.getUserName());
 		
 		UnitOfWork.newCurrent();
@@ -63,6 +64,7 @@ public class TestUnitOfWork {
 		assertEquals(true, UnitOfWork.getCurrent().getDirtyObjects().contains(result));
 		
 		Person.emptyMockDB();
+		SelectedPerson.resetSelectedPerson();
 	}
 	
 	@Test
@@ -70,22 +72,27 @@ public class TestUnitOfWork {
 	{
 		Person person1 = new Person("Matt", "","mattyc", 1);
 		Person person2 = new Person("John", "","Jonny", 2);
+		SelectedPerson.initializeSelectedPerson(person1); //simulates selecting a person
 		CommandToMakeFriendRequest cmd = new CommandToMakeFriendRequest(person1.getUserID(), person2.getUserName());
+		
+		UnitOfWork.newCurrent();
+		cmd.execute();
 		
 		Person person3 = new Person("Bob", "","BobbyB", 3);
 		Person person4 = new Person("George", "","Georgie", 4);
 		CommandToMakeFriendRequest cmd2 = new CommandToMakeFriendRequest(person3.getUserID(), person4.getUserName());
 		
-		UnitOfWork.newCurrent();
-		
-		cmd.execute();
+		SelectedPerson.resetSelectedPerson();
+		SelectedPerson.initializeSelectedPerson(person3); //simulates selecting a person
 		cmd2.execute();
+		
 		Person result = cmd.getResult();
 		Person result2 = cmd.getResult();
 		assertEquals(true, UnitOfWork.getCurrent().getDirtyObjects().contains(result));
 		assertEquals(true, UnitOfWork.getCurrent().getDirtyObjects().contains(result2));
 		
 		Person.emptyMockDB();
+		SelectedPerson.resetSelectedPerson();
 	}
 	
 	@Test

@@ -2,23 +2,14 @@ package domainLogic;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 public class TestCommandToGetPendingIncomingFriendList 
 {
+	
 
-	@Test
-	public void testInitialization() 
-	{
-		int uID = -1;
-		CommandToGetPendingIncomingFriendList cmd = new CommandToGetPendingIncomingFriendList(uID);
-		assertEquals(-1, cmd.getUserID());
-	}
-	
-	
-	/**
-	 * Doesn't actually test anything
-	 */
 	@Test
 	public void testPendingFriend()
 	{		
@@ -41,13 +32,16 @@ public class TestCommandToGetPendingIncomingFriendList
 		
 		assertEquals(0, person1.myIncomingPendingFriends.incomingPendingFriends.size());
 		
+		SelectedPerson.initializeSelectedPerson(person1);
 		person1.myIncomingPendingFriends.incomingPendingFriends.add(person2); //manually added a person to the list
 		CommandToGetPendingIncomingFriendList pendingIncomingCmd = new CommandToGetPendingIncomingFriendList(person1.getUserID());
 		pendingIncomingCmd.execute();
-		String result = pendingIncomingCmd.getResult();
+		String result = pendingIncomingCmd.toString();
 		
 		assertEquals("George", result);
+		
 		Person.emptyMockDB();
+		SelectedPerson.resetSelectedPerson();
 	}
 	
 	@Test
@@ -74,11 +68,14 @@ public class TestCommandToGetPendingIncomingFriendList
 		person1.myIncomingPendingFriends.incomingPendingFriends.add(person2); //manually added a person to the list
 		person1.myIncomingPendingFriends.incomingPendingFriends.add(person3); //manually added a person to the list
 		
+		SelectedPerson.initializeSelectedPerson(person1); // simulates selecting a person
 		CommandToGetPendingIncomingFriendList pendingIncomingCmd = new CommandToGetPendingIncomingFriendList(person1.getUserID());
 		pendingIncomingCmd.execute();
-		String result = pendingIncomingCmd.getResult();
+		String result = pendingIncomingCmd.toString();
 		
 		assertEquals("George,George", result);
+		
 		Person.emptyMockDB();
+		SelectedPerson.resetSelectedPerson();
 	}
 }

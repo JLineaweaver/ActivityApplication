@@ -13,7 +13,7 @@ public class CommandToRejectFriendRequest implements Command
 
 	/**
 	 * 
-	 * @param userIDOfRequestee the User ID of the user accepting the request
+	 * @param userIDOfRequestee the User ID of the user rejecting the request
 	 * @param userNameOfRequester the User Name of the user who initiated the friend request
 	 */
 	public CommandToRejectFriendRequest(int userIDOfRequestee, String userNameOfRequester)

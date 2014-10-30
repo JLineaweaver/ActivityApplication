@@ -9,36 +9,36 @@ import domainLogic.Person;
  */
 public class FriendsList
 {
-	ArrayList<Person> friends;
+	ArrayList<Friend> friends;
 	
 	/**
 	 * Constructor
 	 */
 	public FriendsList() 
 	{
-		friends = new ArrayList<Person>();
+		friends = new ArrayList<Friend>();
 	}
 	
 	/**
 	 * Constructor with parameter
 	 * @param friends
 	 */
-	public FriendsList(ArrayList<Person> friends) 
+	public FriendsList(ArrayList<Friend> friends) 
 	{
 		this.friends = friends;
 	}
 	
-	public ArrayList<Person> getFriendList()
+	public ArrayList<Friend> getFriendList()
 	{
 		return friends;
 	}
 
-	public void add(Person friend) {
+	public void add(Friend friend) {
 		friends.add(friend);
 		
 	}
 
-	public void remove(Person requestee)
+	public void remove(Friend requestee)
 	{
 		friends.remove(requestee);	
 	}

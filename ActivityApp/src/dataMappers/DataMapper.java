@@ -102,9 +102,9 @@ public class DataMapper
 	
 	private boolean updatePendingFriends(Person myPerson, Person oldPerson, PendingFriendsTableDataGateway pftdg) {
 
-		OutgoingPendingFriendList myFriends = myPerson.getOutgoingPendingFriendList();
+		OutgoingPendingFriendList myFriends = myPerson.getTheOutgoingPendingFriendList();
 		ArrayList<Person> myFriendsList = myFriends.getPendingFriendList();
-		OutgoingPendingFriendList oldFriends = oldPerson.getOutgoingPendingFriendList();
+		OutgoingPendingFriendList oldFriends = oldPerson.getTheOutgoingPendingFriendList();
 		ArrayList<Person> oldFriendsList = oldFriends.getPendingFriendList();
 
 		
