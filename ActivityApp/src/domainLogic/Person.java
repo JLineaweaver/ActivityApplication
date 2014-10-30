@@ -199,21 +199,30 @@ public class Person extends DomainObject
 	 * @param userNameOfRequestee
 	 * Find the person based on the Username
 	 * @return the person
+	 * @throws SQLException 
 	 */
-	public static Person findPerson(String userNameOfRequestee) 
+	public static Person findPerson(String userNameOfRequestee) throws SQLException 
 	{
 		DataMapper  dm = MyThreadLocal.get();
 		return dm.findPerson(userNameOfRequestee);
 	}
 
+	public static void CreatePerson(Person p) throws SQLException 
+	{
+		DataMapper pdm = MyThreadLocal.get();
+		pdm.storePerson(p);
+		//pdm.createPerson(p);
+	}
+	
 	/**
 	 * 
 	 * @param userIDOfRequestee is the person that is being as to be someone's friend
 	 * @param userNameOfRequester is the person asking to be someone's friend
 	 * 
 	 * Find the requester, add each other to their friends list, mark person as dirty.
+	 * @throws SQLException 
 	 */
-	public void AcceptFriendRequestCommand(String userNameOfRequester)
+	public void AcceptFriendRequestCommand(String userNameOfRequester) throws SQLException
 	{		
 		user = SelectedPerson.getSelectedPerson();
 		Friend fr1 = new Friend(user.userName, user.displayName);
@@ -301,8 +310,9 @@ public class Person extends DomainObject
 	 * Finds the requestee.
 	 * Adds each other to one another's pending friend lists
 	 * Mark both people as dirty in the unit of work.
+	 * @throws SQLException 
 	 */
-	public void MakeFriendRequest(String userNameOfRequestee) 
+	public void MakeFriendRequest(String userNameOfRequestee) throws SQLException 
 	{
 //		user = Person.findPerson(userIDOfRequester);
 //		Person requestee = Person.findPerson(userNameOfRequestee);
@@ -337,7 +347,7 @@ public class Person extends DomainObject
 	}
 
 
-	public void rejectFriendRequest(int userIDOfRequestee, String userNameOfRequester)
+	public void rejectFriendRequest(int userIDOfRequestee, String userNameOfRequester) throws SQLException
 	{
 		//requestee = Person.findPerson(userIDOfRequestee);
 		//requestee = Person.findUser1(userIDOfRequestee);
@@ -424,7 +434,7 @@ public class Person extends DomainObject
 	}
 
 
-	public void persistChanges() 
+	public void persistChanges() throws SQLException 
 	{
 		UnitOfWork unit = UnitOfWork.getCurrent();
 		unit.commit();

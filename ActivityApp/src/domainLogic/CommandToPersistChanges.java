@@ -1,4 +1,7 @@
 package domainLogic;
+
+import java.sql.SQLException;
+
 /**
  * Tells the system to save any pending changes
  * 
@@ -15,7 +18,12 @@ public class CommandToPersistChanges implements Command
 	@Override
 	public void execute()
 	{
-		person.persistChanges();
+		try {
+			person.persistChanges();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 

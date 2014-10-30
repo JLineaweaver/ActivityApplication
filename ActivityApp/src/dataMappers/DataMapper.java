@@ -28,7 +28,12 @@ public class DataMapper
 	PersonRowDataGateway personGateway;
 	public DataMapper() {
 		//personGateway = new PersonRowDataGateway();
-		friendsGateway = new FriendsTableDataGateway();
+		try {
+			friendsGateway = new FriendsTableDataGateway();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		pendingFriendsGateway = new PendingFriendsTableDataGateway();
 	}
 
