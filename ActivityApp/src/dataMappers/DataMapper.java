@@ -71,7 +71,8 @@ public class DataMapper
 	private boolean updatePassword(Person myPerson, Person oldPerson, PersonRowDataGateway prdg) {
 		if(!myPerson.getPassword().equals(oldPerson.getPassword()))
 		{
-			prdg.updatePassword(myPerson.getPassword());
+			prdg.updateDisplayName(myPerson.getDisplayName());
+
 			return true;
 		}
 		return false;
