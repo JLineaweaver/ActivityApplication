@@ -4,6 +4,7 @@ import gateways.FriendsTableDataGateway;
 import gateways.PendingFriendsTableDataGateway;
 import gateways.PersonRowDataGateway;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -32,17 +33,14 @@ public class DataMapper
 
 	
 	public Person findPerson(String username, String password) throws SQLException {
-		//MockPersonRowDataGateway mprdg = new MockPersonRowDataGateway();
 		PersonRowDataGateway prdg = new PersonRowDataGateway(username,password);
-		//return mprdg.findPerson(username,password);
-		return prdg.findPerson(username, password);
+		ResultSet rs = prdg.findPerson();
+		
 	}
 	
 	public Person findPerson(int ID) throws SQLException {
-		//MockPersonRowDataGateway mprdg = new MockPersonRowDataGateway();
-		//return mprdg.findPerson(ID);
 		PersonRowDataGateway prdg = new PersonRowDataGateway(ID);
-		return prdg.findPerson(ID);
+		ResultSet rs = prdg.findPerson();
 	}
 	public Person findPerson(String userName) {
 		MockPersonRowDataGateway mprdg = new MockPersonRowDataGateway();
