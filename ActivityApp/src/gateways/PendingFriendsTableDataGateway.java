@@ -31,11 +31,27 @@ public class PendingFriendsTableDataGateway
 			}
 	}
 	
-	public ResultSet getPendingFriends(int userID) {
+	public ResultSet getOutgoingPendingFriends(int userID) {
 		ResultSet rs = null;
 		try
 		{
 			String sql = "SELECT * FROM PendingFriends F WHERE userIDOfRequester=?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1,userID);
+			rs = ps.executeQuery();
+		} catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	
+	public ResultSet getIncomingPendingFriends(int userID) {
+		ResultSet rs = null;
+		try
+		{
+			String sql = "SELECT * FROM PendingFriends F WHERE userIDOfRequestee=?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1,userID);
 			rs = ps.executeQuery();
