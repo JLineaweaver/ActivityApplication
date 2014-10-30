@@ -61,17 +61,17 @@ public class DataMapper
 	public boolean storePerson(Person myPerson) throws SQLException {
 		Person oldPerson = findPerson(myPerson.getUserID());
 		PersonRowDataGateway prdg = new PersonRowDataGateway(myPerson.getUserID());
-		updateDisplayName(myPerson, oldPerson, prdg);
-		//updateFriends(myPerson, oldPerson, friendsGateway);
+		updatePassword(myPerson, oldPerson, prdg);
+		updateFriends(myPerson, oldPerson, friendsGateway);
 		//updatePendingFriends(myPerson,oldPerson, pendingFriendsGateway);
 		
 		return true;
 	}
 	
-	private boolean updateDisplayName(Person myPerson, Person oldPerson, PersonRowDataGateway prdg) {
-		if(!myPerson.getDisplayName().equals(oldPerson.getDisplayName()))
+	private boolean updatePassword(Person myPerson, Person oldPerson, PersonRowDataGateway prdg) {
+		if(!myPerson.getPassword().equals(oldPerson.getPassword()))
 		{
-			prdg.updateDisplayName(myPerson.getPassword());
+			prdg.updatePassword(myPerson.getPassword());
 			return true;
 		}
 		return false;
@@ -113,31 +113,33 @@ public class DataMapper
 	
 	private boolean updatePendingFriends(Person myPerson, Person oldPerson, PendingFriendsTableDataGateway pftdg) {
 
-		ArrayList<Person> myFriendsList = myPerson.getTheOutgoingPendingFriendList();
-		ArrayList<Person> oldFriendsList = oldPerson.getTheOutgoingPendingFriendList();
+		OutgoingPendingFriendList myFriends = myPerson.getTheOutgoingPendingFriendList();
+		ArrayList<Person> myFriendsList = myFriends.getPendingFriendList();
+		OutgoingPendingFriendList oldFriends = oldPerson.getTheOutgoingPendingFriendList();
+		ArrayList<Person> oldFriendsList = oldFriends.getPendingFriendList();
 
 		
 		for(int i = 0; i<myFriendsList.size(); i++) {
 			boolean found = false;
 			for(int j = 0; j<oldFriendsList.size(); j++) {
-				if(myFriendsList.get(i).getUserID() == oldFriendsList.get(j).getUserID()) {
+				if(myFriendsList.get(i).getUserName() == oldFriendsList.get(j).getUserName()) {
 					found = true;
 				}
 			}
 			if(!found) {
-				pftdg.addPendingFriend(myPerson.getUserID(),myFriendsList.get(i).getUserID());
+				pftdg.addFriend(myPerson.getUserID(),myFriendsList.get(i).getUserID());
 			}
 		}
 		
 		for(int j = 0; j<oldFriendsList.size(); j++) {
 			boolean found = false;
 			for(int i = 0; i<myFriendsList.size(); i++) {
-				if(myFriendsList.get(i).getUserID() == oldFriendsList.get(j).getUserID()) {
+				if(myFriendsList.get(i).getUserName() == oldFriendsList.get(j).getUserName()) {
 					found = true;
 				}
 			}
 			if(!found) {
-				pftdg.removePendingFriend(myPerson.getUserID(),oldFriendsList.get(j).getUserID());
+				pftdg.removeFriend(myPerson.getUserID(),oldFriendsList.get(j).getUserID());
 			}
 		}
 		
