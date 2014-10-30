@@ -113,33 +113,31 @@ public class DataMapper
 	
 	private boolean updatePendingFriends(Person myPerson, Person oldPerson, PendingFriendsTableDataGateway pftdg) {
 
-		OutgoingPendingFriendList myFriends = myPerson.getTheOutgoingPendingFriendList();
-		ArrayList<Person> myFriendsList = myFriends.getPendingFriendList();
-		OutgoingPendingFriendList oldFriends = oldPerson.getTheOutgoingPendingFriendList();
-		ArrayList<Person> oldFriendsList = oldFriends.getPendingFriendList();
+		ArrayList<Person> myFriendsList = myPerson.getTheOutgoingPendingFriendList();
+		ArrayList<Person> oldFriendsList = oldPerson.getTheOutgoingPendingFriendList();
 
 		
 		for(int i = 0; i<myFriendsList.size(); i++) {
 			boolean found = false;
 			for(int j = 0; j<oldFriendsList.size(); j++) {
-				if(myFriendsList.get(i).getUserName() == oldFriendsList.get(j).getUserName()) {
+				if(myFriendsList.get(i).getUserID() == oldFriendsList.get(j).getUserID()) {
 					found = true;
 				}
 			}
 			if(!found) {
-				pftdg.addFriend(myPerson.getUserID(),myFriendsList.get(i).getUserID());
+				pftdg.addPendingFriend(myPerson.getUserID(),myFriendsList.get(i).getUserID());
 			}
 		}
 		
 		for(int j = 0; j<oldFriendsList.size(); j++) {
 			boolean found = false;
 			for(int i = 0; i<myFriendsList.size(); i++) {
-				if(myFriendsList.get(i).getUserName() == oldFriendsList.get(j).getUserName()) {
+				if(myFriendsList.get(i).getUserID() == oldFriendsList.get(j).getUserID()) {
 					found = true;
 				}
 			}
 			if(!found) {
-				pftdg.removeFriend(myPerson.getUserID(),oldFriendsList.get(j).getUserID());
+				pftdg.removePendingFriend(myPerson.getUserID(),oldFriendsList.get(j).getUserID());
 			}
 		}
 		
