@@ -7,8 +7,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import domainLogic.Person;
+import domainLogic.Friend;
 
 public class PersonRowDataGateway
 {
@@ -136,11 +138,20 @@ public class PersonRowDataGateway
 		
 	}
 	
-	public void addPerson(Person p) {
-		//String username = p.getUsername();
-		//String password = p.getPassword();
-		//String displayName = p.getDisplayName();
-		
+	public void createPerson(String userName, String displayName, String password, ArrayList<Friend> friends, ArrayList<Person> outgoing) {
+		try
+		{
+			String sql = "INSERT INTO Person (userName, displayName, password) VALUES (?,?,?)";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1,userName);
+			ps.setString(2,displayName);
+			ps.setString(3,password);
+			ps.execute();
+		} catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 }

@@ -30,6 +30,23 @@ public class FriendsTableDataGateway
 			}
 	}
 	
+	public ResultSet getFriends(int userID) {
+		ResultSet rs = null;
+		try
+		{
+			String sql = "SELECT * FROM Friends F WHERE userIDOfRequester=?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1,userID);
+			rs = ps.executeQuery();
+			rs.getArray("")
+			//while(rs.)
+		} catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 	public void addFriend(int userID, String username) throws SQLException {
 		PersonRowDataGateway prdg = new PersonRowDataGateway(username);
 		int secondID = prdg.getID();
