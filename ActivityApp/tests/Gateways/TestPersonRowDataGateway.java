@@ -16,6 +16,7 @@ public class TestPersonRowDataGateway
 		PersonRowDataGateway prdg = new PersonRowDataGateway(2);
 		System.out.println(prdg.findPerson());
 		ResultSet rs = prdg.findPerson();
+		rs.next();
 		String username = rs.getString("userName");
 		System.out.println("fuckboy >>>" + username);
 		assertTrue(prdg.findPerson() != null);

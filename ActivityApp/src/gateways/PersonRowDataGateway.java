@@ -34,22 +34,70 @@ public class PersonRowDataGateway
 		con = DriverManager.getConnection(connectURL);
 		}
 		catch (Exception e) {
-			
+			e.printStackTrace();
 		}
 		this.id = id;
-		//Currently can't connect
 		
 	}
 	
 	public PersonRowDataGateway(String username, String password) throws SQLException {
-		con = DriverManager.getConnection(url,dbUser,dbPassword);
+		try {
+			String connectFormat = "jdbc:mysql://%s/%s?user=%s&password=%s";
+			String connectURL = String.format(connectFormat, url, db, dbUser, dbPassword);
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection(connectURL);
+			}
+			catch (Exception e) {
+				
+			}
+			this.username = username;
+			this.password = password;
+			try
+			{
+				String sql = "SELECT * FROM Person P WHERE P.userName = ? AND P.password = ?";
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setString(1, username);
+				ps.setString(2, password);
+				rs = ps.executeQuery();
+				rs.next();
+				id = rs.getInt("userID");
+			} catch (SQLException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+	
+	public PersonRowDataGateway(String username) throws SQLException {
+		try {
+			String connectFormat = "jdbc:mysql://%s/%s?user=%s&password=%s";
+			String connectURL = String.format(connectFormat, url, db, dbUser, dbPassword);
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection(connectURL);
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+			this.username = username;
+			try
+			{
+				String sql = "SELECT * FROM Person P WHERE P.userName = ?";
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setString(1, username);
+				rs = ps.executeQuery();
+				rs.next();
+				id = rs.getInt("userID");
+			} catch (SQLException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
 	
 	
 	
 	public ResultSet findPerson() {
 		ResultSet rs = null;
-		if(id > -1) {
 		try
 		{
 			String sql = "SELECT * FROM Person P WHERE P.userID = ?";
@@ -62,21 +110,30 @@ public class PersonRowDataGateway
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		}
-		else if(!username.equals("") && password.equals("")) {
-			try
-			{
-				String sql = "SELECT * FROM Person P WHERE P.userName = " + username + "P.password = " + password;
-				PreparedStatement ps = con.prepareStatement(sql);
-				rs = ps.executeQuery();
-				System.out.println(rs);
-			} catch (SQLException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		
 		return rs;
+	}
+	
+	public int getID() {
+		return id;
+	}
+	
+	public void updatePassword(String password) {
+		ResultSet rs = null;
+		try
+		{
+			String sql = "UPDATE Person P SET password=? WHERE P.userID = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1,password);
+			ps.setInt(2,id);
+			ps.executeUpdate();
+			System.out.println(rs);
+		} catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	public void addPerson(Person p) {
