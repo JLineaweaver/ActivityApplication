@@ -214,24 +214,27 @@ public class Person extends DomainObject
 	 * Find the requester, add each other to their friends list, mark person as dirty.
 	 */
 	public void AcceptFriendRequestCommand(String userNameOfRequester)
-	{
-		//user = Person.findPerson(userIDOfRequestee);
-		//requester = Person.findPerson(userNameOfRequester);
-		//user.myFriends.add(requester);
-		//user = Person.findUser1(userIDOfRequestee);
-		
+	{		
 		user = SelectedPerson.getSelectedPerson();
 		Friend fr1 = new Friend(user.userName, user.displayName);
-		Person requester = Person.findUser1(userNameOfRequester);
-		Friend fr = new Friend(requester.userName, requester.displayName);
-		requester.myFriends.add(fr1);
-		user.myFriends.add(fr);
 		
-		user.myIncomingPendingFriends.incomingPendingFriends.remove(requester);
-		requester.myOutgoingPendingFriends.outgoingPendingFriends.remove(user);
+		//Person testRequester = Person.findUser1(userNameOfRequester);
+		Person theRequester = Person.findPerson(userNameOfRequester);
+		
+		//Friend testFr = new Friend(testRequester.userName, testRequester.displayName);
+		Friend theFriend = new Friend(theRequester.userName, theRequester.displayName);
+		
+		//testRequester.myFriends.add(fr1);
+		
+		theRequester.myFriends.add(fr1);
+		user.myFriends.add(theFriend);
+		
+		user.myIncomingPendingFriends.incomingPendingFriends.remove(theRequester);
+		theRequester.myOutgoingPendingFriends.outgoingPendingFriends.remove(user);
+		//testRequester.myOutgoingPendingFriends.outgoingPendingFriends.remove(user);
 		
 		this.markDirty(user);
-		this.markDirty(requester);
+		this.markDirty(theRequester);
 	}
 	
 	/**
@@ -278,10 +281,10 @@ public class Person extends DomainObject
 	}
 
 	
-	public void SelectUser(String userName, String pw) 
+	public void SelectUser(String userName, String pw) throws SQLException 
 	{
-		//user = Person.findPerson(userName, pw);
-		user = Person.findUser1(userName, pw); // Use this
+		user = Person.findPerson(userName, pw);
+		//user = Person.findUser1(userName, pw); // Use this
 		//user = new Person("fred", "pw1", "happyFred" , -1); // Just for testing for the CreateUserTest file
 		if(user != SelectedPerson.getSelectedPerson())
 		{
@@ -306,7 +309,8 @@ public class Person extends DomainObject
 
 		//user = Person.findUser1(userIDOfRequester);
 		user = SelectedPerson.getSelectedPerson();
-		Person requestee = Person.findUser1(userNameOfRequestee); //use this
+		//Person requestee = Person.findUser1(userNameOfRequestee); //use this
+		Person requestee = Person.findPerson(userNameOfRequestee);
 		//Person requestee = new Person("henry", "pw2", "sadHenry", -1); // For testing CreateUserTest file
 		
 		user.myIncomingPendingFriends.add(requestee);
@@ -321,8 +325,7 @@ public class Person extends DomainObject
 	{
 		//user = Person.findPerson(userIDOfRequester);
 		user = Person.findUser1(userIDOfRequester);
-		Person requestee = new Person();
-		requestee = Person.findUser1(userNameOfRequestee);
+		Person requestee = Person.findUser1(userNameOfRequestee);
 		Friend req = new Friend(requestee.userName, requestee.displayName);
 		//requestee = Person.findPerson(userNameOfRequestee);
 		user.myFriends.remove(req);
@@ -336,10 +339,12 @@ public class Person extends DomainObject
 
 	public void rejectFriendRequest(int userIDOfRequestee, String userNameOfRequester)
 	{
-		Person requestee = new Person();
 		//requestee = Person.findPerson(userIDOfRequestee);
-		requestee = Person.findUser1(userIDOfRequestee);
-		user = Person.findUser1(userNameOfRequester);
+		//requestee = Person.findUser1(userIDOfRequestee);
+		Person requestee = SelectedPerson.getSelectedPerson();
+		//user = Person.findUser1(userNameOfRequester);
+		user = Person.findPerson(userNameOfRequester);
+		user.myOutgoingPendingFriends.outgoingPendingFriends.remove(requestee);
 		requestee.myIncomingPendingFriends.incomingPendingFriends.remove(user);
 		this.markDirty(requestee);
 		this.markDirty(user);
@@ -348,7 +353,8 @@ public class Person extends DomainObject
 
 	public ArrayList<Friend> retrieveFriendList(int userID)
 	{
-		user = Person.findUser1(userID);
+		//user = Person.findUser1(userID);
+		user = SelectedPerson.getSelectedPerson();
 		return user.myFriends.getFriendList();
 	}
 
@@ -385,7 +391,8 @@ public class Person extends DomainObject
 	public void modifyUser(int userID, String newDisplayName)
 	{
 		//user = Person.findPerson(userID);
-		user = Person.findUser1(userID);
+		//user = Person.findUser1(userID);
+		user = SelectedPerson.getSelectedPerson();
 		user.setDisplayName(newDisplayName);
 		this.markDirty(user);
 		
