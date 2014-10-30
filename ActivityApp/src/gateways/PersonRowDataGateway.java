@@ -122,13 +122,13 @@ public class PersonRowDataGateway
 		return id;
 	}
 	
-	public void updatePassword(String password) {
+	public void updateDisplayName(String displayName) {
 		ResultSet rs = null;
 		try
 		{
-			String sql = "UPDATE Person P SET password=? WHERE P.userID = ?";
+			String sql = "UPDATE Person P SET displayName=? WHERE P.userID = ?";
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1,password);
+			ps.setString(1,displayName);
 			ps.setInt(2,id);
 			ps.executeUpdate();
 			System.out.println(rs);
