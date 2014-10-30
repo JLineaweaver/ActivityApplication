@@ -1,5 +1,7 @@
 package domainLogic;
 
+import java.sql.SQLException;
+
 /**
  * Accept a friend request from one user to another
  * 
@@ -34,7 +36,12 @@ public class CommandToAcceptFriendRequest implements Command
 	@Override
 	public void execute()
 	{
-		person.AcceptFriendRequestCommand(userNameOfRequester);
+		try {
+			person.AcceptFriendRequestCommand(userNameOfRequester);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**

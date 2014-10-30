@@ -1,4 +1,7 @@
 package domainLogic;
+
+import java.sql.SQLException;
+
 /**
  * Initiates a friend request from one user to another
  * @author merlin
@@ -31,7 +34,12 @@ public class CommandToMakeFriendRequest implements Command
 	@Override
 	public void execute()
 	{
-		person.MakeFriendRequest(userNameOfRequestee);
+		try {
+			person.MakeFriendRequest(userNameOfRequestee);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
