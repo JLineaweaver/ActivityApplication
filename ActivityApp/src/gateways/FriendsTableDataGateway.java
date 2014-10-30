@@ -1,4 +1,5 @@
 package gateways;
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -38,14 +39,12 @@ public class FriendsTableDataGateway
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1,userID);
 			rs = ps.executeQuery();
-			rs.getArray("")
-			//while(rs.)
 		} catch (SQLException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		return rs;
 	}
 	public void addFriend(int userID, String username) throws SQLException {
 		PersonRowDataGateway prdg = new PersonRowDataGateway(username);
