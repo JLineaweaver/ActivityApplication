@@ -142,9 +142,10 @@ public class DataMapper
 	}
 	
 	public void createPerson(Person p) {
+		PersonRowDataGateway prdg;
 		try
 		{
-			PersonRowDataGateway prdg = new PersonRowDataGateway(p.getUserID());
+			prdg = new PersonRowDataGateway(p.getUserID());
 		} catch (SQLException e)
 		{
 			// TODO Auto-generated catch block

@@ -9,6 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import domainLogic.FriendsList;
+import domainLogic.OutgoingPendingFriendList;
 import domainLogic.Person;
 import domainLogic.Friend;
 
@@ -138,7 +140,7 @@ public class PersonRowDataGateway
 		
 	}
 	
-	public void createPerson(String userName, String displayName, String password, ArrayList<Friend> friends, ArrayList<Person> outgoing) {
+	public void createPerson(String userName, String displayName, String password, FriendsList friends, OutgoingPendingFriendList outgoing) {
 		try
 		{
 			String sql = "INSERT INTO Person (userName, displayName, password) VALUES (?,?,?)";
