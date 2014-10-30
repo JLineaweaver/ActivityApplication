@@ -142,7 +142,7 @@ public class DataMapper
 	}
 	
 	public void createPerson(Person p) {
-		PersonRowDataGateway prdg;
+		PersonRowDataGateway prdg = null;
 		try
 		{
 			prdg = new PersonRowDataGateway(p.getUserID());
