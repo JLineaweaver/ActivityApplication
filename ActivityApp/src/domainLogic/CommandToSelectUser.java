@@ -1,5 +1,7 @@
 package domainLogic;
 
+import java.sql.SQLException;
+
 /**
  * Retrieve a specified user from the database into the domain model
  */
@@ -30,7 +32,12 @@ public class CommandToSelectUser implements Command
 	@Override
 	public void execute()
 	{
-		person.SelectUser(userName, password);
+		try {
+			person.SelectUser(userName, password);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**

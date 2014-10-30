@@ -72,7 +72,7 @@ public class UnitOfWork
 	public void commit() throws SQLException
 	{
 		insertNew();
-		//updateDirty();
+		updateDirty();
 		//deleteRemoved();
 		this.emptyArrayLists(); //Empty for testing purposes
 	}
@@ -83,9 +83,12 @@ public class UnitOfWork
 		
 	}
 
-	private void updateDirty() 
+	private void updateDirty() throws SQLException
 	{
-		// TODO Auto-generated method stub
+		for(int i = 0; i < dirtyObjects.size(); i++)
+		{
+			Person.StorePerson((Person)dirtyObjects.get(i));
+		}
 		
 	}
 

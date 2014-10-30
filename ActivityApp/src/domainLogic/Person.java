@@ -213,6 +213,12 @@ public class Person extends DomainObject
 		pdm.createPerson(p);
 	}
 	
+	public static void StorePerson(Person p) throws SQLException
+	{
+		DataMapper pdm = MyThreadLocal.get();
+		pdm.storePerson(p);
+	}
+	
 	/**
 	 * 
 	 * @param userIDOfRequestee is the person that is being as to be someone's friend
@@ -282,6 +288,7 @@ public class Person extends DomainObject
 		user = new Person(userName, password, displayName, userID);
 		this.markNew(user);
 	}
+	
 	
 	public Person getUser()
 	{
