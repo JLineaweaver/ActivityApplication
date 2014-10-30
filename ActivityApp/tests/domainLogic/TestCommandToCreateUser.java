@@ -33,4 +33,17 @@ public class TestCommandToCreateUser {
 		assertEquals("JPassword", person.getPassword());
 		assertEquals("JohnnyJohn", person.getDisplayName());
 	}
+	
+	@Test
+	public void testDB()
+	{
+		String uName = "Johnny";
+		String pw = "JPassword";
+		String dName = "JohnnyJohn";
+		CommandToCreateUser cmd = new CommandToCreateUser(uName, pw, dName);
+		UnitOfWork.newCurrent();
+		cmd.execute();
+		CommandToPersistChanges cmd2 = new CommandToPersistChanges();
+		cmd2.execute();
+	}
 }

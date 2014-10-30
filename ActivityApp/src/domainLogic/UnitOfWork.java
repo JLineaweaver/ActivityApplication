@@ -1,5 +1,6 @@
 package domainLogic;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import org.junit.Assert;
@@ -68,11 +69,11 @@ public class UnitOfWork
 		//put an Identity map
 	}
 	
-	public void commit()
+	public void commit() throws SQLException
 	{
 		insertNew();
-		updateDirty();
-		deleteRemoved();
+		//updateDirty();
+		//deleteRemoved();
 		this.emptyArrayLists(); //Empty for testing purposes
 	}
 
@@ -88,9 +89,13 @@ public class UnitOfWork
 		
 	}
 
-	private void insertNew() 
+	private void insertNew() throws SQLException 
 	{
-		//TODO Auto-generated method stub
+		for(int i = 0; i < newObjects.size(); i++)
+		{
+			Person.CreatePerson((Person)newObjects.get(i));
+		}
+
 		
 	}
 	
