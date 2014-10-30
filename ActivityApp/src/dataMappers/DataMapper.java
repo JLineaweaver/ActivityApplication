@@ -71,7 +71,7 @@ public class DataMapper
 	private boolean updateDisplayName(Person myPerson, Person oldPerson, PersonRowDataGateway prdg) {
 		if(!myPerson.getDisplayName().equals(oldPerson.getDisplayName()))
 		{
-			prdg.updateDisplayName(myPerson.getPassword());
+			prdg.updateDisplayName(myPerson.getDisplayName());
 			return true;
 		}
 		return false;
