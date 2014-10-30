@@ -62,7 +62,7 @@ public class DataMapper
 		Person oldPerson = findPerson(myPerson.getUserID());
 		PersonRowDataGateway prdg = new PersonRowDataGateway(myPerson.getUserID());
 		updateDisplayName(myPerson, oldPerson, prdg);
-		updateFriends(myPerson, oldPerson, friendsGateway);
+		//updateFriends(myPerson, oldPerson, friendsGateway);
 		//updatePendingFriends(myPerson,oldPerson, pendingFriendsGateway);
 		
 		return true;
