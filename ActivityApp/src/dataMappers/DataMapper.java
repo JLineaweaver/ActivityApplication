@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import mockGateways.MockFriendsTableDataGateway;
 import mockGateways.MockPendingFriendsTableDataGateway;
 import mockGateways.MockPersonRowDataGateway;
+import domainLogic.Friend;
 import domainLogic.FriendsList;
 import domainLogic.IncomingPendingFriendsList;
 import domainLogic.OutgoingPendingFriendList;
@@ -35,16 +36,21 @@ public class DataMapper
 	public Person findPerson(String username, String password) throws SQLException {
 		PersonRowDataGateway prdg = new PersonRowDataGateway(username,password);
 		ResultSet rs = prdg.findPerson();
-		
+		rs.next();
+		return new Person(rs.getString("userName"), rs.getString("password"), rs.getString("displayName"), rs.getInt("userID"));
 	}
 	
 	public Person findPerson(int ID) throws SQLException {
 		PersonRowDataGateway prdg = new PersonRowDataGateway(ID);
 		ResultSet rs = prdg.findPerson();
+		rs.next();
+		return new Person(rs.getString("userName"), rs.getString("password"), rs.getString("displayName"), rs.getInt("userID"));
 	}
-	public Person findPerson(String userName) {
-		MockPersonRowDataGateway mprdg = new MockPersonRowDataGateway();
-		return mprdg.findPerson(userName);
+	public Person findPerson(String userName) throws SQLException {
+		PersonRowDataGateway prdg = new PersonRowDataGateway(userName);
+		ResultSet rs = prdg.findPerson();
+		rs.next();
+		return new Person(rs.getString("userName"), rs.getString("password"), rs.getString("displayName"), rs.getInt("userID"));
 	}
 	
 	public boolean storePerson(Person myPerson) throws SQLException {
@@ -52,7 +58,7 @@ public class DataMapper
 		PersonRowDataGateway prdg = new PersonRowDataGateway(myPerson.getUserID());
 		updatePassword(myPerson, oldPerson, prdg);
 		updateFriends(myPerson, oldPerson, friendsGateway);
-		updatePendingFriends(myPerson,oldPerson, pendingFriendsGateway);
+		//updatePendingFriends(myPerson,oldPerson, pendingFriendsGateway);
 		
 		return true;
 	}
@@ -65,12 +71,12 @@ public class DataMapper
 		}
 		return false;
 	}
-	private boolean updateFriends(Person myPerson, Person oldPerson, FriendsTableDataGateway ftdg) {
+	private boolean updateFriends(Person myPerson, Person oldPerson, FriendsTableDataGateway ftdg) throws SQLException {
 		
 		FriendsList myFriends = myPerson.getFriends();
-		ArrayList<Person> myFriendsList = myFriends.getFriendList();
+		ArrayList<Friend> myFriendsList = myFriends.getFriendList();
 		FriendsList oldFriends = myPerson.getFriends();
-		ArrayList<Person> oldFriendsList = oldFriends.getFriendList();
+		ArrayList<Friend> oldFriendsList = oldFriends.getFriendList();
 
 		
 		for(int i = 0; i<myFriendsList.size(); i++) {
@@ -81,7 +87,7 @@ public class DataMapper
 				}
 			}
 			if(!found) {
-				ftdg.addFriend(myPerson.getUserID(),myFriendsList.get(i).getUserID());
+				ftdg.addFriend(myPerson.getUserID(),myFriendsList.get(i).getUserName());
 			}
 		}
 		
@@ -93,7 +99,7 @@ public class DataMapper
 				}
 			}
 			if(!found) {
-				ftdg.removeFriend(myPerson.getUserID(),oldFriendsList.get(j).getUserID());
+				ftdg.removeFriend(myPerson.getUserID(),oldFriendsList.get(j).getUserName());
 			}
 		}
 		
