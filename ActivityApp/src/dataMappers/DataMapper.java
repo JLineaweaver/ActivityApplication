@@ -34,7 +34,12 @@ public class DataMapper
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		pendingFriendsGateway = new PendingFriendsTableDataGateway();
+		try {
+			pendingFriendsGateway = new PendingFriendsTableDataGateway();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	
