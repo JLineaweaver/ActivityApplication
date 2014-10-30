@@ -141,4 +141,16 @@ public class DataMapper
 		return true;
 	}
 	
+	public void createPerson(Person p) {
+		try
+		{
+			PersonRowDataGateway prdg = new PersonRowDataGateway(p.getUserID());
+		} catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		prdg.createPerson(p.getUserName(),p.getDisplayName(),p.getPassword(),p.getFriends(),p.getOutgoingPendingFriendList());
+	}
+	
 }
