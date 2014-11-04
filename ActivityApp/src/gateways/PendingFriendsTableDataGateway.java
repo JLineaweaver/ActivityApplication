@@ -62,8 +62,16 @@ public class PendingFriendsTableDataGateway
 		}
 		return rs;
 	}
-	public void addFriend(int userID, String username) throws SQLException {
-		PersonRowDataGateway prdg = new PersonRowDataGateway(username);
+	public void addFriend(int userID, String username) {
+		PersonRowDataGateway prdg = null;
+		try
+		{
+			prdg = new PersonRowDataGateway(username);
+		} catch (SQLException e1)
+		{
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		int secondID = prdg.getID();
 		try
 		{
@@ -80,8 +88,16 @@ public class PendingFriendsTableDataGateway
 		}
 	}
 	
-	public void removeFriend(int userID, String username) throws SQLException {
-		PersonRowDataGateway prdg = new PersonRowDataGateway(username);
+	public void removeFriend(int userID, String username) {
+		PersonRowDataGateway prdg = null;
+		try
+		{
+			prdg = new PersonRowDataGateway(username);
+		} catch (SQLException e1)
+		{
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		int secondID = prdg.getID();
 		try
 		{
