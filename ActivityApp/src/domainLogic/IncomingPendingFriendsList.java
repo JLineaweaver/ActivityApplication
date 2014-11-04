@@ -14,6 +14,7 @@ public class IncomingPendingFriendsList
 		incomingPendingFriends = new ArrayList<Person>();
 	}
 	
+	
 	/**
 	 * Constructor with parameter
 	 * @param friends
