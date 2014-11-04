@@ -2,4 +2,5 @@ CommandToCreateUser fred pw1 happyFred; fred:pw1:happyFred
 CommandToPersistChanges;
 CommandToSelectUser fred pw1;
 CommandToModifyUser <userID> FredMoney;
+CommandToCancelChanges;
 CommandToPersistChanges;
