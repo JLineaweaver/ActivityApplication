@@ -53,6 +53,17 @@ public class Person extends DomainObject
 		mockDB.add(this);
 	}
 	
+	public Person(String uName, String pw, String dName, int ID, FriendsList myFriends, IncomingPendingFriendsList myIncomingPendingFriends, OutgoingPendingFriendList myOutgoingPendingFriends) {
+		displayName = dName;
+		password = pw;
+		userName = uName;
+		userID = ID;
+		this.myFriends = myFriends;
+		this.myIncomingPendingFriends = myIncomingPendingFriends;
+		this.myOutgoingPendingFriends = myOutgoingPendingFriends;
+		mockDB.add(this);
+	}
+	
 	
 //	private void addPeople() {
 //		Person per = new Person(userName, password, displayName, userID);

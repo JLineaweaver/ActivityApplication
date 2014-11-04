@@ -140,7 +140,7 @@ public class PersonRowDataGateway
 		
 	}
 	
-	public void createPerson(String userName, String displayName, String password, FriendsList friends, OutgoingPendingFriendList outgoing) {
+	public void createPerson(String userName, String displayName, String password) {
 		try
 		{
 			String sql = "INSERT INTO Person (userName, displayName, password) VALUES (?,?,?)";

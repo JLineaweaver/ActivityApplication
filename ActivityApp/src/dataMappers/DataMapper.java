@@ -48,40 +48,36 @@ public class DataMapper
 		PersonRowDataGateway prdg = new PersonRowDataGateway(username,password);
 		ResultSet rs = prdg.findPerson();
 		rs.next();
-		if(!rs.getString("userName").equals(""))
+	
 		return new Person(rs.getString("userName"), rs.getString("password"), rs.getString("displayName"), rs.getInt("userID"));
-		else
-			return new Person();
+
 	}
 	public Person findPerson(int ID) throws SQLException {
 		PersonRowDataGateway prdg = new PersonRowDataGateway(ID);
 		ResultSet rs = prdg.findPerson();
 		rs.next();
-		if(!rs.getString("userName").equals(""))
 		return new Person(rs.getString("userName"), rs.getString("password"), rs.getString("displayName"), rs.getInt("userID"));
-		else
-			return new Person();
+
 	}
 	public Person findPerson(String userName) throws SQLException {
 		PersonRowDataGateway prdg = new PersonRowDataGateway(userName);
 		ResultSet rs = prdg.findPerson();
 		rs.next();
-		if(!rs.getString("userName").equals(""))
+
 		return new Person(rs.getString("userName"), rs.getString("password"), rs.getString("displayName"), rs.getInt("userID"));
-		else
-			return new Person();
+
 	}
 	public boolean storePerson(Person myPerson) throws SQLException {
 		Person oldPerson = findPerson(myPerson.getUserID());
-		if(oldPerson.getUserID() == -1) {
-			createPerson(myPerson);
-		}
-		else {
+		//if(oldPerson.getUserID() == -1) {
+			//createPerson(myPerson);
+		//}
+		//else {
 		PersonRowDataGateway prdg = new PersonRowDataGateway(myPerson.getUserID());
 		updateDisplayName(myPerson, oldPerson, prdg);
 		updateFriends(myPerson, oldPerson, friendsGateway);
 		updatePendingFriends(myPerson,oldPerson, pendingFriendsGateway);
-		}
+		//}
 		return true;
 	}
 	private boolean updateDisplayName(Person myPerson, Person oldPerson, PersonRowDataGateway prdg) {
@@ -165,7 +161,7 @@ public class DataMapper
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		prdg.createPerson(p.getUserName(),p.getDisplayName(),p.getPassword(),p.getFriends(),p.getOutgoingPendingFriendList());
+		prdg.createPerson(p.getUserName(),p.getDisplayName(),p.getPassword());
 		Person myPerson = null;
 		try
 		{
