@@ -1,4 +1,4 @@
-CommandToCreateUser matthew pw1 Matt78; matthew:pw1:Matt78
+
 CommandToCreateUser bob pw2 Bobby12; bob:pw2:Bobby12
 CommandToSelectUser bob pw2;
 CommandToMakeFriendRequest <userID> matthew;
