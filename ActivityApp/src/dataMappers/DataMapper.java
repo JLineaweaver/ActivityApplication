@@ -23,25 +23,9 @@ import domainLogic.Person;
  */
 public class DataMapper 
 {
-	FriendsTableDataGateway friendsGateway;
-	PendingFriendsTableDataGateway pendingFriendsGateway;
-	PersonRowDataGateway personGateway;
+	
 	public DataMapper() {
-		//personGateway = new PersonRowDataGateway();
-		try {
-			friendsGateway = new FriendsTableDataGateway();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		try
-		{
-			pendingFriendsGateway = new PendingFriendsTableDataGateway();
-		} catch (SQLException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 	}
 
 	public Person findPerson(String username, String password) throws SQLException {
@@ -90,8 +74,12 @@ public class DataMapper
 		//else {
 		PersonRowDataGateway prdg = new PersonRowDataGateway(myPerson.getUserID());
 		updateDisplayName(myPerson, oldPerson, prdg);
-		updateFriends(myPerson, oldPerson, friendsGateway);
-		updatePendingFriends(myPerson,oldPerson, pendingFriendsGateway);
+		FriendsTableDataGateway ftdg = new FriendsTableDataGateway();
+		updateFriends(myPerson, oldPerson, ftdg);
+		ftdg.close();
+		PendingFriendsTableDataGateway pftdg = new PendingFriendsTableDataGateway();
+		updatePendingFriends(myPerson,oldPerson, pftdg);
+		pftdg.close();
 		//}
 		prdg.close();
 		return true;
