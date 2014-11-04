@@ -89,6 +89,8 @@ public class DataMapper
 		return false;
 	}
 	private boolean updateFriends(Person myPerson, Person oldPerson, FriendsTableDataGateway ftdg) throws SQLException {
+		
+		if(myPerson.getFriends() == null);
 		FriendsList myFriends = myPerson.getFriends();
 		ArrayList<Friend> myFriendsList = myFriends.getFriendList();
 		FriendsList oldFriends = myPerson.getFriends();
@@ -120,6 +122,8 @@ public class DataMapper
 	}
 	private boolean updatePendingFriends(Person myPerson, Person oldPerson, PendingFriendsTableDataGateway pftdg) {
 
+		if(myPerson.getTheOutgoingPendingFriendList() == null) 
+			return false;
 		ArrayList<Person> myFriendsList = myPerson.getTheOutgoingPendingFriendList();
 		ArrayList<Person> oldFriendsList = oldPerson.getTheOutgoingPendingFriendList();
 
