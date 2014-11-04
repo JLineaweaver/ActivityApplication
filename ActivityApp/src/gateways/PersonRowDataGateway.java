@@ -131,7 +131,7 @@ public class PersonRowDataGateway
 			ps.setString(1,displayName);
 			ps.setInt(2,id);
 			ps.executeUpdate();
-			System.out.println(rs);
+			//System.out.println(rs);
 		} catch (SQLException e)
 		{
 			// TODO Auto-generated catch block

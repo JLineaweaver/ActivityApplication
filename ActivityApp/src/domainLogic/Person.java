@@ -39,6 +39,9 @@ public class Person extends DomainObject
 	 */
 	public Person() 
 	{
+		myFriends = new FriendsList();
+		myIncomingPendingFriends = new IncomingPendingFriendsList();
+		myOutgoingPendingFriends = new OutgoingPendingFriendList();
 	}
 	
 	public Person(String uName, String pw, String dName, int ID)
@@ -404,7 +407,7 @@ public class Person extends DomainObject
 	 */
 	public ArrayList<Person> getPendingIncomingFriendList()
 	{
-		return user.myIncomingPendingFriends.incomingPendingFriends;
+		return this.myIncomingPendingFriends.incomingPendingFriends;
 	}
 
 
@@ -443,7 +446,8 @@ public class Person extends DomainObject
 	
 	public ArrayList<Person> getTheOutgoingPendingFriendList()
 	{
-		return user.myOutgoingPendingFriends.getPendingFriendList();
+		//user = SelectedPerson.getSelectedPerson();
+		return this.myOutgoingPendingFriends.getPendingFriendList();
 	}
 	
 	public OutgoingPendingFriendList getOutgoingPendingFriendList() {
