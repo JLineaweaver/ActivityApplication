@@ -49,37 +49,38 @@ public class DataMapper
 		ResultSet rs = prdg.findPerson();
 		rs.next();
 		int id = rs.getInt("userID");
+		
+		Person f = new Person(rs.getString("userName"), rs.getString("password"), rs.getString("displayName"), id , getFriendsList(id), getIncomingPendingFriendsList(id), getOutgoingPendingFriendList(id));
 		prdg.close();
-		return new Person(rs.getString("userName"), rs.getString("password"), rs.getString("displayName"), id , getFriendsList(id), getIncomingPendingFriendsList(id), getOutgoingPendingFriendList(id));
+		return f;
+	
 	}
 	public Person findPerson(int ID) throws SQLException {
 		PersonRowDataGateway prdg = new PersonRowDataGateway(ID);
 		ResultSet rs = prdg.findPerson();
 		rs.next();
 		int id = rs.getInt("userID");
+		Person f = new Person(rs.getString("userName"), rs.getString("password"), rs.getString("displayName"), id , getFriendsList(id), getIncomingPendingFriendsList(id), getOutgoingPendingFriendList(id));
 		prdg.close();
-
-		return new Person(rs.getString("userName"), rs.getString("password"), rs.getString("displayName"), id , getFriendsList(id), getIncomingPendingFriendsList(id), getOutgoingPendingFriendList(id));
-
+		return f;
 	}
 	public Person findPerson(String userName) throws SQLException {
 		PersonRowDataGateway prdg = new PersonRowDataGateway(userName);
 		ResultSet rs = prdg.findPerson();
 		rs.next();
 		int id = rs.getInt("userID");
+		Person f = new Person(rs.getString("userName"), rs.getString("password"), rs.getString("displayName"), id , getFriendsList(id), getIncomingPendingFriendsList(id), getOutgoingPendingFriendList(id));
 		prdg.close();
-
-		return new Person(rs.getString("userName"), rs.getString("password"), rs.getString("displayName"), id , getFriendsList(id), getIncomingPendingFriendsList(id), getOutgoingPendingFriendList(id));
-
+		return f;
 	}
 	public Friend findFriend(int ID) throws SQLException {
 		PersonRowDataGateway prdg = new PersonRowDataGateway(ID);
 		ResultSet rs = prdg.findPerson();
 		rs.next();
+
+		Friend f = new Friend(rs.getString("userName"), rs.getString("displayName"));
 		prdg.close();
-
-		return new Friend(rs.getString("userName"), rs.getString("displayName"));
-
+		return f;
 	}
 	public boolean storePerson(Person myPerson) throws SQLException {
 		Person oldPerson = findPerson(myPerson.getUserID());
