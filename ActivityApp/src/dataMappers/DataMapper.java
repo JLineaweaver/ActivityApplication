@@ -171,15 +171,15 @@ public class DataMapper
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		FriendsList myFriends = p.getFriends();
-		ArrayList<Friend> myFriendsList = myFriends.getFriendList();
-		for(int i = 0; i<myFriendsList.size(); i++) {
-			
-				ftdg.addFriend(myPerson.getUserID(),myFriendsList.get(i).getUserName());
-			}
-		ArrayList<Person> myPFriendsList = p.getTheOutgoingPendingFriendList();
-		for( int i = 0; i<myPFriendsList.size(); i++) {
-			pftdg.addFriend(myPerson.getUserID(),myPFriendsList.get(i).getUserName());
-		}
+//		FriendsList myFriends = p.getFriends();
+//		ArrayList<Friend> myFriendsList = myFriends.getFriendList();
+//		for(int i = 0; i<myFriendsList.size(); i++) {
+//			
+//				ftdg.addFriend(myPerson.getUserID(),myFriendsList.get(i).getUserName());
+//			}
+//		ArrayList<Person> myPFriendsList = p.getTheOutgoingPendingFriendList();
+//		for( int i = 0; i<myPFriendsList.size(); i++) {
+//			pftdg.addFriend(myPerson.getUserID(),myPFriendsList.get(i).getUserName());
+//		}
 	}
 }

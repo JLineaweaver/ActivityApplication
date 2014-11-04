@@ -108,7 +108,7 @@ public class PersonRowDataGateway
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1,id);
 			rs = ps.executeQuery();
-			System.out.println(rs);
+			//System.out.println(rs);
 		} catch (SQLException e)
 		{
 			// TODO Auto-generated catch block
