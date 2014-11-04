@@ -48,23 +48,33 @@ public class DataMapper
 		PersonRowDataGateway prdg = new PersonRowDataGateway(username,password);
 		ResultSet rs = prdg.findPerson();
 		rs.next();
-	
-		return new Person(rs.getString("userName"), rs.getString("password"), rs.getString("displayName"), rs.getInt("userID"));
+		int id = rs.getInt("userID");
+		return new Person(rs.getString("userName"), rs.getString("password"), rs.getString("displayName"), id , getFriendsList(id), getIncomingPendingFriendsList(id), getOutgoingPendingFriendList(id));
 
 	}
 	public Person findPerson(int ID) throws SQLException {
 		PersonRowDataGateway prdg = new PersonRowDataGateway(ID);
 		ResultSet rs = prdg.findPerson();
 		rs.next();
-		return new Person(rs.getString("userName"), rs.getString("password"), rs.getString("displayName"), rs.getInt("userID"));
+		int id = rs.getInt("userID");
+
+		return new Person(rs.getString("userName"), rs.getString("password"), rs.getString("displayName"), id , getFriendsList(id), getIncomingPendingFriendsList(id), getOutgoingPendingFriendList(id));
 
 	}
 	public Person findPerson(String userName) throws SQLException {
 		PersonRowDataGateway prdg = new PersonRowDataGateway(userName);
 		ResultSet rs = prdg.findPerson();
 		rs.next();
+		int id = rs.getInt("userID");
 
-		return new Person(rs.getString("userName"), rs.getString("password"), rs.getString("displayName"), rs.getInt("userID"));
+		return new Person(rs.getString("userName"), rs.getString("password"), rs.getString("displayName"), id , getFriendsList(id), getIncomingPendingFriendsList(id), getOutgoingPendingFriendList(id));
+
+	}
+	public Friend findFriend(int ID) throws SQLException {
+		PersonRowDataGateway prdg = new PersonRowDataGateway(ID);
+		ResultSet rs = prdg.findPerson();
+		rs.next();
+		return new Friend(rs.getString("userName"), rs.getString("displayName"));
 
 	}
 	public boolean storePerson(Person myPerson) throws SQLException {
@@ -186,4 +196,78 @@ public class DataMapper
 //			pftdg.addFriend(myPerson.getUserID(),myPFriendsList.get(i).getUserName());
 //		}
 	}
+
+	
+	public FriendsList getFriendsList(int ID) {
+		FriendsTableDataGateway ftdg = null;
+		ArrayList<Friend> friendList = null;
+		try
+		{
+			ftdg = new FriendsTableDataGateway();
+		
+		ResultSet rs = ftdg.getFriends(ID);
+		friendList = new ArrayList<Friend>();
+		int requestee;
+		int requester;
+		while(rs.next()) {
+			 requestee = rs.getInt("UserIDOfRequestee");
+			 requester = rs.getInt("UserIDOfRequester");
+			 if(requestee == ID) {
+				 friendList.add(findFriend(requester));
+			 }
+			 else {
+			friendList.add(findFriend(requestee));
+			 }
+		}
+		} catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		FriendsList fr = new FriendsList(friendList);
+		return fr;
+	}
+	
+	public IncomingPendingFriendsList getIncomingPendingFriendsList(int ID) {
+		PendingFriendsTableDataGateway pftdg = null;
+		ArrayList<Person> incomingList = null;
+		try
+		{
+			pftdg = new PendingFriendsTableDataGateway();
+		
+		ResultSet rs = pftdg.getIncomingPendingFriends(ID);
+		incomingList = new ArrayList<Person>();
+		while(rs.next()) {
+			incomingList.add(findPerson(rs.getInt("UserIDOfRequester")));
+			 }
+		} catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		IncomingPendingFriendsList fr = new IncomingPendingFriendsList(incomingList);
+		return fr;
+	}
+	public OutgoingPendingFriendList getOutgoingPendingFriendList(int ID) {
+		PendingFriendsTableDataGateway pftdg = null;
+		ArrayList<Person> outgoingList = null;
+		try
+		{
+			pftdg = new PendingFriendsTableDataGateway();
+		
+		ResultSet rs = pftdg.getOutgoingPendingFriends(ID);
+		outgoingList = new ArrayList<Person>();
+		while(rs.next()) {
+			outgoingList.add(findPerson(rs.getInt("UserIDOfRequestee")));
+			 }
+		} catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		OutgoingPendingFriendList fr = new OutgoingPendingFriendList(outgoingList);
+		return fr;
+	
+	}
 }
+
