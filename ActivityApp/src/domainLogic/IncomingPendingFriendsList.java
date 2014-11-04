@@ -1,5 +1,6 @@
 package domainLogic;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class IncomingPendingFriendsList
@@ -37,5 +38,16 @@ public class IncomingPendingFriendsList
 	public void remove(Person requestee)
 	{
 		incomingPendingFriends.remove(requestee);
+	}
+	
+	public void close() {
+		try
+		{
+			con.close();
+		} catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

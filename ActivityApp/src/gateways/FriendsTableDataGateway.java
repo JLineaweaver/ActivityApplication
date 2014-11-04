@@ -89,5 +89,14 @@ public class FriendsTableDataGateway
 			e.printStackTrace();
 		}
 	}
-			
+	public void close() {
+		try
+		{
+			con.close();
+		} catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

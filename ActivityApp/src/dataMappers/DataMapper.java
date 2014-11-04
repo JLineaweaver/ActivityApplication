@@ -49,14 +49,15 @@ public class DataMapper
 		ResultSet rs = prdg.findPerson();
 		rs.next();
 		int id = rs.getInt("userID");
+		prdg.close();
 		return new Person(rs.getString("userName"), rs.getString("password"), rs.getString("displayName"), id , getFriendsList(id), getIncomingPendingFriendsList(id), getOutgoingPendingFriendList(id));
-
 	}
 	public Person findPerson(int ID) throws SQLException {
 		PersonRowDataGateway prdg = new PersonRowDataGateway(ID);
 		ResultSet rs = prdg.findPerson();
 		rs.next();
 		int id = rs.getInt("userID");
+		prdg.close();
 
 		return new Person(rs.getString("userName"), rs.getString("password"), rs.getString("displayName"), id , getFriendsList(id), getIncomingPendingFriendsList(id), getOutgoingPendingFriendList(id));
 
@@ -66,6 +67,7 @@ public class DataMapper
 		ResultSet rs = prdg.findPerson();
 		rs.next();
 		int id = rs.getInt("userID");
+		prdg.close();
 
 		return new Person(rs.getString("userName"), rs.getString("password"), rs.getString("displayName"), id , getFriendsList(id), getIncomingPendingFriendsList(id), getOutgoingPendingFriendList(id));
 
@@ -74,6 +76,8 @@ public class DataMapper
 		PersonRowDataGateway prdg = new PersonRowDataGateway(ID);
 		ResultSet rs = prdg.findPerson();
 		rs.next();
+		prdg.close();
+
 		return new Friend(rs.getString("userName"), rs.getString("displayName"));
 
 	}
@@ -88,6 +92,7 @@ public class DataMapper
 		updateFriends(myPerson, oldPerson, friendsGateway);
 		updatePendingFriends(myPerson,oldPerson, pendingFriendsGateway);
 		//}
+		prdg.close();
 		return true;
 	}
 	private boolean updateDisplayName(Person myPerson, Person oldPerson, PersonRowDataGateway prdg) {
@@ -195,6 +200,9 @@ public class DataMapper
 //		for( int i = 0; i<myPFriendsList.size(); i++) {
 //			pftdg.addFriend(myPerson.getUserID(),myPFriendsList.get(i).getUserName());
 //		}
+		prdg.close();
+		pftdg.close();
+		ftdg.close();
 	}
 
 	
@@ -225,6 +233,8 @@ public class DataMapper
 			e.printStackTrace();
 		}
 		FriendsList fr = new FriendsList(friendList);
+		ftdg.close();
+		
 		return fr;
 	}
 	
@@ -246,6 +256,7 @@ public class DataMapper
 			e.printStackTrace();
 		}
 		IncomingPendingFriendsList fr = new IncomingPendingFriendsList(incomingList);
+		pftdg.close();
 		return fr;
 	}
 	public OutgoingPendingFriendList getOutgoingPendingFriendList(int ID) {
@@ -266,6 +277,7 @@ public class DataMapper
 			e.printStackTrace();
 		}
 		OutgoingPendingFriendList fr = new OutgoingPendingFriendList(outgoingList);
+		pftdg.close();
 		return fr;
 	
 	}
