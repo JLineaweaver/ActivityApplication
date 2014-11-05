@@ -30,6 +30,11 @@ public class CommandToModifyUser implements Command
 	{
 		person.modifyUser(userID, newDisplayName);
 	}
+	
+	public void testExecute()
+	{
+		person.testModifyUser(userID, newDisplayName);
+	}
 
 	/**
 	 * Nothing needs to be returned from this one. These tests will persist and
@@ -41,5 +46,10 @@ public class CommandToModifyUser implements Command
 	public Person getResult()
 	{
 		return person.getUser();
+	}
+	
+	public Person getTestResult()
+	{
+		return person.getTestUser();
 	}
 }

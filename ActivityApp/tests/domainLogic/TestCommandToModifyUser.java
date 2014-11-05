@@ -14,9 +14,10 @@ public class TestCommandToModifyUser
 		Person person = new Person("Mattyc", "mat12", "Matthew170", 2);
 		SelectedPerson.initializeSelectedPerson(person); // simulates selecting the person
 		
+		MockUnitOfWork.newCurrent();
 		assertEquals("Matthew170", person.getDisplayName());
 		CommandToModifyUser cmd = new CommandToModifyUser(person.getUserID(), "Matt170");
-		cmd.execute();
+		cmd.testExecute();
 		assertEquals("Matt170", person.getDisplayName());
 		
 		SelectedPerson.resetSelectedPerson();

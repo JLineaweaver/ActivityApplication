@@ -32,9 +32,9 @@ public class TestCommandToMakeFriendRequest
 		
 		CommandToMakeFriendRequest cmd = new CommandToMakeFriendRequest(person1.getUserID(), person2.getUserName());
 		
-		UnitOfWork.newCurrent();
-		cmd.execute();
-		Person result = cmd.getResult();
+		MockUnitOfWork.newCurrent();
+		cmd.testExecute();
+		Person result = cmd.getTestResult();
 		
 		assertEquals(1, person1.myIncomingPendingFriends.incomingPendingFriends.size());
 		assertEquals(1, result.myIncomingPendingFriends.incomingPendingFriends.size());
@@ -54,10 +54,10 @@ public class TestCommandToMakeFriendRequest
 		CommandToMakeFriendRequest cmd = new CommandToMakeFriendRequest(person1.getUserID(), person2.getUserName());
 		CommandToMakeFriendRequest cmd2 = new CommandToMakeFriendRequest(person1.getUserID(), person3.getUserName());
 		
-		UnitOfWork.newCurrent();
-		cmd.execute();
-		cmd2.execute();
-		Person result = cmd.getResult();
+		MockUnitOfWork.newCurrent();
+		cmd.testExecute();
+		cmd2.testExecute();
+		Person result = cmd.getTestResult();
 		
 		assertEquals(2, person1.myIncomingPendingFriends.incomingPendingFriends.size());
 		assertEquals(2, result.myIncomingPendingFriends.incomingPendingFriends.size());

@@ -17,8 +17,8 @@ public class TestCommandToRejectFriend {
 		assertEquals(1, person1.myIncomingPendingFriends.incomingPendingFriends.size());
 		
 		CommandToRejectFriendRequest cmd = new CommandToRejectFriendRequest(person1.getUserID(), person2.getUserName());
-		UnitOfWork.newCurrent();
-		cmd.execute();
+		MockUnitOfWork.newCurrent();
+		cmd.testExecute();
 		
 		assertEquals(0, person2.myIncomingPendingFriends.incomingPendingFriends.size());
 		SelectedPerson.resetSelectedPerson();

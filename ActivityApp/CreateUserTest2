@@ -1,4 +1,6 @@
-CommandToCreateUser fred pw1 happyFred; fred:pw1:happyFred 
+CommandToCreateUser Matthew pw1 happyMatthew; Matthew:pw1:happyMatthew
 CommandToCreateUser henry pw2 sadHenry; henry:pw2:sadHenry
-CommandToSelectUser fred pw1;
+CommandToPersistChanges;
+CommandToSelectUser Matthew pw1;
 CommandToMakeFriendRequest <userID> henry;
+CommandToPersistChanges;

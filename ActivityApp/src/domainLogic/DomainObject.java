@@ -25,6 +25,21 @@ public class DomainObject
 	{
 		UnitOfWork.getCurrent().registerRemoved(obj);
 	}
+	
+	protected void testMarkNew(DomainObject obj)
+	{
+		MockUnitOfWork.getCurrent().registerNew(obj);
+	}
+	
+	protected void testMarkDirty(DomainObject obj)
+	{
+		MockUnitOfWork.getCurrent().registerDirty(obj);
+	}
+	
+	protected void testMarkRemoved(DomainObject obj)
+	{
+		MockUnitOfWork.getCurrent().registerRemoved(obj);
+	}
 
 	public String getIsObjectNull() 
 	{

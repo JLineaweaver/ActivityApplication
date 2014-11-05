@@ -1,4 +1,7 @@
 package domainLogic;
+
+import java.sql.SQLException;
+
 /**
  * Reject a friend request from one user to another
  * @author merlin
@@ -31,8 +34,19 @@ public class CommandToRejectFriendRequest implements Command
 	public void execute()
 	{
 		Person person = new Person();
-		person.rejectFriendRequest(userIDOfRequestee, userNameOfRequester);
+		try {
+			person.rejectFriendRequest(userIDOfRequestee, userNameOfRequester);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
+	}
+	
+	public void testExecute()
+	{
+		Person person = new Person();
+		person.testRejectFriendRequest(userIDOfRequestee, userNameOfRequester);
 	}
 
 	/**

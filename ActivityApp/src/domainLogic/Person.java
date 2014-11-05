@@ -19,6 +19,7 @@ public class Person extends DomainObject
 	private String displayName;
 	private int userID = -1;
 	private Person user;
+	private Person testUser;
 	private int size = 0;
 	FriendsList myFriends;
 	IncomingPendingFriendsList myIncomingPendingFriends;
@@ -244,25 +245,47 @@ public class Person extends DomainObject
 	public void AcceptFriendRequestCommand(String userNameOfRequester) throws SQLException
 	{		
 		user = SelectedPerson.getSelectedPerson();
-		Friend fr1 = new Friend(user.userName, user.displayName);
+		Person testUser = user;
 		
-		//Person testRequester = Person.findUser1(userNameOfRequester);
+		Friend userAsFriend = new Friend(user.userName, user.displayName);
 		Person theRequester = Person.findPerson(userNameOfRequester);
-		
-		//Friend testFr = new Friend(testRequester.userName, testRequester.displayName);
-		Friend theFriend = new Friend(theRequester.userName, theRequester.displayName);
-		
-		//testRequester.myFriends.add(fr1);
-		
-		theRequester.myFriends.add(fr1);
-		user.myFriends.add(theFriend);
-		
+		Friend requesterAsFriend = new Friend(theRequester.userName, theRequester.displayName);
+		theRequester.myFriends.add(userAsFriend);
+		user.myFriends.add(requesterAsFriend);
 		user.myIncomingPendingFriends.incomingPendingFriends.remove(theRequester);
 		theRequester.myOutgoingPendingFriends.outgoingPendingFriends.remove(user);
-		//testRequester.myOutgoingPendingFriends.outgoingPendingFriends.remove(user);
-		
 		this.markDirty(user);
 		this.markDirty(theRequester);
+		
+		
+		//For the testing
+		Friend testUserAsFriend = new Friend(testUser.userName, testUser.displayName);
+		Person testRequester = Person.findUser1(userNameOfRequester);
+		Friend testRequestAsFriend = new Friend(testRequester.userName, testRequester.displayName);
+		testRequester.myFriends.add(testUserAsFriend);
+		testUser.myFriends.add(testRequestAsFriend);
+		testUser.myIncomingPendingFriends.incomingPendingFriends.remove(testRequester);
+		testRequester.myOutgoingPendingFriends.outgoingPendingFriends.remove(testUser);
+		this.testMarkDirty(testUser);
+		this.testMarkDirty(testRequester);
+	}
+	
+	/**
+	 * @param userNameOfRequester
+	 * Test Accept Friend request command
+	 */
+	public void TestAcceptFriendRequestCommand(String userNameOfRequester)
+	{		
+		Person testUser = SelectedPerson.getSelectedPerson();
+		Friend testUserAsFriend = new Friend(testUser.userName, testUser.displayName);
+		Person testRequester = Person.findUser1(userNameOfRequester);
+		Friend testRequestAsFriend = new Friend(testRequester.userName, testRequester.displayName);
+		testRequester.myFriends.add(testUserAsFriend);
+		testUser.myFriends.add(testRequestAsFriend);
+		testUser.myIncomingPendingFriends.incomingPendingFriends.remove(testRequester);
+		testRequester.myOutgoingPendingFriends.outgoingPendingFriends.remove(testUser);
+		this.testMarkDirty(testUser);
+		this.testMarkDirty(testRequester);
 	}
 	
 	/**
@@ -303,22 +326,41 @@ public class Person extends DomainObject
 		this.markNew(user);
 	}
 	
+	public void testCreateUser(String userName, String password, String displayName) 
+	{
+		testUser = new Person(userName, password, displayName, userID);
+		this.testMarkNew(testUser);
+	}
+	
 	
 	public Person getUser()
 	{
 		return user;
+	}
+	
+	public Person getTestUser()
+	{
+		return testUser;
 	}
 
 	
 	public void SelectUser(String userName, String pw) throws SQLException 
 	{
 		user = Person.findPerson(userName, pw);
-		//user = Person.findUser1(userName, pw); // Use this
-		//user = new Person("fred", "pw1", "happyFred" , -1); // Just for testing for the CreateUserTest file
 		if(user != SelectedPerson.getSelectedPerson())
 		{
 			SelectedPerson.resetSelectedPerson();
 			SelectedPerson.initializeSelectedPerson(user);
+		}			
+	}
+	
+	public void testSelectUser(String userName, String pw) 
+	{
+		testUser = Person.findUser1(userName, pw); 
+		if(testUser != SelectedPerson.getSelectedPerson())
+		{
+			SelectedPerson.resetSelectedPerson();
+			SelectedPerson.initializeSelectedPerson(testUser);
 		}			
 	}
 
@@ -334,14 +376,8 @@ public class Person extends DomainObject
 	 */
 	public void MakeFriendRequest(String userNameOfRequestee) throws SQLException 
 	{
-//		user = Person.findPerson(userIDOfRequester);
-//		Person requestee = Person.findPerson(userNameOfRequestee);
-
-		//user = Person.findUser1(userIDOfRequester);
 		user = SelectedPerson.getSelectedPerson();
-		//Person requestee = Person.findUser1(userNameOfRequestee); //use this
 		Person requestee = Person.findPerson(userNameOfRequestee);
-		//Person requestee = new Person("henry", "pw2", "sadHenry", -1); // For testing CreateUserTest file
 		
 		user.myIncomingPendingFriends.add(requestee);
 		requestee.myOutgoingPendingFriends.add(user);
@@ -349,15 +385,25 @@ public class Person extends DomainObject
 		this.markDirty(user);
 		this.markDirty(requestee);
 	}
+	
+	public void testMakeFriendRequest(String userNameOfRequestee)
+	{
+		testUser = SelectedPerson.getSelectedPerson();
+		Person testRequestee = Person.findUser1(userNameOfRequestee); 
+		
+		testUser.myIncomingPendingFriends.add(testRequestee);
+		testRequestee.myOutgoingPendingFriends.add(user);
+
+		this.testMarkDirty(testUser);
+		this.testMarkDirty(testRequestee);
+	}
 
 
 	public void UnFriend(int userIDOfRequester, String userNameOfRequestee)
 	{
-		//user = Person.findPerson(userIDOfRequester);
 		user = Person.findUser1(userIDOfRequester);
 		Person requestee = Person.findUser1(userNameOfRequestee);
 		Friend req = new Friend(requestee.userName, requestee.displayName);
-		//requestee = Person.findPerson(userNameOfRequestee);
 		user.myFriends.remove(req);
 		Friend req2 = new Friend(user.userName, user.displayName);
 		requestee.myFriends.remove(req2);
@@ -365,27 +411,51 @@ public class Person extends DomainObject
 		this.markDirty(user);
 		
 	}
+	
+	public void testUnFriend(int userIDOfRequester, String userNameOfRequestee)
+	{
+		testUser = SelectedPerson.getSelectedPerson();
+		Person testRequestee = Person.findUser1(userNameOfRequestee);
+		Friend testRequesteeAsFriend = new Friend(testRequestee.userName, testRequestee.displayName);
+		testUser.myFriends.remove(testRequesteeAsFriend);
+		Friend testUserAsFriend = new Friend(testUser.userName, testUser.displayName);
+		testRequestee.myFriends.remove(testUserAsFriend);
+		this.testMarkDirty(testRequestee);
+		this.testMarkDirty(testUser);
+	} 
 
 
 	public void rejectFriendRequest(int userIDOfRequestee, String userNameOfRequester) throws SQLException
 	{
-		//requestee = Person.findPerson(userIDOfRequestee);
-		//requestee = Person.findUser1(userIDOfRequestee);
 		Person requestee = SelectedPerson.getSelectedPerson();
-		//user = Person.findUser1(userNameOfRequester);
 		user = Person.findPerson(userNameOfRequester);
 		user.myOutgoingPendingFriends.outgoingPendingFriends.remove(requestee);
 		requestee.myIncomingPendingFriends.incomingPendingFriends.remove(user);
 		this.markDirty(requestee);
 		this.markDirty(user);
 	}
+	
+	public void testRejectFriendRequest(int userIDOfRequestee, String userNameOfRequester)
+	{
+		Person testRequestee = SelectedPerson.getSelectedPerson();
+		testUser = Person.findUser1(userNameOfRequester);
+		testUser.myOutgoingPendingFriends.outgoingPendingFriends.remove(testRequestee);
+		testRequestee.myIncomingPendingFriends.incomingPendingFriends.remove(testUser);
+		this.testMarkDirty(testRequestee);
+		this.testMarkDirty(testUser);
+	}
 
 
 	public ArrayList<Friend> retrieveFriendList(int userID)
 	{
-		//user = Person.findUser1(userID);
 		user = SelectedPerson.getSelectedPerson();
 		return user.myFriends.getFriendList();
+	}
+	
+	public ArrayList<Friend> testRetrieveFriendList(int userID)
+	{
+		testUser = SelectedPerson.getSelectedPerson();
+		return testUser.myFriends.getFriendList();
 	}
 
 	/**
@@ -396,16 +466,23 @@ public class Person extends DomainObject
 	 */
 	public void PendingIncomingFriendList() 
 	{
-		//user = Person.findPerson(userID);
-		//user = Person.findUser1(userID);
-		
 		user = SelectedPerson.getSelectedPerson();		
+	}
+	
+	public void testPendingIncomingFriendList() 
+	{
+		testUser = Person.findUser1(userID);	
 	}
 	
 	/**
 	 * @return the list of pending incoming friend list as a string
 	 */
 	public ArrayList<Person> getPendingIncomingFriendList()
+	{
+		return this.myIncomingPendingFriends.incomingPendingFriends;
+	}
+	
+	public ArrayList<Person> getTestPendingIncomingFriendList()
 	{
 		return this.myIncomingPendingFriends.incomingPendingFriends;
 	}
@@ -416,16 +493,26 @@ public class Person extends DomainObject
 		UnitOfWork unit = UnitOfWork.getCurrent();
 		unit.emptyArrayLists();
 	}
+	
+	public void testCancelChanges()
+	{
+		MockUnitOfWork unit = MockUnitOfWork.getCurrent();
+		unit.emptyArrayLists();
+	}
 
 
 	public void modifyUser(int userID, String newDisplayName)
 	{
-		//user = Person.findPerson(userID);
-		//user = Person.findUser1(userID);
 		user = SelectedPerson.getSelectedPerson();
 		user.setDisplayName(newDisplayName);
-		this.markDirty(user);
-		
+		this.markDirty(user);	
+	}
+	
+	public void testModifyUser(int userID, String newDisplayName)
+	{
+		testUser = SelectedPerson.getSelectedPerson();
+		testUser.setDisplayName(newDisplayName);
+		this.testMarkDirty(user);
 	}
 
 
@@ -439,9 +526,12 @@ public class Person extends DomainObject
 	 */
 	public void PendingOutgoingFriendList() 
 	{
-		//user = Person.findPerson(userID);
-		//user = Person.findUser1(userID);
 		user = SelectedPerson.getSelectedPerson();
+	}
+	
+	public void testPendingOutgoingFriendList() 
+	{
+		testUser = SelectedPerson.getSelectedPerson();
 	}
 	
 	public ArrayList<Person> getTheOutgoingPendingFriendList()
@@ -450,9 +540,15 @@ public class Person extends DomainObject
 		return this.myOutgoingPendingFriends.getPendingFriendList();
 	}
 	
+	public ArrayList<Person> getTestTheOutgoingPendingFriendList()
+	{
+		return this.myOutgoingPendingFriends.getPendingFriendList();
+	}
+	
 	public OutgoingPendingFriendList getOutgoingPendingFriendList() {
 		return myOutgoingPendingFriends;
 	}
+
 
 
 	public void persistChanges() throws SQLException 
@@ -460,5 +556,11 @@ public class Person extends DomainObject
 		UnitOfWork unit = UnitOfWork.getCurrent();
 		unit.commit();
 	}
+	
+	public void testPersistChanges()
+	{
+		MockUnitOfWork unit = MockUnitOfWork.getCurrent();
+		unit.commit();
+	} 
 	
 }

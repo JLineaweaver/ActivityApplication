@@ -36,6 +36,11 @@ public class CommandToGetPendingOutgoingFriendList implements Command
 	{
 		person.PendingOutgoingFriendList();
 	}
+	
+	public void testExecute()
+	{
+		person.testPendingOutgoingFriendList();
+	}
 
 	/**
 	 * A list of the friends associated with the given user
@@ -47,6 +52,13 @@ public class CommandToGetPendingOutgoingFriendList implements Command
 	{
 		Person person = SelectedPerson.getSelectedPerson();
 		result = person.getTheOutgoingPendingFriendList();
+		return result;
+	}
+	
+	public ArrayList<Person> getTestResult()
+	{
+		Person person = SelectedPerson.getSelectedPerson();
+		result = person.getTestTheOutgoingPendingFriendList();
 		return result;
 	}
 	

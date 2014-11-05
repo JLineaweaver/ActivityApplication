@@ -14,25 +14,23 @@ public class TestCommandToCancelChanges {
 		SelectedPerson.initializeSelectedPerson(person1); // simulates selecting person1
 		assertEquals(0, person1.getNumberOfFriends());
 		
-		UnitOfWork.newCurrent();
-		UnitOfWork unit = UnitOfWork.getCurrent();
+		MockUnitOfWork.newCurrent();
+		MockUnitOfWork unit = MockUnitOfWork.getCurrent();
 		assertEquals(0, person1.myIncomingPendingFriends.incomingPendingFriends.size());
 		
 		CommandToMakeFriendRequest cmd = new CommandToMakeFriendRequest(person1.getUserID(), person2.getUserName());
 		
-		cmd.execute();
-		Person result = cmd.getResult();
+		cmd.testExecute();
+		Person result = cmd.getTestResult();
 		
 		assertEquals(1, person1.myIncomingPendingFriends.incomingPendingFriends.size());
 		assertEquals(1, result.myIncomingPendingFriends.incomingPendingFriends.size());
 
 		assertEquals(2, unit.getDirtyObjects().size());
 		CommandToCancelChanges cmd1 = new CommandToCancelChanges();
-		cmd1.execute();
+		cmd1.testExecute();
 		
 		assertEquals(0, unit.getDirtyObjects().size());
 		SelectedPerson.resetSelectedPerson();
-		
 	}
-
 }

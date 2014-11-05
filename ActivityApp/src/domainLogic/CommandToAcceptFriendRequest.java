@@ -43,6 +43,11 @@ public class CommandToAcceptFriendRequest implements Command
 			e.printStackTrace();
 		}
 	}
+	
+	public void testExecute()
+	{
+		person.TestAcceptFriendRequestCommand(userNameOfRequester);
+	}
 
 	/**
 	 * Nothing needs to be retrieved from this command

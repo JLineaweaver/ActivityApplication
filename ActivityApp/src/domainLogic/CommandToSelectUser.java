@@ -39,6 +39,11 @@ public class CommandToSelectUser implements Command
 			e.printStackTrace();
 		}
 	}
+	
+	public void testExecute()
+	{
+		person.testSelectUser(userName, password);
+	}
 
 	/**
 	 * Get the password that was given as part of the user's credentials
@@ -58,6 +63,13 @@ public class CommandToSelectUser implements Command
 	 */
 	@Override
 	public Person getResult()
+	{
+		Person person;
+		person =  SelectedPerson.getSelectedPerson();
+		return person;
+	}
+	
+	public Person getTestResult()
 	{
 		Person person;
 		person =  SelectedPerson.getSelectedPerson();

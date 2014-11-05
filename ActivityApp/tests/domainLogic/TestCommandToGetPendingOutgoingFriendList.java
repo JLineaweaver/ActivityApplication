@@ -14,8 +14,8 @@ public class TestCommandToGetPendingOutgoingFriendList {
 		Person person = new Person("Matt", "pw", "MattyMatt", -2);
 		SelectedPerson.initializeSelectedPerson(person); //simulates selecting a person
 		CommandToGetPendingOutgoingFriendList cmd = new CommandToGetPendingOutgoingFriendList(person.getUserID());
-		cmd.execute();
-		assertEquals(0, cmd.getResult().size());
+		cmd.testExecute();
+		assertEquals(0, cmd.getTestResult().size());
 		
 		Person.emptyMockDB();
 		SelectedPerson.resetSelectedPerson();
@@ -29,8 +29,8 @@ public class TestCommandToGetPendingOutgoingFriendList {
 		SelectedPerson.initializeSelectedPerson(person);//Simulates selecting a person
 		person.myOutgoingPendingFriends.outgoingPendingFriends.add(person2); //manually added a friend to the list
 		CommandToGetPendingOutgoingFriendList cmd = new CommandToGetPendingOutgoingFriendList(person.getUserID());
-		cmd.execute();
-		assertEquals(person2, cmd.getResult().get(0));
+		cmd.testExecute();
+		assertEquals(person2, cmd.getTestResult().get(0));
 		
 		Person.emptyMockDB();
 		SelectedPerson.resetSelectedPerson();
@@ -46,9 +46,9 @@ public class TestCommandToGetPendingOutgoingFriendList {
 		person.myOutgoingPendingFriends.outgoingPendingFriends.add(person2); //manually added a friend to the list
 		person.myOutgoingPendingFriends.outgoingPendingFriends.add(person3);
 		CommandToGetPendingOutgoingFriendList cmd = new CommandToGetPendingOutgoingFriendList(person.getUserID());
-		cmd.execute();
-		assertEquals(person2, cmd.getResult().get(0));
-		assertEquals(person3, cmd.getResult().get(1));
+		cmd.testExecute();
+		assertEquals(person2, cmd.getTestResult().get(0));
+		assertEquals(person3, cmd.getTestResult().get(1));
 		
 		Person.emptyMockDB();
 		SelectedPerson.resetSelectedPerson();
@@ -67,9 +67,8 @@ public class TestCommandToGetPendingOutgoingFriendList {
 			person.myOutgoingPendingFriends.outgoingPendingFriends.add(person3);
 			
 			CommandToGetPendingOutgoingFriendList cmd = new CommandToGetPendingOutgoingFriendList(person.getUserID());
-			cmd.execute();
-			ArrayList<Person> list = cmd.getResult();
-			
+			cmd.testExecute();
+		
 			assertEquals("Fred,Josh", cmd.toString());
 			
 			Person.emptyMockDB();

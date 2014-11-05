@@ -32,6 +32,11 @@ public class CommandToUnFriend implements Command
 	{
 		person.UnFriend(userIDOfRequester, userNameOfRequestee);
 	}
+	
+	public void testExecute()
+	{
+		person.testUnFriend(userIDOfRequester, userNameOfRequestee);
+	}
 
 	/**
 	 * Nothing needs to be retrieved from this command
@@ -41,6 +46,11 @@ public class CommandToUnFriend implements Command
 	public Person getResult()
 	{
 		return person.getUser();
+	}
+	
+	public Person getTestResult()
+	{
+		return person.getTestUser();
 	}
 
 }

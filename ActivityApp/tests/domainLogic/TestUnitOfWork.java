@@ -16,11 +16,11 @@ public class TestUnitOfWork {
 		String dName = "JohnnyJohn";
 		CommandToCreateUser cmd = new CommandToCreateUser(uName, pw, dName);
 		
-		UnitOfWork.newCurrent();
+		MockUnitOfWork.newCurrent();
 		
-		cmd.execute();
-		Person person = cmd.getResult();
-		assertEquals(true, UnitOfWork.getCurrent().getNewObjects().contains(person));		
+		cmd.testExecute();
+		Person person = cmd.getTestResult();
+		assertEquals(true, MockUnitOfWork.getCurrent().getNewObjects().contains(person));		
 	}
 	
 	@Test
@@ -36,15 +36,15 @@ public class TestUnitOfWork {
 		String dName2 = "FreddyFred";
 		CommandToCreateUser cmd2 = new CommandToCreateUser(uName2, pw2, dName2);
 		
-		UnitOfWork.newCurrent();
+		MockUnitOfWork.newCurrent();
 		
-		cmd.execute();
-		cmd2.execute();
-		Person person = cmd.getResult();
-		Person person2 = cmd2.getResult();
+		cmd.testExecute();
+		cmd2.testExecute();
+		Person person = cmd.getTestResult();
+		Person person2 = cmd2.getTestResult();
 		
-		assertEquals(true, UnitOfWork.getCurrent().getNewObjects().contains(person));
-		assertEquals(true, UnitOfWork.getCurrent().getNewObjects().contains(person2));
+		assertEquals(true, MockUnitOfWork.getCurrent().getNewObjects().contains(person));
+		assertEquals(true, MockUnitOfWork.getCurrent().getNewObjects().contains(person2));
 		
 		Person.emptyMockDB();
 	}
@@ -57,11 +57,11 @@ public class TestUnitOfWork {
 		SelectedPerson.initializeSelectedPerson(person1); //simulates selecting a person
 		CommandToMakeFriendRequest cmd = new CommandToMakeFriendRequest(person1.getUserID(), person2.getUserName());
 		
-		UnitOfWork.newCurrent();
+		MockUnitOfWork.newCurrent();
 		
-		cmd.execute();
-		Person result = cmd.getResult();
-		assertEquals(true, UnitOfWork.getCurrent().getDirtyObjects().contains(result));
+		cmd.testExecute();
+		Person result = cmd.getTestResult();
+		assertEquals(true, MockUnitOfWork.getCurrent().getDirtyObjects().contains(result));
 		
 		Person.emptyMockDB();
 		SelectedPerson.resetSelectedPerson();
@@ -75,8 +75,8 @@ public class TestUnitOfWork {
 		SelectedPerson.initializeSelectedPerson(person1); //simulates selecting a person
 		CommandToMakeFriendRequest cmd = new CommandToMakeFriendRequest(person1.getUserID(), person2.getUserName());
 		
-		UnitOfWork.newCurrent();
-		cmd.execute();
+		MockUnitOfWork.newCurrent();
+		cmd.testExecute();
 		
 		Person person3 = new Person("Bob", "","BobbyB", 3);
 		Person person4 = new Person("George", "","Georgie", 4);
@@ -84,12 +84,12 @@ public class TestUnitOfWork {
 		
 		SelectedPerson.resetSelectedPerson();
 		SelectedPerson.initializeSelectedPerson(person3); //simulates selecting a person
-		cmd2.execute();
+		cmd2.testExecute();
 		
-		Person result = cmd.getResult();
-		Person result2 = cmd.getResult();
-		assertEquals(true, UnitOfWork.getCurrent().getDirtyObjects().contains(result));
-		assertEquals(true, UnitOfWork.getCurrent().getDirtyObjects().contains(result2));
+		Person result = cmd.getTestResult();
+		Person result2 = cmd.getTestResult();
+		assertEquals(true, MockUnitOfWork.getCurrent().getDirtyObjects().contains(result));
+		assertEquals(true, MockUnitOfWork.getCurrent().getDirtyObjects().contains(result2));
 		
 		Person.emptyMockDB();
 		SelectedPerson.resetSelectedPerson();
@@ -98,15 +98,15 @@ public class TestUnitOfWork {
 	@Test
 	public void testNewToDirtyObject()
 	{
-		UnitOfWork work = new UnitOfWork();
+		MockUnitOfWork work = new MockUnitOfWork();
 		work.newCurrent();
 		
 		Person person = new Person("Johnny", "JPassword", "JohnnyJohn", -1);
-		person.markNew(person); // Manually added person to the new objects
+		person.testMarkNew(person); // Manually added person to the new objects
 		
 		assertEquals(true, work.getCurrent().getNewObjects().contains(person));
 		
-		person.markDirty(person);
+		person.testMarkDirty(person);
 		assertEquals(false, work.getCurrent().getNewObjects().contains(person));
 		assertEquals(true, work.getCurrent().getDirtyObjects().contains(person));
 		
@@ -117,13 +117,13 @@ public class TestUnitOfWork {
 	@Test
 	public void testNewToRemovedObject()
 	{
-		UnitOfWork work = new UnitOfWork();
+		MockUnitOfWork work = new MockUnitOfWork();
 		work.newCurrent();
 		
 		Person person = new Person("Johnny", "JPassword", "JohnnyJohn", -1);
-		person.markNew(person); // Manually added person to the new objects
+		person.testMarkNew(person); // Manually added person to the new objects
 				
-		person.markRemoved(person);
+		person.testMarkRemoved(person);
 		assertEquals(false, work.getCurrent().getNewObjects().contains(person));
 		assertEquals(true, work.getCurrent().getRemovedObjects().contains(person));
 	}
@@ -131,14 +131,14 @@ public class TestUnitOfWork {
 	@Test
 	public void testDirtyToRemoved()
 	{
-		UnitOfWork work = new UnitOfWork();
+		MockUnitOfWork work = new MockUnitOfWork();
 		work.newCurrent();
 		
 		Person person = new Person("Johnny", "JPassword", "JohnnyJohn", -1);
-		person.markDirty(person); // Manually added person to the new objects
+		person.testMarkDirty(person); // Manually added person to the new objects
 		assertEquals(true, work.getCurrent().getDirtyObjects().contains(person));
 				
-		person.markRemoved(person);
+		person.testMarkRemoved(person);
 		assertEquals(false, work.getCurrent().getDirtyObjects().contains(person));
 		assertEquals(true, work.getCurrent().getRemovedObjects().contains(person));
 		

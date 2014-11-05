@@ -37,6 +37,11 @@ public class CommandToGetPendingIncomingFriendList implements Command
 	{
 		person.PendingIncomingFriendList();
 	}
+	
+	public void testExecute()
+	{
+		person.testPendingIncomingFriendList();
+	}
 
 	/**
 	 * A comma-separated list of the friends associated with the given user
@@ -48,6 +53,13 @@ public class CommandToGetPendingIncomingFriendList implements Command
 	{
 		Person person = SelectedPerson.getSelectedPerson();
 		result = person.getPendingIncomingFriendList();
+		return result;
+	}
+	
+	public ArrayList<Person> getTestResult()
+	{
+		Person person = SelectedPerson.getSelectedPerson();
+		result = person.getTestPendingIncomingFriendList();
 		return result;
 	}
 	

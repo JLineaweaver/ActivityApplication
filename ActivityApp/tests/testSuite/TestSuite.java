@@ -1,7 +1,5 @@
 package testSuite;
 
-import mockedUI.UserThreadTests;
-
 import org.junit.runners.Suite;
 import org.junit.runner.RunWith;
 
@@ -29,7 +27,6 @@ import domainLogic.TestUnitOfWork;
 	TestUnitOfWork.class,
 	TestCommandToGetPendingIncomingFriendList.class,
 	TestCommandToGetPendingOutgoingFriendList.class,
-	UserThreadTests.class,
 	TestCommandToCancelChanges.class,
 	TestCommandToModifyUser.class,
 	TestCommandToRejectFriend.class,
