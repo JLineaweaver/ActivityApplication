@@ -396,11 +396,25 @@ public class Person extends DomainObject
 	public void UnFriend(int userIDOfRequester, String userNameOfRequestee) throws SQLException
 	{
 		user = SelectedPerson.getSelectedPerson();
+		Friend userAsFriend = new Friend(user.userName, user.displayName);
 		Person requestee = Person.findPerson(userNameOfRequestee);
 		Friend requsteeAsFriend = new Friend(requestee.userName, requestee.displayName);
-		user.myFriends.remove(requsteeAsFriend);
-		Friend userAsFriend = new Friend(user.userName, user.displayName);
-		requestee.myFriends.remove(userAsFriend);
+		for(int i = 0; i < testUser.myFriends.friends.size(); i++)
+		{
+			if(user.myFriends.friends.get(i).getUserName().equals(requsteeAsFriend.getUserName()) && 
+					user.myFriends.friends.get(i).getDisplayName().equals(requsteeAsFriend.getDisplayName()))
+			{
+				user.myFriends.remove(user.myFriends.friends.get(i));
+			}
+		}
+		for(int i = 0; i < requestee.myFriends.friends.size(); i++)
+		{
+			if(requestee.myFriends.friends.get(i).getUserName().equals(userAsFriend.getUserName()) && 
+					requestee.myFriends.friends.get(i).getDisplayName().equals(userAsFriend.getDisplayName()))
+			{
+				requestee.myFriends.remove(requestee.myFriends.friends.get(i));
+			}
+		}
 		this.markDirty(requestee);
 		this.markDirty(user);
 		
@@ -409,11 +423,25 @@ public class Person extends DomainObject
 	public void testUnFriend(int userIDOfRequester, String userNameOfRequestee)
 	{
 		testUser = SelectedPerson.getSelectedPerson();
+		Friend testUserAsFriend = new Friend(testUser.userName, testUser.displayName);
 		Person testRequestee = Person.findUser1(userNameOfRequestee);
 		Friend testRequesteeAsFriend = new Friend(testRequestee.userName, testRequestee.displayName);
-		testUser.myFriends.remove(testRequesteeAsFriend);
-		Friend testUserAsFriend = new Friend(testUser.userName, testUser.displayName);
-		testRequestee.myFriends.remove(testUserAsFriend);
+		for(int i = 0; i < testUser.myFriends.friends.size(); i++)
+		{
+			if(testUser.myFriends.friends.get(i).getUserName().equals(testRequesteeAsFriend.getUserName()) && 
+					testUser.myFriends.friends.get(i).getDisplayName().equals(testRequesteeAsFriend.getDisplayName()))
+			{
+				testUser.myFriends.remove(testUser.myFriends.friends.get(i));
+			}
+		}
+		for(int i = 0; i < testRequestee.myFriends.friends.size(); i++)
+		{
+			if(testRequestee.myFriends.friends.get(i).getUserName().equals(testUserAsFriend.getUserName()) && 
+					testRequestee.myFriends.friends.get(i).getDisplayName().equals(testUserAsFriend.getDisplayName()))
+			{
+				testRequestee.myFriends.remove(testRequestee.myFriends.friends.get(i));
+			}
+		}
 		this.testMarkDirty(testRequestee);
 		this.testMarkDirty(testUser);
 	} 

@@ -1,4 +1,7 @@
 package domainLogic;
+
+import java.sql.SQLException;
+
 /**
  * Cancels a friend request between two users
  * @author merlin
@@ -30,7 +33,12 @@ public class CommandToUnFriend implements Command
 	@Override
 	public void execute()
 	{
-		person.UnFriend(userIDOfRequester, userNameOfRequestee);
+		try {
+			person.UnFriend(userIDOfRequester, userNameOfRequestee);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void testExecute()
