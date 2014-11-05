@@ -15,6 +15,7 @@ import domainLogic.TestCommandToMakeFriendRequest;
 import domainLogic.TestCommandToModifyUser;
 import domainLogic.TestCommandToPersistChanges;
 import domainLogic.TestCommandToRejectFriend;
+import domainLogic.TestCommandToRetrieveFriendsList;
 import domainLogic.TestCommandToSelectUser;
 import domainLogic.TestCommandToUnfriend;
 import domainLogic.TestPerson;
@@ -35,6 +36,7 @@ import domainLogic.TestUnitOfWork;
 	TestCommandToRejectFriend.class,
 	TestCommandToPersistChanges.class,
 	TestCommandToUnfriend.class,
+	TestCommandToRetrieveFriendsList.class,
 	UserThreadTests.class,
 	TestPersonRowDataGateway.class})
 public class TestSuite {
