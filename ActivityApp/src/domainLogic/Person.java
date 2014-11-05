@@ -244,9 +244,7 @@ public class Person extends DomainObject
 	 */
 	public void AcceptFriendRequestCommand(String userNameOfRequester) throws SQLException
 	{		
-		user = SelectedPerson.getSelectedPerson();
-		Person testUser = user;
-		
+		user = SelectedPerson.getSelectedPerson();		
 		Friend userAsFriend = new Friend(user.userName, user.displayName);
 		Person theRequester = Person.findPerson(userNameOfRequester);
 		Friend requesterAsFriend = new Friend(theRequester.userName, theRequester.displayName);
@@ -256,18 +254,6 @@ public class Person extends DomainObject
 		theRequester.myOutgoingPendingFriends.outgoingPendingFriends.remove(user);
 		this.markDirty(user);
 		this.markDirty(theRequester);
-		
-		
-		//For the testing
-		Friend testUserAsFriend = new Friend(testUser.userName, testUser.displayName);
-		Person testRequester = Person.findUser1(userNameOfRequester);
-		Friend testRequestAsFriend = new Friend(testRequester.userName, testRequester.displayName);
-		testRequester.myFriends.add(testUserAsFriend);
-		testUser.myFriends.add(testRequestAsFriend);
-		testUser.myIncomingPendingFriends.incomingPendingFriends.remove(testRequester);
-		testRequester.myOutgoingPendingFriends.outgoingPendingFriends.remove(testUser);
-		this.testMarkDirty(testUser);
-		this.testMarkDirty(testRequester);
 	}
 	
 	/**
@@ -276,7 +262,7 @@ public class Person extends DomainObject
 	 */
 	public void TestAcceptFriendRequestCommand(String userNameOfRequester)
 	{		
-		Person testUser = SelectedPerson.getSelectedPerson();
+		testUser = SelectedPerson.getSelectedPerson();
 		Friend testUserAsFriend = new Friend(testUser.userName, testUser.displayName);
 		Person testRequester = Person.findUser1(userNameOfRequester);
 		Friend testRequestAsFriend = new Friend(testRequester.userName, testRequester.displayName);
@@ -399,14 +385,22 @@ public class Person extends DomainObject
 	}
 
 
-	public void UnFriend(int userIDOfRequester, String userNameOfRequestee)
+	/**
+	 * @param userIDOfRequester
+	 * @param userNameOfRequestee
+	 * @throws SQLException
+	 * 
+	 * What I want is to find the people, and delete the mapping of userID in the friends table 
+	 * that correspond to these two people.
+	 */
+	public void UnFriend(int userIDOfRequester, String userNameOfRequestee) throws SQLException
 	{
-		user = Person.findUser1(userIDOfRequester);
-		Person requestee = Person.findUser1(userNameOfRequestee);
-		Friend req = new Friend(requestee.userName, requestee.displayName);
-		user.myFriends.remove(req);
-		Friend req2 = new Friend(user.userName, user.displayName);
-		requestee.myFriends.remove(req2);
+		user = SelectedPerson.getSelectedPerson();
+		Person requestee = Person.findPerson(userNameOfRequestee);
+		Friend requsteeAsFriend = new Friend(requestee.userName, requestee.displayName);
+		user.myFriends.remove(requsteeAsFriend);
+		Friend userAsFriend = new Friend(user.userName, user.displayName);
+		requestee.myFriends.remove(userAsFriend);
 		this.markDirty(requestee);
 		this.markDirty(user);
 		

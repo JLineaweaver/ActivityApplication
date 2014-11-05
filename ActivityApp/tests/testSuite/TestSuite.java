@@ -1,8 +1,11 @@
 package testSuite;
 
+import mockedUI.UserThreadTests;
+
 import org.junit.runners.Suite;
 import org.junit.runner.RunWith;
 
+import Gateways.TestPersonRowDataGateway;
 import domainLogic.TestCommandToAcceptFriendRequest;
 import domainLogic.TestCommandToCancelChanges;
 import domainLogic.TestCommandToCreateUser;
@@ -31,7 +34,9 @@ import domainLogic.TestUnitOfWork;
 	TestCommandToModifyUser.class,
 	TestCommandToRejectFriend.class,
 	TestCommandToPersistChanges.class,
-	TestCommandToUnfriend.class})
+	TestCommandToUnfriend.class,
+	UserThreadTests.class,
+	TestPersonRowDataGateway.class})
 public class TestSuite {
 }
 

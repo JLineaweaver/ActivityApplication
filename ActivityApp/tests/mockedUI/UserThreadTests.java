@@ -108,15 +108,4 @@ public class UserThreadTests
 		assertTrue( t.executeInstruction("MockCommand <userID> mymessage; 5 mymessage worked"));
 	}
 	
-//	@Test
-//	public void testExecution() throws FileNotFoundException
-//	{
-//		Person person = new Person("fred", "pw1" ,"happyFred" , -1);
-//		Person person2 = new Person("henry" , "pw2", "sadHenry", -2);
-//		UserThread t = new UserThread("CreateUserTest");
-//		UnitOfWork.newCurrent();
-//		t.run();
-//		Person.emptyMockDB();
-//		SelectedPerson.resetSelectedPerson();
-//	}
 }

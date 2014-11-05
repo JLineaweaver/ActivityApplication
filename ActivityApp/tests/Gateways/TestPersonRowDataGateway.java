@@ -18,7 +18,7 @@ public class TestPersonRowDataGateway
 		ResultSet rs = prdg.findPerson();
 		rs.next();
 		String username = rs.getString("userName");
-		System.out.println("fuckboy >>>" + username);
+		System.out.println("HelloBoy >>>" + username);
 		assertTrue(prdg.findPerson() != null);
 		}
 		catch (Exception e) {
