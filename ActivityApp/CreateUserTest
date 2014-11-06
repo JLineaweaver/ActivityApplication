@@ -1,2 +1,2 @@
-CommandToSelectUser fred pw1;
-CommandToGetPendingIncomingFriendList <userID>; george
+CommandToSelectUser Matthew pw1;
+CommandToGetPendingOutgoingFriendList <userID>; henry
