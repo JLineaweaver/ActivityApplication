@@ -23,37 +23,16 @@ public class PersonRowDataGateway
 	Connection con = null;
 	ResultSet rs = null;
 	
-	 //lsagroup2.cbzhjl6tpflt.us-east-1.rds.amazonaws.com
-	String db = "fitness2";
-	String url = "lsagroup2.cbzhjl6tpflt.us-east-1.rds.amazonaws.com";
-	String dbUser = "lsagroup2";
-	String dbPassword = "lsagroup2";
-
-	public PersonRowDataGateway(int id) throws SQLException {
 	
-		try {
-		String connectFormat = "jdbc:mysql://%s/%s?user=%s&password=%s";
-		String connectURL = String.format(connectFormat, url, db, dbUser, dbPassword);
-		Class.forName("com.mysql.jdbc.Driver");
-		con = DriverManager.getConnection(connectURL);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+
+	public PersonRowDataGateway(int id, Connection con) throws SQLException {
+	
 		this.id = id;
-		
+		this.con = con;
 	}
 	
-	public PersonRowDataGateway(String username, String password) throws SQLException {
-		try {
-			String connectFormat = "jdbc:mysql://%s/%s?user=%s&password=%s";
-			String connectURL = String.format(connectFormat, url, db, dbUser, dbPassword);
-			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection(connectURL);
-			}
-			catch (Exception e) {
-				
-			}
+	public PersonRowDataGateway(String username, String password, Connection con) throws SQLException {
+			this.con = con;
 			this.username = username;
 			this.password = password;
 			try
@@ -72,16 +51,9 @@ public class PersonRowDataGateway
 			}
 	}
 	
-	public PersonRowDataGateway(String username) throws SQLException {
-		try {
-			String connectFormat = "jdbc:mysql://%s/%s?user=%s&password=%s";
-			String connectURL = String.format(connectFormat, url, db, dbUser, dbPassword);
-			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection(connectURL);
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
+	public PersonRowDataGateway(String username, Connection con) throws SQLException {
+		
+			this.con = con;
 			this.username = username;
 			try
 			{
@@ -156,14 +128,5 @@ public class PersonRowDataGateway
 		}
 		
 	}
-	public void close() {
-		try
-		{
-			con.close();
-		} catch (SQLException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+	
 }

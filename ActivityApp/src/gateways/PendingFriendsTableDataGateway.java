@@ -11,24 +11,10 @@ public class PendingFriendsTableDataGateway
 		Connection con = null;
 		ResultSet rs = null;
 		
-		 //lsagroup2.cbzhjl6tpflt.us-east-1.rds.amazonaws.com
-		String db = "fitness2";
-		String url = "lsagroup2.cbzhjl6tpflt.us-east-1.rds.amazonaws.com";
-		String dbUser = "lsagroup2";
-		String dbPassword = "lsagroup2";
-		
+	
 
-	public PendingFriendsTableDataGateway() throws SQLException {
-		
-			try {
-			String connectFormat = "jdbc:mysql://%s/%s?user=%s&password=%s";
-			String connectURL = String.format(connectFormat, url, db, dbUser, dbPassword);
-			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection(connectURL);
-			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
+	public PendingFriendsTableDataGateway(Connection con) throws SQLException {
+		this.con = con;
 	}
 	
 	public ResultSet getOutgoingPendingFriends(int userID) {
@@ -66,7 +52,7 @@ public class PendingFriendsTableDataGateway
 		PersonRowDataGateway prdg = null;
 		try
 		{
-			prdg = new PersonRowDataGateway(username);
+			prdg = new PersonRowDataGateway(username, con);
 		} catch (SQLException e1)
 		{
 			// TODO Auto-generated catch block
@@ -92,7 +78,7 @@ public class PendingFriendsTableDataGateway
 		PersonRowDataGateway prdg = null;
 		try
 		{
-			prdg = new PersonRowDataGateway(username);
+			prdg = new PersonRowDataGateway(username, con);
 		} catch (SQLException e1)
 		{
 			// TODO Auto-generated catch block
@@ -113,15 +99,6 @@ public class PendingFriendsTableDataGateway
 			e.printStackTrace();
 		}
 	}
-	public void close() {
-		try
-		{
-			con.close();
-		} catch (SQLException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}		
+	
 	
 }

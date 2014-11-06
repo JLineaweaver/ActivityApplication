@@ -584,5 +584,10 @@ public class Person extends DomainObject
 		MockUnitOfWork unit = MockUnitOfWork.getCurrent();
 		unit.commit();
 	} 
+	public void addLists(FriendsList fl, IncomingPendingFriendsList ipfl, OutgoingPendingFriendList opfl) {
+		myFriends = fl;
+		myIncomingPendingFriends = ipfl;
+		myOutgoingPendingFriends = opfl;
+	}
 	
 }

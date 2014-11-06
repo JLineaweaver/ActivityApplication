@@ -1,9 +1,11 @@
 package dataMappers;
+import java.sql.Connection;
 
 import gateways.FriendsTableDataGateway;
 import gateways.PendingFriendsTableDataGateway;
 import gateways.PersonRowDataGateway;
 
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,47 +25,77 @@ import domainLogic.Person;
  */
 public class DataMapper 
 {
+	Connection con;
+	IdentityMap im;
 	
+	String db = "fitness2";
+	String url = "lsagroup2.cbzhjl6tpflt.us-east-1.rds.amazonaws.com";
+	String dbUser = "lsagroup2";
+	String dbPassword = "lsagroup2";
 	public DataMapper() {
-		
+		try {
+			String connectFormat = "jdbc:mysql://%s/%s?user=%s&password=%s";
+			String connectURL = String.format(connectFormat, url, db, dbUser, dbPassword);
+			Class.forName("com.mysql.jdbc.Driver");
+			con = DriverManager.getConnection(connectURL);
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+		im = new IdentityMap();
 	}
 
 	public Person findPerson(String username, String password) throws SQLException {
-		PersonRowDataGateway prdg = new PersonRowDataGateway(username,password);
+		if(im.find(username)!= null) {
+			return im.find(username);
+		}
+		PersonRowDataGateway prdg = new PersonRowDataGateway(username,password, con);
 		ResultSet rs = prdg.findPerson();
 		rs.next();
 		int id = rs.getInt("userID");
 		
-		Person f = new Person(rs.getString("userName"), rs.getString("password"), rs.getString("displayName"), id , getFriendsList(id), getIncomingPendingFriendsList(id), getOutgoingPendingFriendList(id));
-		prdg.close();
+		Person f = new Person(rs.getString("userName"), rs.getString("password"), rs.getString("displayName"), id);
+		im.add(f);
+		im.find(id).addLists(getFriendsList(id), getIncomingPendingFriendsList(id), getOutgoingPendingFriendList(id));
+		f.addLists(getFriendsList(id), getIncomingPendingFriendsList(id), getOutgoingPendingFriendList(id));
 		return f;
 	
 	}
 	public Person findPerson(int ID) throws SQLException {
-		PersonRowDataGateway prdg = new PersonRowDataGateway(ID);
+		if(im.find(ID)!= null) {
+			return im.find(ID);
+		}
+		PersonRowDataGateway prdg = new PersonRowDataGateway(ID, con);
 		ResultSet rs = prdg.findPerson();
 		rs.next();
 		int id = rs.getInt("userID");
-		Person f = new Person(rs.getString("userName"), rs.getString("password"), rs.getString("displayName"), id , getFriendsList(id), getIncomingPendingFriendsList(id), getOutgoingPendingFriendList(id));
-		prdg.close();
+		Person f = new Person(rs.getString("userName"), rs.getString("password"), rs.getString("displayName"), id);
+		im.add(f);
+		im.find(id).addLists(getFriendsList(id), getIncomingPendingFriendsList(id), getOutgoingPendingFriendList(id));
+		f.addLists(getFriendsList(id), getIncomingPendingFriendsList(id), getOutgoingPendingFriendList(id));
 		return f;
 	}
 	public Person findPerson(String userName) throws SQLException {
-		PersonRowDataGateway prdg = new PersonRowDataGateway(userName);
+		if(im.find(userName)!= null) {
+			return im.find(userName);
+		}
+		PersonRowDataGateway prdg = new PersonRowDataGateway(userName, con);
 		ResultSet rs = prdg.findPerson();
 		rs.next();
 		int id = rs.getInt("userID");
-		Person f = new Person(rs.getString("userName"), rs.getString("password"), rs.getString("displayName"), id , getFriendsList(id), getIncomingPendingFriendsList(id), getOutgoingPendingFriendList(id));
-		prdg.close();
+		Person f = new Person(rs.getString("userName"), rs.getString("password"), rs.getString("displayName"), id);
+		im.add(f);
+		im.find(id).addLists(getFriendsList(id), getIncomingPendingFriendsList(id), getOutgoingPendingFriendList(id));
+		f.addLists(getFriendsList(id), getIncomingPendingFriendsList(id), getOutgoingPendingFriendList(id));
 		return f;
 	}
 	public Friend findFriend(int ID) throws SQLException {
-		PersonRowDataGateway prdg = new PersonRowDataGateway(ID);
+		PersonRowDataGateway prdg = new PersonRowDataGateway(ID, con);
 		ResultSet rs = prdg.findPerson();
 		rs.next();
 
 		Friend f = new Friend(rs.getString("userName"), rs.getString("displayName"));
-		prdg.close();
+		
 		return f;
 	}
 	public boolean storePerson(Person myPerson) throws SQLException {
@@ -72,16 +104,16 @@ public class DataMapper
 			//createPerson(myPerson);
 		//}
 		//else {
-		PersonRowDataGateway prdg = new PersonRowDataGateway(myPerson.getUserID());
+		PersonRowDataGateway prdg = new PersonRowDataGateway(myPerson.getUserID(), con);
 		updateDisplayName(myPerson, oldPerson, prdg);
-		FriendsTableDataGateway ftdg = new FriendsTableDataGateway();
+		FriendsTableDataGateway ftdg = new FriendsTableDataGateway(con);
 		updateFriends(myPerson, oldPerson, ftdg);
-		ftdg.close();
-		PendingFriendsTableDataGateway pftdg = new PendingFriendsTableDataGateway();
+		
+		PendingFriendsTableDataGateway pftdg = new PendingFriendsTableDataGateway(con);
 		updatePendingFriends(myPerson,oldPerson, pftdg);
-		pftdg.close();
+		
 		//}
-		prdg.close();
+		
 		return true;
 	}
 	private boolean updateDisplayName(Person myPerson, Person oldPerson, PersonRowDataGateway prdg) {
@@ -161,9 +193,9 @@ public class DataMapper
 		PendingFriendsTableDataGateway pftdg = null;
 		try
 		{
-			prdg = new PersonRowDataGateway(p.getUserID());
-			ftdg = new FriendsTableDataGateway();
-			pftdg = new PendingFriendsTableDataGateway();
+			prdg = new PersonRowDataGateway(p.getUserID(), con);
+			ftdg = new FriendsTableDataGateway(con);
+			pftdg = new PendingFriendsTableDataGateway(con);
 		} catch (SQLException e)
 		{
 			// TODO Auto-generated catch block
@@ -189,9 +221,7 @@ public class DataMapper
 //		for( int i = 0; i<myPFriendsList.size(); i++) {
 //			pftdg.addFriend(myPerson.getUserID(),myPFriendsList.get(i).getUserName());
 //		}
-		prdg.close();
-		pftdg.close();
-		ftdg.close();
+		
 	}
 
 	
@@ -200,7 +230,7 @@ public class DataMapper
 		ArrayList<Friend> friendList = null;
 		try
 		{
-			ftdg = new FriendsTableDataGateway();
+			ftdg = new FriendsTableDataGateway(con);
 		
 		ResultSet rs = ftdg.getFriends(ID);
 		friendList = new ArrayList<Friend>();
@@ -222,7 +252,7 @@ public class DataMapper
 			e.printStackTrace();
 		}
 		FriendsList fr = new FriendsList(friendList);
-		ftdg.close();
+		
 		
 		return fr;
 	}
@@ -232,7 +262,7 @@ public class DataMapper
 		ArrayList<Person> incomingList = null;
 		try
 		{
-			pftdg = new PendingFriendsTableDataGateway();
+			pftdg = new PendingFriendsTableDataGateway(con);
 		
 		ResultSet rs = pftdg.getIncomingPendingFriends(ID);
 		incomingList = new ArrayList<Person>();
@@ -245,7 +275,7 @@ public class DataMapper
 			e.printStackTrace();
 		}
 		IncomingPendingFriendsList fr = new IncomingPendingFriendsList(incomingList);
-		pftdg.close();
+		
 		return fr;
 	}
 	public OutgoingPendingFriendList getOutgoingPendingFriendList(int ID) {
@@ -253,7 +283,7 @@ public class DataMapper
 		ArrayList<Person> outgoingList = null;
 		try
 		{
-			pftdg = new PendingFriendsTableDataGateway();
+			pftdg = new PendingFriendsTableDataGateway(con);
 		
 		ResultSet rs = pftdg.getOutgoingPendingFriends(ID);
 		outgoingList = new ArrayList<Person>();
@@ -266,7 +296,7 @@ public class DataMapper
 			e.printStackTrace();
 		}
 		OutgoingPendingFriendList fr = new OutgoingPendingFriendList(outgoingList);
-		pftdg.close();
+		
 		return fr;
 	
 	}
