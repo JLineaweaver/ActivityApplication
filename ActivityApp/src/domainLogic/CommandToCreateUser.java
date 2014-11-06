@@ -89,6 +89,7 @@ public class CommandToCreateUser implements Command
 	
 	public String toString()
 	{
+		result = this.getResult();
 		return result.getUserName() + ":" + result.getPassword() + ":" + result.getDisplayName();
 	}
 

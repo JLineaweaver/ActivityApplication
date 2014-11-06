@@ -198,7 +198,7 @@ public class UserThread implements Runnable
 		}
 		if (parts.length == 2)
 		{
-			String result = (String) cmd.getResult().toString();
+			String result = (String) cmd.toString();
 			if (result == null)
 			{
 				return false;
