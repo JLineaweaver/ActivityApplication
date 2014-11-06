@@ -104,8 +104,8 @@ public class DataMapper
 		rs.next();
 		int id = rs.getInt("userID");
 		Person f = new Person(rs.getString("userName"), rs.getString("password"), rs.getString("displayName"), id);
-		im.add(f);
-		im.find(id).addLists(getFriendsList(id), getIncomingPendingFriendsList(id), getOutgoingPendingFriendList(id));
+		//im.add(f);
+		//im.find(id).addLists(getFriendsList(id), getIncomingPendingFriendsList(id), getOutgoingPendingFriendList(id));
 		f.addLists(getFriendsList(id), getIncomingPendingFriendsList(id), getOutgoingPendingFriendList(id));
 		return f;
 	}
@@ -140,7 +140,7 @@ public class DataMapper
 		if(myPerson.getFriends() == null);
 		FriendsList myFriends = myPerson.getFriends();
 		ArrayList<Friend> myFriendsList = myFriends.getFriendList();
-		FriendsList oldFriends = myPerson.getFriends();
+		FriendsList oldFriends = oldPerson.getFriends();
 		ArrayList<Friend> oldFriendsList = oldFriends.getFriendList();
 
 		for(int i = 0; i<myFriendsList.size(); i++) {

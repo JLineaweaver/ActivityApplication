@@ -1,0 +1,3 @@
+CommandToSelectUser henry pw2;
+CommandToRetrieveFriendList <userID>; Matthew
+CommandToPersistChanges;

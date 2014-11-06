@@ -365,8 +365,8 @@ public class Person extends DomainObject
 		user = SelectedPerson.getSelectedPerson();
 		Person requestee = Person.findPerson(userNameOfRequestee);
 		
-		user.myIncomingPendingFriends.add(requestee);
-		requestee.myOutgoingPendingFriends.add(user);
+		user.myOutgoingPendingFriends.add(requestee);
+		requestee.myIncomingPendingFriends.add(user);
 
 		this.markDirty(user);
 		this.markDirty(requestee);
@@ -399,7 +399,7 @@ public class Person extends DomainObject
 		Friend userAsFriend = new Friend(user.userName, user.displayName);
 		Person requestee = Person.findPerson(userNameOfRequestee);
 		Friend requsteeAsFriend = new Friend(requestee.userName, requestee.displayName);
-		for(int i = 0; i < testUser.myFriends.friends.size(); i++)
+		for(int i = 0; i < user.myFriends.friends.size(); i++)
 		{
 			if(user.myFriends.friends.get(i).getUserName().equals(requsteeAsFriend.getUserName()) && 
 					user.myFriends.friends.get(i).getDisplayName().equals(requsteeAsFriend.getDisplayName()))
