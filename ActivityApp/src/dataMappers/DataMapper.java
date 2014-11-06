@@ -98,8 +98,19 @@ public class DataMapper
 		
 		return f;
 	}
+	public Person findDBPerson(int ID) throws SQLException  {
+		PersonRowDataGateway prdg = new PersonRowDataGateway(ID, con);
+		ResultSet rs = prdg.findPerson();
+		rs.next();
+		int id = rs.getInt("userID");
+		Person f = new Person(rs.getString("userName"), rs.getString("password"), rs.getString("displayName"), id);
+		im.add(f);
+		im.find(id).addLists(getFriendsList(id), getIncomingPendingFriendsList(id), getOutgoingPendingFriendList(id));
+		f.addLists(getFriendsList(id), getIncomingPendingFriendsList(id), getOutgoingPendingFriendList(id));
+		return f;
+	}
 	public boolean storePerson(Person myPerson) throws SQLException {
-		Person oldPerson = findPerson(myPerson.getUserID());
+		Person oldPerson = findDBPerson(myPerson.getUserID());
 		//if(oldPerson.getUserID() == -1) {
 			//createPerson(myPerson);
 		//}
