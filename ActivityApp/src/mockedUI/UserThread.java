@@ -188,6 +188,7 @@ public class UserThread implements Runnable
 	 */
 	protected boolean executeInstruction(String instruction)
 	{
+		System.out.println(instruction);
 		String[] parts = splitInstruction(instruction);
 		Command cmd = buildCommand(parts[0]);
 		cmd.execute();
@@ -198,7 +199,7 @@ public class UserThread implements Runnable
 		}
 		if (parts.length == 2)
 		{
-			String result = (String) cmd.toString();
+			String result = cmd.toString();
 			if (result == null)
 			{
 				return false;
@@ -245,7 +246,7 @@ public class UserThread implements Runnable
 		{
 			input = commandReader.nextLine();
 		}
-		while ((input != null) && input.startsWith("**"))
+		while ((input != null) && input.contains("**"))
 		{
 			if (commandReader.hasNextLine())
 			{
