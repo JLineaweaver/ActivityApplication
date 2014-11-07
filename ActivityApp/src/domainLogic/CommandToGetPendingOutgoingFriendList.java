@@ -70,10 +70,10 @@ public class CommandToGetPendingOutgoingFriendList implements Command
 		{
 			if(i == 0)
 			{
-				str = result.get(i).getUserName();
+				str = result.get(i).getDisplayName();
 			}else
 			{
-				str = str + "," + result.get(i).getUserName();
+				str = str + "," + result.get(i).getDisplayName();
 			}
 		}
 		return str;

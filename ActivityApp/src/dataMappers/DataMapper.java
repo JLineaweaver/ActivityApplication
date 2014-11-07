@@ -311,5 +311,8 @@ public class DataMapper
 		return fr;
 	
 	}
+	public void resetMap() {
+		im.clear();
+	}
 }
 

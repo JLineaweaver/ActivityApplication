@@ -31,4 +31,7 @@ public class IdentityMap
 		}
 		return null;
 	}
+	public void clear() {
+		list = new ArrayList<Person>();
+	}
 }

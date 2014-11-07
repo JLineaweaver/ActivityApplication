@@ -232,6 +232,7 @@ public class Person extends DomainObject
 	{
 		DataMapper pdm = MyThreadLocal.get();
 		pdm.storePerson(p);
+		pdm.resetMap();
 	}
 	
 	/**
@@ -577,6 +578,7 @@ public class Person extends DomainObject
 	{
 		UnitOfWork unit = UnitOfWork.getCurrent();
 		unit.commit();
+		
 	}
 	
 	public void testPersistChanges()
