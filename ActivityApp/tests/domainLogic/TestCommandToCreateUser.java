@@ -26,24 +26,16 @@ public class TestCommandToCreateUser {
 		String dName = "JohnnyJohn";
 		CommandToCreateUser cmd = new CommandToCreateUser(uName, pw, dName);
 		
-		MockUnitOfWork.newCurrent();
-		cmd.testExecute();
-		Person person = cmd.getTestResult();
+		UnitOfWork unit = new UnitOfWork();
+		UnitOfWork.newCurrent();
+		unit = UnitOfWork.getCurrent();
+		cmd.execute();
+		Person person = cmd.getResult();
 		assertEquals("Johnny", person.getUserName());
 		assertEquals("JPassword", person.getPassword());
 		assertEquals("JohnnyJohn", person.getDisplayName());
-	}
-	
-	@Test
-	public void testDB()
-	{
-		String uName = "Johnny";
-		String pw = "JPassword";
-		String dName = "JohnnyJohn";
-		CommandToCreateUser cmd = new CommandToCreateUser(uName, pw, dName);
-		MockUnitOfWork.newCurrent();
-		cmd.testExecute();
-		CommandToPersistChanges cmd2 = new CommandToPersistChanges();
-		cmd2.testExecute();
+		
+		assertEquals(person ,unit.getNewObjects().get(0));
+		unit.emptyArrayLists();
 	}
 }

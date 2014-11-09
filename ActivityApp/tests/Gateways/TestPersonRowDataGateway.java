@@ -12,18 +12,18 @@ public class TestPersonRowDataGateway
 	@Test
 	public void test()
 	{
-		try {
-		PersonRowDataGateway prdg = new PersonRowDataGateway(2);
-		System.out.println(prdg.findPerson());
-		ResultSet rs = prdg.findPerson();
-		rs.next();
-		String username = rs.getString("userName");
-		System.out.println("HelloBoy >>>" + username);
-		assertTrue(prdg.findPerson() != null);
-		}
-		catch (Exception e) {
-			
-		}
+//		try {
+//		PersonRowDataGateway prdg = new PersonRowDataGateway(2);
+//		System.out.println(prdg.findPerson());
+//		ResultSet rs = prdg.findPerson();
+//		rs.next();
+//		String username = rs.getString("userName");
+//		System.out.println("HelloBoy >>>" + username);
+//		assertTrue(prdg.findPerson() != null);
+//		}
+//		catch (Exception e) {
+//			
+//		}
 		
 	}
 

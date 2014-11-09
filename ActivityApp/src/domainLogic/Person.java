@@ -13,13 +13,11 @@ import dataMappers.MyThreadLocal;
  */
 public class Person extends DomainObject
 {
-	static ArrayList<Person> mockDB = new ArrayList<Person>();
-	private String userName;
+	public String userName;
 	private String password;
 	private String displayName;
-	private int userID = -1;
+	public int userID = -1;
 	private Person user;
-	private Person testUser;
 	private int size = 0;
 	FriendsList myFriends;
 	IncomingPendingFriendsList myIncomingPendingFriends;
@@ -31,7 +29,6 @@ public class Person extends DomainObject
 	public String toString()
 	{
 		return userName + ":" + password + ":" + displayName;
-		//return mockDB.get(0).getUserName() + ":" + mockDB.get(0).getPassword() + ":" + mockDB.get(0).getDisplayName();
 	}
 	
 	
@@ -54,10 +51,10 @@ public class Person extends DomainObject
 		myFriends = new FriendsList();
 		myIncomingPendingFriends = new IncomingPendingFriendsList();
 		myOutgoingPendingFriends = new OutgoingPendingFriendList();
-		mockDB.add(this);
 	}
 	
-	public Person(String uName, String pw, String dName, int ID, FriendsList myFriends, IncomingPendingFriendsList myIncomingPendingFriends, OutgoingPendingFriendList myOutgoingPendingFriends) {
+	public Person(String uName, String pw, String dName, int ID, FriendsList myFriends, IncomingPendingFriendsList myIncomingPendingFriends, OutgoingPendingFriendList myOutgoingPendingFriends) 
+	{
 		displayName = dName;
 		password = pw;
 		userName = uName;
@@ -65,72 +62,9 @@ public class Person extends DomainObject
 		this.myFriends = myFriends;
 		this.myIncomingPendingFriends = myIncomingPendingFriends;
 		this.myOutgoingPendingFriends = myOutgoingPendingFriends;
-		mockDB.add(this);
 	}
 	
-	
-//	private void addPeople() {
-//		Person per = new Person(userName, password, displayName, userID);
-//		mockDB.add(per);
-//		
-//	}
-	public static Person findUser1(int id)
-	{
-		for(int i = 0; i < mockDB.size(); i++)
-		{
-			if(mockDB.get(i).userID == id)
-			{
-				return mockDB.get(i);
-			}
-		}
-		return null;
-	}
-	public static Person findUser1(String userName)
-	{
-		for(int i = 0; i < mockDB.size(); i++)
-		{
-			if(mockDB.get(i).userName == userName)
-			{
-				return mockDB.get(i);
-			}
-		}
-		return null;
-	}
-	public static Person findUser1(String userName, int id)
-	{
-		for(int i = 0; i < mockDB.size(); i++)
-		{
-			if(mockDB.get(i).userName == userName)
-			{
-				if(mockDB.get(i).userID == id)
-				{
-					return mockDB.get(i);
-				}
-			}
-		}
-		return null;
-	}
-	public static Person findUser1(String userName, String pw)
-	{
-		for(int i = 0; i < mockDB.size(); i++)
-		{
-			if(mockDB.get(i).userName == userName)
-			{
-				if(mockDB.get(i).getPassword() == pw)
-				{
-					return mockDB.get(i);
-				}
-			}
-		}
-		return null;
-	}
-	
-	public static void emptyMockDB()
-	{
-		mockDB.clear();
-	}
-	
-	
+		
 	/**
 	 * @return username
 	 */
@@ -256,25 +190,7 @@ public class Person extends DomainObject
 		this.markDirty(user);
 		this.markDirty(theRequester);
 	}
-	
-	/**
-	 * @param userNameOfRequester
-	 * Test Accept Friend request command
-	 */
-	public void TestAcceptFriendRequestCommand(String userNameOfRequester)
-	{		
-		testUser = SelectedPerson.getSelectedPerson();
-		Friend testUserAsFriend = new Friend(testUser.userName, testUser.displayName);
-		Person testRequester = Person.findUser1(userNameOfRequester);
-		Friend testRequestAsFriend = new Friend(testRequester.userName, testRequester.displayName);
-		testRequester.myFriends.add(testUserAsFriend);
-		testUser.myFriends.add(testRequestAsFriend);
-		testUser.myIncomingPendingFriends.incomingPendingFriends.remove(testRequester);
-		testRequester.myOutgoingPendingFriends.outgoingPendingFriends.remove(testUser);
-		this.testMarkDirty(testUser);
-		this.testMarkDirty(testRequester);
-	}
-	
+		
 	/**
 	 * @return the array list of friends for that person
 	 */
@@ -312,22 +228,11 @@ public class Person extends DomainObject
 		user = new Person(userName, password, displayName, userID);
 		this.markNew(user);
 	}
-	
-	public void testCreateUser(String userName, String password, String displayName) 
-	{
-		testUser = new Person(userName, password, displayName, userID);
-		this.testMarkNew(testUser);
-	}
-	
+
 	
 	public Person getUser()
 	{
 		return user;
-	}
-	
-	public Person getTestUser()
-	{
-		return testUser;
 	}
 
 	
@@ -340,17 +245,6 @@ public class Person extends DomainObject
 			SelectedPerson.initializeSelectedPerson(user);
 		}			
 	}
-	
-	public void testSelectUser(String userName, String pw) 
-	{
-		testUser = Person.findUser1(userName, pw); 
-		if(testUser != SelectedPerson.getSelectedPerson())
-		{
-			SelectedPerson.resetSelectedPerson();
-			SelectedPerson.initializeSelectedPerson(testUser);
-		}			
-	}
-
 
 	/**
 	 * 
@@ -373,18 +267,6 @@ public class Person extends DomainObject
 		this.markDirty(requestee);
 	}
 	
-	public void testMakeFriendRequest(String userNameOfRequestee)
-	{
-		testUser = SelectedPerson.getSelectedPerson();
-		Person testRequestee = Person.findUser1(userNameOfRequestee); 
-		
-		testUser.myIncomingPendingFriends.add(testRequestee);
-		testRequestee.myOutgoingPendingFriends.add(user);
-
-		this.testMarkDirty(testUser);
-		this.testMarkDirty(testRequestee);
-	}
-
 
 	/**
 	 * @param userIDOfRequester
@@ -421,32 +303,6 @@ public class Person extends DomainObject
 		
 	}
 	
-	public void testUnFriend(int userIDOfRequester, String userNameOfRequestee)
-	{
-		testUser = SelectedPerson.getSelectedPerson();
-		Friend testUserAsFriend = new Friend(testUser.userName, testUser.displayName);
-		Person testRequestee = Person.findUser1(userNameOfRequestee);
-		Friend testRequesteeAsFriend = new Friend(testRequestee.userName, testRequestee.displayName);
-		for(int i = 0; i < testUser.myFriends.friends.size(); i++)
-		{
-			if(testUser.myFriends.friends.get(i).getUserName().equals(testRequesteeAsFriend.getUserName()) && 
-					testUser.myFriends.friends.get(i).getDisplayName().equals(testRequesteeAsFriend.getDisplayName()))
-			{
-				testUser.myFriends.remove(testUser.myFriends.friends.get(i));
-			}
-		}
-		for(int i = 0; i < testRequestee.myFriends.friends.size(); i++)
-		{
-			if(testRequestee.myFriends.friends.get(i).getUserName().equals(testUserAsFriend.getUserName()) && 
-					testRequestee.myFriends.friends.get(i).getDisplayName().equals(testUserAsFriend.getDisplayName()))
-			{
-				testRequestee.myFriends.remove(testRequestee.myFriends.friends.get(i));
-			}
-		}
-		this.testMarkDirty(testRequestee);
-		this.testMarkDirty(testUser);
-	} 
-
 
 	public void rejectFriendRequest(int userIDOfRequestee, String userNameOfRequester) throws SQLException
 	{
@@ -458,16 +314,6 @@ public class Person extends DomainObject
 		this.markDirty(user);
 	}
 	
-	public void testRejectFriendRequest(int userIDOfRequestee, String userNameOfRequester)
-	{
-		Person testRequestee = SelectedPerson.getSelectedPerson();
-		testUser = Person.findUser1(userNameOfRequester);
-		testUser.myOutgoingPendingFriends.outgoingPendingFriends.remove(testRequestee);
-		testRequestee.myIncomingPendingFriends.incomingPendingFriends.remove(testUser);
-		this.testMarkDirty(testRequestee);
-		this.testMarkDirty(testUser);
-	}
-
 
 	public ArrayList<Friend> retrieveFriendList(int userID)
 	{
@@ -475,11 +321,6 @@ public class Person extends DomainObject
 		return user.myFriends.getFriendList();
 	}
 	
-	public ArrayList<Friend> testRetrieveFriendList(int userID)
-	{
-		testUser = SelectedPerson.getSelectedPerson();
-		return testUser.myFriends.getFriendList();
-	}
 
 	/**
 	 * 
@@ -492,10 +333,6 @@ public class Person extends DomainObject
 		user = SelectedPerson.getSelectedPerson();		
 	}
 	
-	public void testPendingIncomingFriendList() 
-	{
-		testUser = Person.findUser1(userID);	
-	}
 	
 	/**
 	 * @return the list of pending incoming friend list as a string
@@ -505,11 +342,6 @@ public class Person extends DomainObject
 		return this.myIncomingPendingFriends.incomingPendingFriends;
 	}
 	
-	public ArrayList<Person> getTestPendingIncomingFriendList()
-	{
-		return this.myIncomingPendingFriends.incomingPendingFriends;
-	}
-
 
 	public void cancelChanges()
 	{
@@ -517,12 +349,6 @@ public class Person extends DomainObject
 		unit.emptyArrayLists();
 	}
 	
-	public void testCancelChanges()
-	{
-		MockUnitOfWork unit = MockUnitOfWork.getCurrent();
-		unit.emptyArrayLists();
-	}
-
 
 	public void modifyUser(int userID, String newDisplayName)
 	{
@@ -531,13 +357,6 @@ public class Person extends DomainObject
 		this.markDirty(user);	
 	}
 	
-	public void testModifyUser(int userID, String newDisplayName)
-	{
-		testUser = SelectedPerson.getSelectedPerson();
-		testUser.setDisplayName(newDisplayName);
-		this.testMarkDirty(user);
-	}
-
 
 	/**
 	 * 
@@ -552,41 +371,27 @@ public class Person extends DomainObject
 		user = SelectedPerson.getSelectedPerson();
 	}
 	
-	public void testPendingOutgoingFriendList() 
-	{
-		testUser = SelectedPerson.getSelectedPerson();
-	}
 	
 	public ArrayList<Person> getTheOutgoingPendingFriendList()
 	{
-		//user = SelectedPerson.getSelectedPerson();
 		return this.myOutgoingPendingFriends.getPendingFriendList();
 	}
 	
-	public ArrayList<Person> getTestTheOutgoingPendingFriendList()
+	
+	public OutgoingPendingFriendList getOutgoingPendingFriendList() 
 	{
-		return this.myOutgoingPendingFriends.getPendingFriendList();
-	}
-	
-	public OutgoingPendingFriendList getOutgoingPendingFriendList() {
 		return myOutgoingPendingFriends;
 	}
-
 
 
 	public void persistChanges() throws SQLException 
 	{
 		UnitOfWork unit = UnitOfWork.getCurrent();
 		unit.commit();
-		
 	}
-	
-	public void testPersistChanges()
+ 
+	public void addLists(FriendsList fl, IncomingPendingFriendsList ipfl, OutgoingPendingFriendList opfl) 
 	{
-		MockUnitOfWork unit = MockUnitOfWork.getCurrent();
-		unit.commit();
-	} 
-	public void addLists(FriendsList fl, IncomingPendingFriendsList ipfl, OutgoingPendingFriendList opfl) {
 		myFriends = fl;
 		myIncomingPendingFriends = ipfl;
 		myOutgoingPendingFriends = opfl;

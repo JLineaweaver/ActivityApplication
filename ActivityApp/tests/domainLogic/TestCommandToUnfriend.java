@@ -4,48 +4,71 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import dataMappers.MyThreadLocal;
+
 public class TestCommandToUnfriend 
 {
 
 	@Test
 	public void testUnfriend() 
 	{
-		Person person1 = new Person("Matt", "","mattyc", 1);
-		Person person3 = new Person("John", "","Johnny", 2);
-		Friend person3AsFriend = new Friend("John","Johnny");
-		SelectedPerson.initializeSelectedPerson(person1); // simulates creating a person
+		UnitOfWork unit = new UnitOfWork();
+		UnitOfWork.newCurrent();
+		unit = UnitOfWork.getCurrent();
+
+		CommandToSelectUser cmd3 = new CommandToSelectUser("testPerson1", "testPerson1PW");
+		MyThreadLocal.unset();
 		
-		assertEquals(0, person1.getNumberOfFriends());
-		person1.myFriends.add(person3AsFriend);
-		assertEquals(1, person1.getNumberOfFriends());
+		cmd3.execute();
+		Person selectedPerson = cmd3.getResult();
+		Person testPerson2 = new Person("testPerson2", "testPerson2PW", "testPerson2DN", -1);
 		
-		CommandToUnFriend un = new CommandToUnFriend(person1.getUserID(), person3AsFriend.getUserName());
-		MockUnitOfWork.newCurrent();
-		un.testExecute();
-		assertEquals(0, person1.getNumberOfFriends());
-		assertEquals("Matt", un.getTestResult().getUserName());
-		assertEquals(0, un.getTestResult().myFriends.getFriendList().size());
+		CommandToAcceptFriendRequest cmd2 = new CommandToAcceptFriendRequest(selectedPerson.getUserID(), testPerson2.getUserName());
+		selectedPerson.myIncomingPendingFriends.incomingPendingFriends.add(testPerson2);
+		cmd2.execute();
 		
-		Person.emptyMockDB();
+		CommandToUnFriend un = new CommandToUnFriend(selectedPerson.getUserID(), testPerson2.getUserName());
+		un.execute();
+		assertEquals(0, selectedPerson.getNumberOfFriends());
+		assertEquals("testPerson1", un.getResult().getUserName());
+		assertEquals(0, un.getResult().myFriends.getFriendList().size());
+		
 		SelectedPerson.resetSelectedPerson();
+		unit.emptyArrayLists();
+
+;
 	}
 	
 	@Test
 	public void testUnFriendBothWays()
 	{
-		Person person1 = new Person("Matt", "","mattyc", 1);
-		Person person3 = new Person("John", "","Johnny", 2);
-		Friend person3AsFriend = new Friend("John","Johnny");
-		SelectedPerson.initializeSelectedPerson(person1); // simulates creating a person
+		UnitOfWork unit = new UnitOfWork();
+		UnitOfWork.newCurrent();
+		unit = UnitOfWork.getCurrent();
 
-		person1.myFriends.add(person3AsFriend);
+		CommandToSelectUser cmd3 = new CommandToSelectUser("testPerson1", "testPerson1PW");
+		MyThreadLocal.unset();
 		
-		CommandToUnFriend un = new CommandToUnFriend(person1.getUserID(), person3AsFriend.getUserName());
-		MockUnitOfWork.newCurrent();
-		un.testExecute();
-		assertEquals(0, person3.getNumberOfFriends());
+		cmd3.execute();
+		Person selectedPerson = cmd3.getResult();
+		Person testPerson2 = new Person("testPerson2", "testPerson2PW", "testPerson2DN", -1);
 		
-		Person.emptyMockDB();
+		CommandToAcceptFriendRequest cmd2 = new CommandToAcceptFriendRequest(selectedPerson.getUserID(), testPerson2.getUserName());
+		selectedPerson.myIncomingPendingFriends.incomingPendingFriends.add(testPerson2);
+		cmd2.execute();
+		
+		CommandToSelectUser cmd4 = new CommandToSelectUser("testPerson2", "testPerson2PW");
+		cmd4.execute();
+		
+		selectedPerson = cmd4.getResult();
+		
+		CommandToUnFriend un = new CommandToUnFriend(selectedPerson.getUserID(), "testPerson1");
+		un.execute();
+		assertEquals(0, testPerson2.getNumberOfFriends());
+		assertEquals("testPerson2", un.getResult().getUserName());
+		assertEquals(0, un.getResult().myFriends.getFriendList().size());
+		
 		SelectedPerson.resetSelectedPerson();
+		unit.emptyArrayLists();
 	}
 }

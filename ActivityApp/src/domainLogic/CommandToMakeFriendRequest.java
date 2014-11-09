@@ -42,10 +42,6 @@ public class CommandToMakeFriendRequest implements Command
 		}
 	}
 	
-	public void testExecute()
-	{
-		person.testMakeFriendRequest(userNameOfRequestee);
-	}
 
 	/**
 	 * Nothing needs to be retrieved from this command
@@ -61,11 +57,6 @@ public class CommandToMakeFriendRequest implements Command
 		return result;
 	}
 	
-	public Person getTestResult()
-	{
-		Person result = person.getTestUser();
-		return result;
-	}
 	
 	public int getIDOfRequester()
 	{

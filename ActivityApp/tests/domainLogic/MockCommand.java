@@ -48,5 +48,10 @@ public class MockCommand implements Command
 	{
 		return userID + " " + msg + " worked";
 	}
+	
+	public String toString()
+	{
+		return userID + " " + msg + " worked";
+	}
 
 }

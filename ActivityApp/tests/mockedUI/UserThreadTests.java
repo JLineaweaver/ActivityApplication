@@ -104,8 +104,8 @@ public class UserThreadTests
 	public void canPassUserID() throws FileNotFoundException
 	{
 		UserThread t = new UserThread("FriendRequestTest");
-		t.setCurrentUserID(5);
-		assertTrue( t.executeInstruction("MockCommand <userID> mymessage; 5 mymessage worked"));
+		t.setCurrentUserID(-1);
+		assertTrue( t.executeInstruction("MockCommand <userID> mymessage; -1 mymessage worked"));
 	}
 	
 }

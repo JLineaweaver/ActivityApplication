@@ -40,10 +40,10 @@ public class CommandToSelectUser implements Command
 		}
 	}
 	
-	public void testExecute()
-	{
-		person.testSelectUser(userName, password);
-	}
+//	public void testExecute()
+//	{
+//		person.testSelectUser(userName, password);
+//	}
 
 	/**
 	 * Get the password that was given as part of the user's credentials
@@ -69,12 +69,12 @@ public class CommandToSelectUser implements Command
 		return person;
 	}
 	
-	public Person getTestResult()
-	{
-		Person person;
-		person =  SelectedPerson.getSelectedPerson();
-		return person;
-	}
+//	public Person getTestResult()
+//	{
+//		Person person;
+//		person =  SelectedPerson.getSelectedPerson();
+//		return person;
+//	}
 
 	/**
 	 * Get the user name that was given as part of the user's credentials

@@ -4,23 +4,31 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import dataMappers.MyThreadLocal;
+
 public class TestCommandToModifyUser
 {
 
 	@Test
 	public void testModify()
 	{
-		//This test is mocked up not data base tested
-		Person person = new Person("Mattyc", "mat12", "Matthew170", 2);
-		SelectedPerson.initializeSelectedPerson(person); // simulates selecting the person
+		UnitOfWork unit = new UnitOfWork();
+		UnitOfWork.newCurrent();
+		unit = UnitOfWork.getCurrent();
+
+		CommandToSelectUser cmd3 = new CommandToSelectUser("testPerson1", "testPerson1PW");
+		MyThreadLocal.unset();
 		
-		MockUnitOfWork.newCurrent();
-		assertEquals("Matthew170", person.getDisplayName());
-		CommandToModifyUser cmd = new CommandToModifyUser(person.getUserID(), "Matt170");
-		cmd.testExecute();
-		assertEquals("Matt170", person.getDisplayName());
+		cmd3.execute();
+		Person selectedPerson = cmd3.getResult();
+
+		assertEquals("testPerson1DN", selectedPerson.getDisplayName());
+		CommandToModifyUser cmd = new CommandToModifyUser(selectedPerson.getUserID(), "Matt170");
+		cmd.execute();
+		assertEquals("Matt170", selectedPerson.getDisplayName());
 		
 		SelectedPerson.resetSelectedPerson();
+		unit.emptyArrayLists();
 	}
 
 }

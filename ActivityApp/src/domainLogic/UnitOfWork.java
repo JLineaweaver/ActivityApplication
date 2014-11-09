@@ -13,24 +13,18 @@ public class UnitOfWork
 {
 	private ArrayList<DomainObject> newObjects = new ArrayList<DomainObject>();
 	private ArrayList<DomainObject> dirtyObjects = new ArrayList<DomainObject>();
-	private ArrayList<DomainObject> removedObjects = new ArrayList<DomainObject>();
 	
 	private static ThreadLocal<UnitOfWork> current = new ThreadLocal<UnitOfWork>();
 	
-	
 	public void registerNew(DomainObject obj)
 	{
-		//Assert.assertNotNull("id not null", obj.getIsObjectNull());
 		Assert.assertTrue("object not dirty", !dirtyObjects.contains(obj));
-		Assert.assertTrue("object not removed", !removedObjects.contains(obj));
 		Assert.assertTrue("object not already registered new", !newObjects.contains(obj));
 		newObjects.add(obj);
 	}
 	
 	public void registerDirty(DomainObject obj)
 	{
-		//Assert.assertNotNull("id not null", obj.getIsObjectNull());
-		Assert.assertTrue("object not removed", !removedObjects.contains(obj));
 		if(!dirtyObjects.contains(obj))
 		{
 			if(newObjects.contains(obj))
@@ -47,40 +41,12 @@ public class UnitOfWork
 		}
 	}
 	
-	public void registerRemoved(DomainObject obj)
-	{
-		//Assert.assertNotNull("id not null", obj.getIsObjectNull());
-		if(dirtyObjects.contains(obj))
-		{
-			dirtyObjects.remove(obj);
-		}else if(newObjects.contains(obj))
-		{
-			newObjects.remove(obj);
-		}
-
-		if(!removedObjects.contains(obj))
-		{
-			removedObjects.add(obj);
-		}
-	}
-	
-	public void registerClean(DomainObject obj)
-	{
-		//put an Identity map
-	}
 	
 	public void commit() throws SQLException
 	{
 		insertNew();
 		updateDirty();
-		//deleteRemoved();
 		this.emptyArrayLists(); //Empty for testing purposes
-	}
-
-	private void deleteRemoved() 
-	{
-		// TODO Auto-generated method stub
-		
 	}
 
 	private void updateDirty() throws SQLException
@@ -131,15 +97,10 @@ public class UnitOfWork
 		return dirtyObjects;
 	}
 	
-	public ArrayList<DomainObject> getRemovedObjects()
-	{
-		return removedObjects;
-	}	
 
 	public void emptyArrayLists()
 	{
 		newObjects.clear();
 		dirtyObjects.clear();
-		removedObjects.clear();
 	}
 }

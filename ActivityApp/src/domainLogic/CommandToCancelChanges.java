@@ -21,11 +21,6 @@ public class CommandToCancelChanges implements Command
 
 	}
 	
-	public void testExecute()
-	{
-		Person person = new Person();
-		person.testCancelChanges();
-	}
 
 	/**
 	 * Nothing needs to be returned here (null). The tests will retrieve

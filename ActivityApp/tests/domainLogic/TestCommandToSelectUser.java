@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import dataMappers.DataMapper;
+
 public class TestCommandToSelectUser 
 {
 
@@ -20,46 +22,33 @@ public class TestCommandToSelectUser
 	@Test
 	public void testSelectOneFromTwoPeople()
 	{
-		String uName = "Johnny";
-		String pw = "JPassword";
-		String dName = "JohnnyJohn";
-		CommandToCreateUser cmd = new CommandToCreateUser(uName, pw, dName);
-		MockUnitOfWork.newCurrent();
-		cmd.testExecute();
-		String uName2 = "Matthew";
-		String pw2 = "password";
-		String dName2 = "MattyMatt3000";
-		CommandToCreateUser cmd2 = new CommandToCreateUser(uName2, pw2, dName2);
-		cmd2.testExecute();
-		CommandToSelectUser cmd3 = new CommandToSelectUser(cmd.getUserName(), cmd.getPassword());
-		cmd3.testExecute();
-		Person selectedPerson = cmd.getTestResult();
-		assertEquals("Johnny", selectedPerson.getUserName());	
 		
-		Person.emptyMockDB();
+		UnitOfWork unit = new UnitOfWork();
+		UnitOfWork.newCurrent();
+		unit = UnitOfWork.getCurrent();
+
+		CommandToSelectUser cmd3 = new CommandToSelectUser("testPerson1", "testPerson1PW");
+		cmd3.execute();
+		Person selectedPerson = cmd3.getResult();
+		assertEquals("testPerson1", selectedPerson.getUserName());	
+		
 		SelectedPerson.resetSelectedPerson();
+		unit.emptyArrayLists();
 	}
 	
 	@Test
 	public void testSelectOtherFromTwoPeople()
 	{
-		String uName = "Johnny";
-		String pw = "JPassword";
-		String dName = "JohnnyJohn";
-		CommandToCreateUser cmd = new CommandToCreateUser(uName, pw, dName);
-		MockUnitOfWork.newCurrent();
-		cmd.testExecute();
-		String uName2 = "Matthew";
-		String pw2 = "password";
-		String dName2 = "MattyMatt3000";
-		CommandToCreateUser cmd2 = new CommandToCreateUser(uName2, pw2, dName2);
-		cmd2.testExecute();
-		CommandToSelectUser cmd3 = new CommandToSelectUser(cmd2.getUserName(), cmd2.getPassword());
-		cmd3.testExecute();
-		Person selectedPerson = cmd2.getTestResult();
-		assertEquals("Matthew", selectedPerson.getUserName());	
+		UnitOfWork unit = new UnitOfWork();
+		UnitOfWork.newCurrent();
+		unit = UnitOfWork.getCurrent();
 		
-		Person.emptyMockDB();
+		CommandToSelectUser cmd3 = new CommandToSelectUser("testPerson2", "testPerson2PW");
+		cmd3.execute();
+		Person selectedPerson = cmd3.getResult();
+		assertEquals("testPerson2", selectedPerson.getUserName());	
+		
 		SelectedPerson.resetSelectedPerson();
+		unit.emptyArrayLists();
 	}
 }

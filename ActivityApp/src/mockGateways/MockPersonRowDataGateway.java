@@ -1,32 +1,74 @@
 package mockGateways;
 
+import java.util.ArrayList;
+
 import domainLogic.Person;
 
 
 public class MockPersonRowDataGateway
 {
 	private Person person;
+	static ArrayList<Person> mockDB = new ArrayList<Person>();
 
-	public MockPersonRowDataGateway() 
+	public MockPersonRowDataGateway(Person p) 
 	{
-		
+		mockDB.add(p);
 	}
 	
-	public Person findPerson(String Username, String password) 
+	public static Person findUser1(int id)
 	{
-		person = new Person("MockUserName", "MockPassword", "MockDisplayName", -1);
-		return person;
+		for(int i = 0; i < mockDB.size(); i++)
+		{
+			if(mockDB.get(i).userID == id)
+			{
+				return mockDB.get(i);
+			}
+		}
+		return null;
 	}
-	public Person findPerson(int ID) 
+	public static Person findUser1(String userName)
 	{
-		person = new Person("CroftUserName", "CroftPassword", "CroftDisplayName", -1);
-		return person;
+		for(int i = 0; i < mockDB.size(); i++)
+		{
+			if(mockDB.get(i).userName == userName)
+			{
+				return mockDB.get(i);
+			}
+		}
+		return null;
+	}
+	public static Person findUser1(String userName, int id)
+	{
+		for(int i = 0; i < mockDB.size(); i++)
+		{
+			if(mockDB.get(i).userName == userName)
+			{
+				if(mockDB.get(i).userID == id)
+				{
+					return mockDB.get(i);
+				}
+			}
+		}
+		return null;
+	}
+	public static Person findUser1(String userName, String pw)
+	{
+		for(int i = 0; i < mockDB.size(); i++)
+		{
+			if(mockDB.get(i).userName == userName)
+			{
+				if(mockDB.get(i).getPassword() == pw)
+				{
+					return mockDB.get(i);
+				}
+			}
+		}
+		return null;
 	}
 	
-	public Person findPerson(String Username) 
+	public static void emptyMockDB()
 	{
-		person = new Person("KujawskiUserName", "KujawskiPassword", "KujawskiDisplayName", -1);
-		return person;
+		mockDB.clear();
 	}
 	
 	public Person getPerson()

@@ -43,11 +43,6 @@ public class CommandToRejectFriendRequest implements Command
 
 	}
 	
-	public void testExecute()
-	{
-		Person person = new Person();
-		person.testRejectFriendRequest(userIDOfRequestee, userNameOfRequester);
-	}
 
 	/**
 	 * Nothing needs to be retrieved from this command

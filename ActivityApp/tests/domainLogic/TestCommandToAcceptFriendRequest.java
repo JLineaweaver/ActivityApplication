@@ -1,16 +1,23 @@
 package domainLogic;
 
 import static org.junit.Assert.*;
+import gateways.PersonRowDataGateway;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import mockGateways.MockPersonRowDataGateway;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+
+import dataMappers.DataMapper;
+import dataMappers.MyThreadLocal;
 
 public class TestCommandToAcceptFriendRequest 
 {
-
+	
 	/**
 	 * CommandToCreateUser for both Persons. CommandToSelectUser of the user I want. 
 	 * CommandToMakeFriendRequest to the other user. CommandToPersistChanges. 
@@ -30,80 +37,55 @@ public class TestCommandToAcceptFriendRequest
 	@Test
 	public void testFriendRequest()
 	{
-		Person person1 = new Person("Matt", "","mattyc", 1);
-		Person person2 = new Person("John", "","Jonny", 2);
-		SelectedPerson.initializeSelectedPerson(person1); // simulates creating a person
+		UnitOfWork unit = new UnitOfWork();
+		UnitOfWork.newCurrent();
+		unit = UnitOfWork.getCurrent();
+
+		CommandToSelectUser cmd3 = new CommandToSelectUser("testPerson1", "testPerson1PW");
+		MyThreadLocal.unset();
 		
-		CommandToAcceptFriendRequest cmd = new CommandToAcceptFriendRequest(person1.getUserID(), person2.getUserName());
-		person1.myIncomingPendingFriends.incomingPendingFriends.add(person2);
+		cmd3.execute();
+		Person selectedPerson = cmd3.getResult();
+		Person testPerson2 = new Person("testPerson2", "testPerson2PW", "testPerson2DN", -1);
 		
-		MockUnitOfWork.newCurrent();
-		cmd.testExecute();
+		CommandToAcceptFriendRequest cmd2 = new CommandToAcceptFriendRequest(selectedPerson.getUserID(), testPerson2.getUserName());
+		selectedPerson.myIncomingPendingFriends.incomingPendingFriends.add(testPerson2);
+		cmd2.execute();
 		
-		assertEquals(1, person1.getNumberOfFriends());
+		assertEquals(1, selectedPerson.getNumberOfFriends());
 		
-		Person.emptyMockDB();
 		SelectedPerson.resetSelectedPerson();
+		unit.emptyArrayLists();
 	}
 	
 	@Test
 	public void testMultipleFriendRequests()
 	{
 
-		Person person1 = new Person("Matt", "","mattyc", 1);
-		Person person2 = new Person("John", "","Jonny", 2);
-		Person person3 = new Person("George","", "GeorgeyGeorge", 3);
-		SelectedPerson.initializeSelectedPerson(person1); //simulates selecting a person
+		UnitOfWork unit = new UnitOfWork();
+		UnitOfWork.newCurrent();
+		unit = UnitOfWork.getCurrent();
 		
-		CommandToAcceptFriendRequest cmd = new CommandToAcceptFriendRequest(person1.getUserID(), person2.getUserName());
-		CommandToAcceptFriendRequest cmd2 = new CommandToAcceptFriendRequest(person1.getUserID(), person3.getUserName());
-		person1.myIncomingPendingFriends.incomingPendingFriends.add(person2);
-		person1.myIncomingPendingFriends.incomingPendingFriends.add(person3);
+		CommandToSelectUser cmd3 = new CommandToSelectUser("testPerson2", "testPerson2PW");
+		cmd3.execute();
+		Person selectedPerson = cmd3.getResult();
 		
+		Person person = new Person("testPerson1", "testPerson1PW", "testPerson1DN", -1);
+		Person person3 = new Person("testPerson3", "testPerson3PW", "testPerson3DN", -1);
 		
-		MockUnitOfWork.newCurrent();
-		cmd.testExecute();
-		cmd2.testExecute();
+		CommandToAcceptFriendRequest cmd = new CommandToAcceptFriendRequest(selectedPerson.getUserID(), person.getUserName());
+		CommandToAcceptFriendRequest cmd2 = new CommandToAcceptFriendRequest(selectedPerson.getUserID(), person3.getUserName());
 		
-		assertEquals(2, person1.getNumberOfFriends());	
-		assertEquals(0, person1.myIncomingPendingFriends.incomingPendingFriends.size());
+		selectedPerson.myIncomingPendingFriends.incomingPendingFriends.add(person);
+		selectedPerson.myIncomingPendingFriends.incomingPendingFriends.add(person3);
 		
-		Person.emptyMockDB();
+		cmd.execute();
+		cmd2.execute();		
+				
+		assertEquals(2, selectedPerson.getNumberOfFriends());	
+		assertEquals(0, cmd2.getResult().myIncomingPendingFriends.incomingPendingFriends.size());
+		
 		SelectedPerson.resetSelectedPerson();
-	}
-	
-	@Test
-	public void testSelectingMultipleTimesAndAcceptingFriendRequest()
-	{
-		Person person1 = new Person("Matt", "","mattyc", 1);
-		Person person2 = new Person("John", "","Jonny", 2);
-		Person person3 = new Person("George","", "GeorgeyGeorge", 3);
-		
-		CommandToAcceptFriendRequest cmd = new CommandToAcceptFriendRequest(person1.getUserID(), person2.getUserName());
-		CommandToAcceptFriendRequest cmd2 = new CommandToAcceptFriendRequest(person2.getUserID(), person3.getUserName());
-		CommandToAcceptFriendRequest cmd3 = new CommandToAcceptFriendRequest(person1.getUserID(), person3.getUserName());
-		person1.myIncomingPendingFriends.incomingPendingFriends.add(person2);
-		person2.myIncomingPendingFriends.incomingPendingFriends.add(person3);
-		
-		
-		MockUnitOfWork.newCurrent();
-		
-		SelectedPerson.initializeSelectedPerson(person1); //simulates selecting a person
-		cmd.testExecute();
-		SelectedPerson.resetSelectedPerson();
-		
-		SelectedPerson.initializeSelectedPerson(person2); //simulates selecting a person
-		cmd2.testExecute();
-		SelectedPerson.resetSelectedPerson();
-		
-		assertEquals(2, person2.getNumberOfFriends());
-		
-		SelectedPerson.initializeSelectedPerson(person1); // selected person 1 again
-		cmd3.testExecute();
-		
-		assertEquals(2, person1.getNumberOfFriends());
-		
-		Person.emptyMockDB();
-		SelectedPerson.resetSelectedPerson();
+		unit.emptyArrayLists();
 	}
 }

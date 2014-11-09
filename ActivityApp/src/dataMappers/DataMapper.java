@@ -27,6 +27,9 @@ public class DataMapper
 {
 	Connection con;
 	IdentityMap im;
+	Person testPerson1 = new Person("testPerson1", "testPerson1PW", "testPerson1DN", -1);
+	Person testPerson2 = new Person("testPerson2", "testPerson2PW", "testPerson2DN", -1);
+	Person testPerson3 = new Person("testPerson3", "testPerson3PW", "testPerson3DN", -1); 
 	
 	String db = "fitness2";
 	String url = "lsagroup2.cbzhjl6tpflt.us-east-1.rds.amazonaws.com";
@@ -43,6 +46,10 @@ public class DataMapper
 				e.printStackTrace();
 			}
 		im = new IdentityMap();
+		im.add(testPerson1);
+		im.add(testPerson2);
+		im.add(testPerson3);
+		
 	}
 
 	public Person findPerson(String username, String password) throws SQLException {
@@ -311,8 +318,10 @@ public class DataMapper
 		return fr;
 	
 	}
-	public void resetMap() {
+	public void resetMap() 
+	{
 		im.clear();
-	}
+	}	
 }
+
 

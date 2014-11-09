@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public class CommandToGetPendingOutgoingFriendList implements Command
 {
 
-	private int userID;
 	private Person person = new Person();
 	private ArrayList<Person> result;
 
@@ -24,7 +23,6 @@ public class CommandToGetPendingOutgoingFriendList implements Command
 	 */
 	public CommandToGetPendingOutgoingFriendList(int userID)
 	{
-		this.userID = userID;
 	}
 
 	/**
@@ -37,10 +35,6 @@ public class CommandToGetPendingOutgoingFriendList implements Command
 		person.PendingOutgoingFriendList();
 	}
 	
-	public void testExecute()
-	{
-		person.testPendingOutgoingFriendList();
-	}
 
 	/**
 	 * A list of the friends associated with the given user
@@ -55,12 +49,6 @@ public class CommandToGetPendingOutgoingFriendList implements Command
 		return result;
 	}
 	
-	public ArrayList<Person> getTestResult()
-	{
-		Person person = SelectedPerson.getSelectedPerson();
-		result = person.getTestTheOutgoingPendingFriendList();
-		return result;
-	}
 	
 	public String toString()
 	{

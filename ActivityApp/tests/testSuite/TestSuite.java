@@ -37,8 +37,9 @@ import domainLogic.TestUnitOfWork;
 	TestCommandToPersistChanges.class,
 	TestCommandToUnfriend.class,
 	TestCommandToRetrieveFriendsList.class,
-	UserThreadTests.class,
-	TestPersonRowDataGateway.class})
+    UserThreadTests.class
+	}
+)
 public class TestSuite {
 }
 

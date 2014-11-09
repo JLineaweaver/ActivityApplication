@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import dataMappers.MyThreadLocal;
+
 public class TestCommandToPersistChanges {
 
 	@Test
@@ -12,29 +14,25 @@ public class TestCommandToPersistChanges {
 		/**
 		 * Mocked uop
 		 */
-		Person person1 = new Person("Matt", "","mattyc", 1);
-		Person person2 = new Person("John", "","Jonny", 2);
-		assertEquals(0, person1.getNumberOfFriends());
-		SelectedPerson.initializeSelectedPerson(person1); // simulates creating a person
-		
-		MockUnitOfWork.newCurrent();
-		MockUnitOfWork unit = MockUnitOfWork.getCurrent();
-		assertEquals(0, person1.myIncomingPendingFriends.incomingPendingFriends.size());
-		
-		CommandToMakeFriendRequest cmd = new CommandToMakeFriendRequest(person1.getUserID(), person2.getUserName());
-		
-		cmd.testExecute();
-		Person result = cmd.getTestResult();
-		
-		assertEquals(1, person1.myIncomingPendingFriends.incomingPendingFriends.size());
-		assertEquals(1, result.myIncomingPendingFriends.incomingPendingFriends.size());
+		UnitOfWork unit = new UnitOfWork();
+		UnitOfWork.newCurrent();
+		unit = UnitOfWork.getCurrent();
 
+		CommandToSelectUser cmd3 = new CommandToSelectUser("testPerson1", "testPerson1PW");
+		MyThreadLocal.unset();
+		
+		cmd3.execute();
+		Person selectedPerson = cmd3.getResult();
+		Person testPerson2 = new Person("testPerson2", "testPerson2PW", "testPerson2DN", -1);
+		
+		CommandToMakeFriendRequest cmd2 = new CommandToMakeFriendRequest(selectedPerson.getUserID(), testPerson2.getUserName());
+		cmd2.execute();
+		
 		assertEquals(2, unit.getDirtyObjects().size());
 		CommandToPersistChanges cmd1 = new CommandToPersistChanges();
-		cmd1.testExecute();
+		unit.emptyArrayLists();
 		
 		assertEquals(0, unit.getDirtyObjects().size());
 		SelectedPerson.resetSelectedPerson();
 	}
-
 }

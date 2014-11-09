@@ -67,7 +67,7 @@ public class FriendsTableDataGateway
 			ps.setInt(1,userID);
 			ps.setInt(2,secondID);
 			ps.execute();
-			System.out.println(rs);
+			//System.out.println(rs);
 		} catch (SQLException e)
 		{
 			// TODO Auto-generated catch block

@@ -34,10 +34,6 @@ public class CommandToRetrieveFriendList implements Command
 
 	}
 	
-	public void testExecute()
-	{
-		person.testRetrieveFriendList(userID);
-	}
 	
 	public String toString()
 	{
@@ -56,24 +52,7 @@ public class CommandToRetrieveFriendList implements Command
 		
 		return str;
 	}
-	
-	public String testToString()
-	{
-		String str = "";
-		result = this.getTestResult();
-		for(int i = 0; i < result.size(); i++)
-		{
-			if(i == 0)
-			{
-				str = result.get(i).getUserName();
-			}else
-			{
-				str = str + "," + result.get(i).getUserName();
-			}
-		}
-		
-		return str;
-	}
+
 	
 	/**
 	 * A list of the friends associated with the given user
@@ -83,12 +62,6 @@ public class CommandToRetrieveFriendList implements Command
 	public ArrayList<Friend> getResult()
 	{
 		result = person.getUser().myFriends.getFriendList();
-		return result;
-	}
-	
-	public ArrayList<Friend> getTestResult()
-	{
-		result = person.getTestUser().myFriends.getFriendList();
 		return result;
 	}
 

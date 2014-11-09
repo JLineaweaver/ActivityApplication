@@ -4,24 +4,35 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import dataMappers.MyThreadLocal;
+
 public class TestCommandToRejectFriend {
 
 	@Test
 	public void test() 
 	{
-		Person person1 = new Person("Matt", "","mattyc", 1);
-		Person person2 = new Person("John", "","Jonny", 2);
-		SelectedPerson.initializeSelectedPerson(person1); // simulates selecting person1
+		UnitOfWork unit = new UnitOfWork();
+		UnitOfWork.newCurrent();
+		unit = UnitOfWork.getCurrent();
+
+		CommandToSelectUser cmd3 = new CommandToSelectUser("testPerson1", "testPerson1PW");
+		MyThreadLocal.unset();
 		
-		person1.myIncomingPendingFriends.incomingPendingFriends.add(person2);
-		assertEquals(1, person1.myIncomingPendingFriends.incomingPendingFriends.size());
+		cmd3.execute();
+		Person selectedPerson = cmd3.getResult();
+		Person testPerson2 = new Person("testPerson2", "testPerson2PW", "testPerson2DN", -1);
 		
-		CommandToRejectFriendRequest cmd = new CommandToRejectFriendRequest(person1.getUserID(), person2.getUserName());
-		MockUnitOfWork.newCurrent();
-		cmd.testExecute();
+		CommandToMakeFriendRequest cmd2 = new CommandToMakeFriendRequest(selectedPerson.getUserID(), testPerson2.getUserName());
+		cmd2.execute();
 		
-		assertEquals(0, person2.myIncomingPendingFriends.incomingPendingFriends.size());
+		assertEquals(1, selectedPerson.myOutgoingPendingFriends.outgoingPendingFriends.size());
+		
+		CommandToRejectFriendRequest cmd = new CommandToRejectFriendRequest(selectedPerson.getUserID(), testPerson2.getUserName());
+		cmd.execute();
+		assertEquals(0, testPerson2.myIncomingPendingFriends.incomingPendingFriends.size());
+		
 		SelectedPerson.resetSelectedPerson();
+		unit.emptyArrayLists();
 	}
 
 }

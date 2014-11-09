@@ -1,122 +1,121 @@
-**
-**
-CommandToSelectUser tedTedMovie pw2
-CommandToMakeFriendRequest <userID> johnTedMovie;
-CommandToGetPendingOutgoingFriendList <userID>; johnTedMovie
+**Group3
+CommandToSelectUser tedTedMovie pw2;
+CommandToMakeFriendRequest <userID> redSoxFan12;
+CommandToGetPendingOutgoingFriendList <userID>; redSoxFan12
 CommandToPersistChanges;
 CommandToSelectUser johnTedMovie pw1;
-CommandToGetPendingIncomingFriendList <userID>; tedTedMovie
-CommandToAcceptFriendRequest <userID> tedTedMovie;
+CommandToGetPendingIncomingFriendList <userID>; bruinsFan12
+CommandToAcceptFriendRequest <userID> bruinsFan12;
 CommandToGetPendingIncomingFriendList <userID>;
-CommandToRetrieveFriendList <userID>; tedTedMovie
+CommandToRetrieveFriendList <userID>; bruinsFan12
 CommandToPersistChanges;
 CommandToSelectUser tedTedMovie pw2;
-CommandToRetrieveFriendList <userID>; johnTedMovie
-CommandToMakeFriendRequest <userID> loriTedMovie;
-CommandToGetPendingOutgoingFriendList <userID>; loriTedMovie
+CommandToRetrieveFriendList <userID>; redSoxFan12
+CommandToMakeFriendRequest <userID> patriotsFan12;
+CommandToGetPendingOutgoingFriendList <userID>; patriotsFan12
 CommandToPersistChanges;
 CommandToSelectUser loriTedMovie pw3;
-CommandToGetPendingIncomingFriendList <userID>; tedTedMovie
-CommandToRejectFriendRequest <userID> tedTedMovie;
+CommandToGetPendingIncomingFriendList <userID>; bruinsFan12
+CommandToRejectFriendRequest <userID> bruinsFan12;
 CommandToGetPendingIncomingFriendList <userID>; 
 CommandToRetrieveFriendList <userID>;
 CommandToPersistChanges; 
 CommandToSelectUser tedTedMovie pw2;
-CommandToRetrieveFriendList <userID>; johnTedMovie
+CommandToRetrieveFriendList <userID>; redSoxFan12
 CommandToSelectUser loriTedMovie pw3;
-CommandToMakeFriendRequest <userID>; johnTedMovie
-CommandToGetPendingOutgoingFriendList <userID>; johnTedMovie
+CommandToMakeFriendRequest <userID>; redSoxFan12
+CommandToGetPendingOutgoingFriendList <userID>; redSoxFan12
 CommandToPersistChanges;
 CommandToSelectUser johnTedMovie pw1;
-CommandToGetPendingIncomingFriendList <userID>; loriTedMovie
-CommandToAcceptFriendRequest <userID> loriTedMovie;
+CommandToGetPendingIncomingFriendList <userID>; patriotsFan12
+CommandToAcceptFriendRequest <userID> patriotsFan12;
 CommandToGetPendingIncomingFriendList <userID>;
-CommandToRetrieveFriendList <userID>; tedTedMovie loriTedMovie
+CommandToRetrieveFriendList <userID>; bruinsFan12,patriotsFan12
 CommandToPersistChanges;
 CommandToSelectUser loriTedMovie pw3;
-CommandToRetrieveFriendList <userID>; johnTedMovie
+CommandToRetrieveFriendList <userID>; redSoxFan12
 **
 CommandToSelectUser loriTedMovie pw3;
-CommandToUnFriend <userID> johnTedMovie;
+CommandToUnFriend <userID> redSoxFan12;
 CommandToRetrieveFriendList <userID>;
 CommandToSelectUser johnTedMovie pw1;
-CommandToUnFriend <userID> tedTedMovie;
+CommandToUnFriend <userID> bruinsFan12;
 CommandToRetrieveFriendList <userID>;
 CommandToSelectUser tedTedMovie pw1;
 CommandToRetrieveFriendList <userID>;
 **
 **
 CommandToSelectUser brianUsrNme pw2;
-CommandToMakeFriendRequest <userID> daveUsrNme;
-CommandToGetPendingOutgoingFriendList <userID>; daveUsrNme
+CommandToMakeFriendRequest <userID> eaglesFan14;
+CommandToGetPendingOutgoingFriendList <userID>; eaglesFan14
 CommandToPersistChanges;
 CommandToSelectUser daveUsrNme pw1;
-CommandToGetPendingIncomingFriendList <userID>; brianUsrNme
-CommandToAcceptFriendRequest <userID> brianUsrNme;
+CommandToGetPendingIncomingFriendList <userID>; steelersFan06
+CommandToAcceptFriendRequest <userID> steelersFan06;
 CommandToGetPendingIncomingFriendList <userID>;
-CommandToRetrieveFriendList <userID>; brianUsrNme
+CommandToRetrieveFriendList <userID>; steelersFan06
 CommandToPersistChanges;
 CommandToSelectUser brianUsrNme pw2;
-CommandToRetrieveFriendList <userID>; daveUsrNme
+CommandToRetrieveFriendList <userID>; eaglesFan14
 CommandToModifyUser <userID> steelersFan14;
 CommandToPersistChanges;
 CommandToSelectUser daveUsrNme pw1;
-CommandToRetrieveFriendList <userID>; brianUsrNme
+CommandToRetrieveFriendList <userID>; steelersFan06
 **
 CommandToSelectUser brianUsrNme pw2;
-CommandToUnFriend <userID> daveUsrNme;
+CommandToUnFriend <userID> eaglesFan14;
 CommandToRetrieveFriendList <userID>;
 CommandToSelectUser daveUsrNme pw1;
 CommandToRetrieveFriendList <userID>;
 **
 **
 CommandToSelectUser simonPegg pw1;
-CommandToMakeFriendRequest <userID> nickFrost;
-CommandToGetPendingOutgoingFriendList <userID>; nickFrost
+CommandToMakeFriendRequest <userID> ed;
+CommandToGetPendingOutgoingFriendList <userID>; ed
 CommandToPersistChanges;
 CommandToSelectUser nickFrost pw2;
-CommandToGetPendingIncomingFriendList <userID>; simonPegg
-CommandToAcceptFriendRequest <userID> simonPegg;
+CommandToGetPendingIncomingFriendList <userID>; shaun
+CommandToAcceptFriendRequest <userID> shaun;
 CommandToGetPendingIncomingFriendList <userID>;
-CommandToRetrieveFriendList <userID>; simonPegg
+CommandToRetrieveFriendList <userID>; shaun
 CommandToPersistChanges;
 CommandToSelectUser simonPegg pw1;
-CommandToRetrieveFriendList <userID>; nickFrost
-CommandToMakeFriendRequest <userID> kateAshfield;
-CommandToGetPendingOutgoingFriendList <userID>; kateAshfield
+CommandToRetrieveFriendList <userID>; ed
+CommandToMakeFriendRequest <userID> liz;
+CommandToGetPendingOutgoingFriendList <userID>; liz
 CommandToPersistChanges;
 CommandToSelectUser kateAshfield pw3;
-CommandToGetPendingIncomingFriendList <userID>; simonPegg
-CommandToAcceptFriendRequest <userID> simonPegg;
+CommandToGetPendingIncomingFriendList <userID>; shaun
+CommandToAcceptFriendRequest <userID> shaun;
 CommandToGetPendingIncomingFriendList <userID>;
-CommandToRetrieveFriendList <userID>; simonPegg
+CommandToRetrieveFriendList <userID>; shaun
 CommandToPersistChanges;
 CommandToSelectUser simonPegg pw1;
-CommandToRetrieveFriendList <userID>; nickFrost kateAshfield
-CommandToMakeFriendRequest <userID> lucyDavis;
-CommandToGetPendingOutgoingFriendList <userID>; lucyDavis
+CommandToRetrieveFriendList <userID>; ed,liz
+CommandToMakeFriendRequest <userID> dianne;
+CommandToGetPendingOutgoingFriendList <userID>; dianne
 CommandToPersistChanges;
 CommandToSelectUser lucyDavis pw4;
-CommandToGetPendingIncomingFriendList <userID>; simonPegg
-CommandToAcceptFriendRequest <userID> simonPegg;
+CommandToGetPendingIncomingFriendList <userID>; shaun
+CommandToAcceptFriendRequest <userID> shaun;
 CommandToGetPendingIncomingFriendList <userID>;
-CommandToRetrieveFriendList <userID>; simonPegg
+CommandToRetrieveFriendList <userID>; shaun
 CommandToPersistChanges;
 CommandToSelectUser simonPegg pw1;
-CommandToRetrieveFriendList <userID>; nickFrost kateAshfield lucyDavis
+CommandToRetrieveFriendList <userID>; ed,liz,dianne
 CommandToSelectUser kateAshfield pw3;
-CommandToUnFriend <userID> simonPegg;
+CommandToUnFriend <userID> shaun;
 CommandToRetrieveFriendList <userID>; 
 CommandToPersistChanges;
 CommandToSelectUser simonPegg pw1;
-CommandToRetrieveFriendList <userID>; nickFrost lucyDavis
-CommandToUnFriend <userID> lucyDavis;
-CommandToRetrieveFriendList <userID>; nickFrost
+CommandToRetrieveFriendList <userID>; ed,dianne
+CommandToUnFriend <userID> dianne;
+CommandToRetrieveFriendList <userID>; ed
 CommandToPersistChanges;
 CommandToSelectUser lucyDavis pw4;
 CommandToRetrieveFriendList <userID>;
 CommandToSelectUser nickFrost pw2;
-CommandToUnFriend <userID> simonPegg;
+CommandToUnFriend <userID> shaun;
 CommandToRetrieveFriendList <userID>;
 CommandToPersistChanges;
 CommandToSelectUser simonPegg pw1;
@@ -133,34 +132,34 @@ CommandToRetrieveFriendList <userID>;
 **
 **
 CommandToSelectUser tedTedMovie pw2
-CommandToMakeFriendRequest <userID> johnTedMovie;
-CommandToGetPendingOutgoingFriendList <userID>; johnTedMovie
+CommandToMakeFriendRequest <userID> redSoxFan12;
+CommandToGetPendingOutgoingFriendList <userID>; redSoxFan12
 CommandToPersistChanges;
 CommandToSelectUser johnTedMovie pw1;
-CommandToGetPendingIncomingFriendList <userID>; tedTedMovie
-CommandToAcceptFriendRequest <userID> tedTedMovie;
+CommandToGetPendingIncomingFriendList <userID>; bruinsFan12
+CommandToAcceptFriendRequest <userID> bruinsFan12;
 CommandToGetPendingIncomingFriendList <userID>;
-CommandToRetrieveFriendList <userID>; tedTedMovie
+CommandToRetrieveFriendList <userID>; bruinsFan12
 CommandToPersistChanges;
 CommandToSelectUser tedTedMovie pw2;
-CommandToRetrieveFriendList <userID>; johnTedMovie
-CommandToMakeFriendRequest <userID> loriTedMovie;
-CommandToGetPendingOutgoingFriendList <userID>; loriTedMovie
+CommandToRetrieveFriendList <userID>; redSoxFan12
+CommandToMakeFriendRequest <userID> patriotsFan12;
+CommandToGetPendingOutgoingFriendList <userID>; patriotsFan12
 CommandToPersistChanges;
 CommandToSelectUser loriTedMovie pw3;
-CommandToGetPendingIncomingFriendList <userID>; tedTedMovie
-CommandToRejectFriendRequest <userID> tedTedMovie;
+CommandToGetPendingIncomingFriendList <userID>; bruinsFan12
+CommandToRejectFriendRequest <userID> bruinsFan12;
 CommandToCancelChanges;
-CommandToGetPendingIncomingFriendList <userID>; tedTedMovie
-CommandToAcceptFriendRequest <userID> tedTedMovie;
+CommandToGetPendingIncomingFriendList <userID>; bruinsFan12
+CommandToAcceptFriendRequest <userID> bruinsFan12;
 CommandToGetPendingIncomingFriendList <userID>;
-CommandToRetrieveFriendList <userID>; tedTedMovie
+CommandToRetrieveFriendList <userID>; bruinsFan12
 CommandToPersistChanges;
 CommandToSelectUser tedTedMovie pw2;
-CommandToRetrieveFriendList <userID>; johnTedMovie loriTedMovie
+CommandToRetrieveFriendList <userID>; redSoxFan12,patriotsFan12
 CommandToSelectUser johnTedMovie pw1;
-CommandToMakeFriendRequest <userID> loriTedMovie;
-CommandToGetPendingOutgoingFriendList <userID>; loriTedMovie
+CommandToMakeFriendRequest <userID> patriotsFan12;
+CommandToGetPendingOutgoingFriendList <userID>; patriotsFan12
 CommandToCancelChanges;
 CommandToGetPendingOutgoingFriendList <userID>;
 CommandToPersistChanges;
@@ -168,8 +167,8 @@ CommandToSelectUser loriTedMovie pw3;
 CommandToGetPendingIncomingFriendList <userID>; 
 **
 CommandToSelectUser tedTedMovie pw2;
-CommandToUnFriend <userID> johnTedMovie;
-CommandToUnFriend <userID> loriTedMovie;
+CommandToUnFriend <userID> redSoxFan12;
+CommandToUnFriend <userID> patriotsFan12;
 CommandToRetrieveFriendList <userID>;
 CommandToPersistChanges;
 CommandToSelectUser johnTedMovie pw1;
@@ -179,82 +178,82 @@ CommandToRetrieveFriendList <userID>;
 **
 **
 CommandToSelectUser simonPegg pw1;
-CommandToMakeFriendRequest <userID> nickFrost;
-CommandToGetPendingOutgoingFriendList <userID>; nickFrost
+CommandToMakeFriendRequest <userID> ed;
+CommandToGetPendingOutgoingFriendList <userID>; ed
 CommandToPersistChanges;
 CommandToSelectUser nickFrost pw2;
-CommandToGetPendingIncomingFriendList <userID>; simonPegg
-CommandToAcceptFriendRequest <userID> simonPegg;
+CommandToGetPendingIncomingFriendList <userID>; shaun
+CommandToAcceptFriendRequest <userID> shaun;
 CommandToGetPendingIncomingFriendList <userID>;
-CommandToRetrieveFriendList <userID>; simonPegg
+CommandToRetrieveFriendList <userID>; shaun
 CommandToPersistChanges;
 CommandToSelectUser simonPegg pw1;
-CommandToRetrieveFriendList <userID>; nickFrost
-CommandToMakeFriendRequest <userID> kateAshfield;
-CommandToGetPendingOutgoingFriendList <userID>; kateAshfield
+CommandToRetrieveFriendList <userID>; ed
+CommandToMakeFriendRequest <userID> liz;
+CommandToGetPendingOutgoingFriendList <userID>; liz
 CommandToPersistChanges;
 CommandToSelectUser kateAshfield pw3;
-CommandToGetPendingIncomingFriendList <userID>; simonPegg
-CommandToAcceptFriendRequest <userID> simonPegg;
+CommandToGetPendingIncomingFriendList <userID>; shaun
+CommandToAcceptFriendRequest <userID> shaun;
 CommandToGetPendingIncomingFriendList <userID>;
-CommandToRetrieveFriendList <userID>; simonPegg
+CommandToRetrieveFriendList <userID>; shaun
 CommandToPersistChanges;
 CommandToSelectUser simonPegg pw1;
-CommandToRetrieveFriendList <userID>; nickFrost kateAshfield
-CommandToMakeFriendRequest <userID> lucyDavis;
-CommandToGetPendingOutgoingFriendList <userID>; lucyDavis
+CommandToRetrieveFriendList <userID>; ed,liz
+CommandToMakeFriendRequest <userID> dianne;
+CommandToGetPendingOutgoingFriendList <userID>; dianne
 CommandToPersistChanges;
 CommandToSelectUser lucyDavis pw4;
-CommandToGetPendingIncomingFriendList <userID>; simonPegg
-CommandToAcceptFriendRequest <userID> simonPegg;
+CommandToGetPendingIncomingFriendList <userID>; shaun
+CommandToAcceptFriendRequest <userID> shaun;
 CommandToGetPendingIncomingFriendList <userID>;
-CommandToRetrieveFriendList <userID>; simonPegg
+CommandToRetrieveFriendList <userID>; shaun
 CommandToPersistChanges;
 CommandToSelectUser simonPegg pw1;
-CommandToRetrieveFriendList <userID>; nickFrost kateAshfield lucyDavis
+CommandToRetrieveFriendList <userID>; ed,liz,dianne
 CommandToSelectUser kateAshfield pw3;
-CommandToUnFriend <userID> simonPegg;
+CommandToUnFriend <userID> shaun;
 CommandToRetrieveFriendList <userID>; 
 CommandToPersistChanges;
 CommandToSelectUser simonPegg pw1;
-CommandToRetrieveFriendList <userID>; nickFrost lucyDavis
-CommandToUnFriend <userID> lucyDavis;
-CommandToRetrieveFriendList <userID>; nickFrost
+CommandToRetrieveFriendList <userID>; ed,dianne
+CommandToUnFriend <userID> dianne;
+CommandToRetrieveFriendList <userID>; ed
 CommandToPersistChanges;
 CommandToSelectUser lucyDavis pw4;
 CommandToRetrieveFriendList <userID>;
 CommandToSelectUser nickFrost pw2;
-CommandToUnFriend <userID> simonPegg;
+CommandToUnFriend <userID> shaun;
 CommandToRetrieveFriendList <userID>;
 CommandToPersistChanges;
 CommandToSelectUser simonPegg pw1;
 CommandToRetrieveFriendList <userID>;
 CommandToSelectUser dylanMoran pw5;
-CommandToMakeFriendRequest <userID> lucyDavis;
-CommandToGetPendingOutgoingFriendList <userID>; lucyDavis
+CommandToMakeFriendRequest <userID> dianne;
+CommandToGetPendingOutgoingFriendList <userID>; dianne
 CommandToPersistChanges;
 CommandToSelectUser lucyDavis pw4;
-CommandToGetPendingIncomingFriendList <userID>; dylanMoran
-CommandToAcceptFriendRequest <userID> dylanMoran;
+CommandToGetPendingIncomingFriendList <userID>; david
+CommandToAcceptFriendRequest <userID> david;
 CommandToGetPendingIncomingFriendList <userID>;
-CommandToRetrieveFriendList <userID>; dylanMoran
+CommandToRetrieveFriendList <userID>; david
 CommandToPersistChanges;
 CommandToSelectUser dylanMoran pw5;
-CommandToRetrieveFriendList <userID>; lucyDavis
+CommandToRetrieveFriendList <userID>; dianne
 CommandToModifyUser <userID> zombieDavid;
-CommandToMakeFriendRequest <userID> kateAshfield;
-CommandToGetPendingOutgoingFriendList <userID>; kateAshfield
+CommandToMakeFriendRequest <userID> liz;
+CommandToGetPendingOutgoingFriendList <userID>; liz
 CommandToPersistChanges;
 CommandToSelectUser kateAshfield pw3;
-CommandToGetPendingIncomingFriendList <userID>; dylanMoran
-CommandToRejectFreindRequest <userID> dylanMoran;
+CommandToGetPendingIncomingFriendList <userID>; david
+CommandToRejectFreindRequest <userID> david;
 CommandToGetPendingIncomingFriendList <userID>;
 CommandToRetrieveFriendList <userID>;
 CommandToSelectUser dylanMoran pw5;
-CommandToRetrieveFriendList <userID>; lucyDavis
+CommandToRetrieveFriendList <userID>; dianne
 **
 CommandToSelectUser dylanMoran pw5;
-CommandToUnFriend <userID> lucyDavis;
+CommandToUnFriend <userID> dianne;
 CommandToRetrieveFriendList <userID>;
 CommandToSelectUser simonPegg pw1;
 CommandToRetrieveFriendList <userID>;
@@ -269,26 +268,26 @@ CommandToRetrieveFriendList <userID>;
 CommandToSelectUser ezUser ezPass;
 CommandToRetrieveFriendList <userID>;
 CommandToGetPendingOutgoingFriendList <userID>;
-CommandToMakeFriendRequest <userID> jeUser;
-CommandToGetPendingOutgoingFriendList <userID>; jeUser
+CommandToMakeFriendRequest <userID> jeDisp;
+CommandToGetPendingOutgoingFriendList <userID>; jeDisp
 CommandToPersistChanges;
 **
 CommandToSelectUser jeUser jePass;
-CommandToGetPendingIncomingFriendList <userID>; ezUser
-CommandToAcceptFriendRequest <userID> ezUser;
+CommandToGetPendingIncomingFriendList <userID>; ezDisp
+CommandToAcceptFriendRequest <userID> ezDisp;
 CommandToGetPendingIncomingFriendList <userID>;
-CommandToRetrieveFriendList <userID>; ezUser
+CommandToRetrieveFriendList <userID>; ezDisp
 **
 CommandToSelectUser ezUser ezPass;
 CommandToGetPendingIncomingFriendList <userID>;
 CommandToGetPendingOutgoingFriendList <userID>;
-CommandToRetrieveFriendList <userID>; jeUser
+CommandToRetrieveFriendList <userID>; jeDisp
 CommandToPersistChanges;
 **
 CommandToSelectUser jeUser jePass;
 CommandToGetPendingOutgoingFriendList <userID>;
-CommandToMakeFriendRequest <userID> edUser;
-CommandToGetPendingOutgoingFriendList <userID>; edUser
+CommandToMakeFriendRequest <userID> edDisp;
+CommandToGetPendingOutgoingFriendList <userID>; edDisp
 CommandToCancelChanges;
 CommandToGetPendingOutgoingFriendList <userID>;
 CommandToPersistChanges;
@@ -300,33 +299,26 @@ CommandToPersistChanges;
 **
 CommandToSelectUser edUser edPass;
 CommandToGetPendingIncomingFriendList <userID>;
-CommandToMakeFriendRequest <userID> caUser;
-CommandToGetPendingOutgoingFriendList <userID>; caUser
+CommandToMakeFriendRequest <userID> caDisp;
+CommandToGetPendingOutgoingFriendList <userID>; caDisp
 CommandToPersistChanges;
 **
 CommandToSelectUser caUser caPass;
-CommandToGetPendingIncomingFriendList <userID>; edUser
-CommandToRejectFriendRequest <userID> edUser;
+CommandToGetPendingIncomingFriendList <userID>; edDisp
+CommandToRejectFriendRequest <userID> edDisp;
 CommandToGetPendingIncomingFriendList <userID>;
 CommandToCancelChanges;
-CommandToGetPendingIncomingFriendList <userID>; edUser
-CommandToAcceptFriendRequest <userID> edUser;
-CommandToRetrieveFriendList <userID>; edUser
+CommandToGetPendingIncomingFriendList <userID>; edDisp
+CommandToAcceptFriendRequest <userID> edDisp;
+CommandToRetrieveFriendList <userID>; edDisp
 CommandToPersistChanges;
 **
 CommandToSelectUser edUser edPass;
-CommandToRetrieveFriendList <userID>; caUser
-CommandToUnFriend <userID> caUser;
+CommandToRetrieveFriendList <userID>; caDisp
+CommandToUnFriend <userID> caDisp;
 CommandToRetrieveFriendList <userID>;
 CommandToSelectUser caUser caPass;
 CommandToRetrieveFriendList <userID>;
 **
 **
 **
-
-
-
-
-
-
-

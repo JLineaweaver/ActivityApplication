@@ -8,6 +8,8 @@ import mockGateways.MockPersonRowDataGateway;
 
 import org.junit.Test;
 
+import dataMappers.MyThreadLocal;
+
 public class TestCommandToMakeFriendRequest 
 {
 
@@ -24,45 +26,49 @@ public class TestCommandToMakeFriendRequest
 	@Test
 	public void testOnePendingFriend()
 	{
+		UnitOfWork unit = new UnitOfWork();
+		UnitOfWork.newCurrent();
+		unit = UnitOfWork.getCurrent();
+
+		CommandToSelectUser cmd3 = new CommandToSelectUser("testPerson1", "testPerson1PW");
+		MyThreadLocal.unset();
 		
-		Person person1 = new Person("Matt", "","mattyc", 1);
-		Person person2 = new Person("John", "","Jonny", 2);
-		assertEquals(0, person1.myIncomingPendingFriends.incomingPendingFriends.size());
-		SelectedPerson.initializeSelectedPerson(person1); //Simulates selecting a person
+		cmd3.execute();
+		Person selectedPerson = cmd3.getResult();
+		Person testPerson2 = new Person("testPerson2", "testPerson2PW", "testPerson2DN", -1);
 		
-		CommandToMakeFriendRequest cmd = new CommandToMakeFriendRequest(person1.getUserID(), person2.getUserName());
+		CommandToMakeFriendRequest cmd2 = new CommandToMakeFriendRequest(selectedPerson.getUserID(), testPerson2.getUserName());
+		cmd2.execute();
 		
-		MockUnitOfWork.newCurrent();
-		cmd.testExecute();
-		Person result = cmd.getTestResult();
+		assertEquals(1, selectedPerson.myOutgoingPendingFriends.outgoingPendingFriends.size());
 		
-		assertEquals(1, person1.myIncomingPendingFriends.incomingPendingFriends.size());
-		assertEquals(1, result.myIncomingPendingFriends.incomingPendingFriends.size());
-		
-		Person.emptyMockDB();
 		SelectedPerson.resetSelectedPerson();
+		unit.emptyArrayLists();
 	}
 	
 	@Test
 	public void testMultiplePendingFrinds()
 	{
-		Person person1 = new Person("Matt", "","mattyc", 1);
-		Person person2 = new Person("John", "","Jonny", 2);
-		Person person3 = new Person("George", "","Georgy", 3);
-		SelectedPerson.initializeSelectedPerson(person1); // simulates selecting a person
+		UnitOfWork unit = new UnitOfWork();
+		UnitOfWork.newCurrent();
+		unit = UnitOfWork.getCurrent();
+
+		CommandToSelectUser cmd3 = new CommandToSelectUser("testPerson1", "testPerson1PW");
+		MyThreadLocal.unset();
 		
-		CommandToMakeFriendRequest cmd = new CommandToMakeFriendRequest(person1.getUserID(), person2.getUserName());
-		CommandToMakeFriendRequest cmd2 = new CommandToMakeFriendRequest(person1.getUserID(), person3.getUserName());
+		cmd3.execute();
+		Person selectedPerson = cmd3.getResult();
+		Person testPerson2 = new Person("testPerson2", "testPerson2PW", "testPerson2DN", -1);
+		Person testPerson3 = new Person("testPerson3", "testPerson3PW", "testPerson3DN", -1);
 		
-		MockUnitOfWork.newCurrent();
-		cmd.testExecute();
-		cmd2.testExecute();
-		Person result = cmd.getTestResult();
+		CommandToMakeFriendRequest cmd2 = new CommandToMakeFriendRequest(selectedPerson.getUserID(), testPerson2.getUserName());
+		CommandToMakeFriendRequest cmd1 = new CommandToMakeFriendRequest(selectedPerson.getUserID(), testPerson3.getUserName());
+		cmd2.execute();
+		cmd1.execute();
 		
-		assertEquals(2, person1.myIncomingPendingFriends.incomingPendingFriends.size());
-		assertEquals(2, result.myIncomingPendingFriends.incomingPendingFriends.size());
+		assertEquals(2, selectedPerson.myOutgoingPendingFriends.outgoingPendingFriends.size());
 		
-		Person.emptyMockDB();
 		SelectedPerson.resetSelectedPerson();
+		unit.emptyArrayLists();
 	}
 }

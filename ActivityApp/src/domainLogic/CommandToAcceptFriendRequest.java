@@ -44,10 +44,6 @@ public class CommandToAcceptFriendRequest implements Command
 		}
 	}
 	
-	public void testExecute()
-	{
-		person.TestAcceptFriendRequestCommand(userNameOfRequester);
-	}
 
 	/**
 	 * Nothing needs to be retrieved from this command

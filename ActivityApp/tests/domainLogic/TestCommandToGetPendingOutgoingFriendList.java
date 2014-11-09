@@ -6,73 +6,79 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import dataMappers.MyThreadLocal;
+
 public class TestCommandToGetPendingOutgoingFriendList {
 
 	@Test
 	public void testGetEmptyOutgoingFriendList() 
 	{
-		Person person = new Person("Matt", "pw", "MattyMatt", -2);
-		SelectedPerson.initializeSelectedPerson(person); //simulates selecting a person
-		CommandToGetPendingOutgoingFriendList cmd = new CommandToGetPendingOutgoingFriendList(person.getUserID());
-		cmd.testExecute();
-		assertEquals(0, cmd.getTestResult().size());
+		UnitOfWork unit = new UnitOfWork();
+		UnitOfWork.newCurrent();
+		unit = UnitOfWork.getCurrent();
+
+		CommandToSelectUser cmd3 = new CommandToSelectUser("testPerson1", "testPerson1PW");
+		MyThreadLocal.unset();
 		
-		Person.emptyMockDB();
+		cmd3.execute();
+		Person selectedPerson = cmd3.getResult();
+			
+		assertEquals(0, selectedPerson.myOutgoingPendingFriends.outgoingPendingFriends.size());
 		SelectedPerson.resetSelectedPerson();
+		unit.emptyArrayLists();
 	}
 	
 	@Test
 	public void testGetOutgoingPendingFriendList()
 	{
-		Person person = new Person("Matt", "pw", "MattyMatt", -2);
-		Person person2 = new Person("Fred", "pw", "FreddyFred", -9);
-		SelectedPerson.initializeSelectedPerson(person);//Simulates selecting a person
-		person.myOutgoingPendingFriends.outgoingPendingFriends.add(person2); //manually added a friend to the list
-		CommandToGetPendingOutgoingFriendList cmd = new CommandToGetPendingOutgoingFriendList(person.getUserID());
-		cmd.testExecute();
-		assertEquals(person2, cmd.getTestResult().get(0));
+		UnitOfWork unit = new UnitOfWork();
+		UnitOfWork.newCurrent();
+		unit = UnitOfWork.getCurrent();
+
+		CommandToSelectUser cmd3 = new CommandToSelectUser("testPerson1", "testPerson1PW");
+		MyThreadLocal.unset();
 		
-		Person.emptyMockDB();
+		cmd3.execute();
+		Person selectedPerson = cmd3.getResult();
+		Person testPerson2 = new Person("testPerson2", "testPerson2PW", "testPerson2DN", -1);
+			
+		assertEquals(0, selectedPerson.myOutgoingPendingFriends.outgoingPendingFriends.size());
+		
+		selectedPerson.myOutgoingPendingFriends.outgoingPendingFriends.add(testPerson2); //manually added a person to the list
+		CommandToGetPendingOutgoingFriendList pendingOutgoingCmd = new CommandToGetPendingOutgoingFriendList(selectedPerson.getUserID());
+		pendingOutgoingCmd.execute();
+		String result = pendingOutgoingCmd.toString();
+		
+		assertEquals("testPerson2DN", result);
+		
 		SelectedPerson.resetSelectedPerson();
+		unit.emptyArrayLists();
 	}
 	
 	@Test
 	public void testGetMultipleOutgoingPendingFriendList()
 	{
-		Person person = new Person("Matt", "pw", "MattyMatt", -2);
-		Person person2 = new Person("Fred", "pw", "FreddyFred", -9);
-		Person person3 = new Person("Josh", "pw", "JoshyJosh", -5);
-		SelectedPerson.initializeSelectedPerson(person); //simulates selecting a person
-		person.myOutgoingPendingFriends.outgoingPendingFriends.add(person2); //manually added a friend to the list
-		person.myOutgoingPendingFriends.outgoingPendingFriends.add(person3);
-		CommandToGetPendingOutgoingFriendList cmd = new CommandToGetPendingOutgoingFriendList(person.getUserID());
-		cmd.testExecute();
-		assertEquals(person2, cmd.getTestResult().get(0));
-		assertEquals(person3, cmd.getTestResult().get(1));
+		UnitOfWork unit = new UnitOfWork();
+		UnitOfWork.newCurrent();
+		unit = UnitOfWork.getCurrent();
+
+		CommandToSelectUser cmd3 = new CommandToSelectUser("testPerson1", "testPerson1PW");
+		MyThreadLocal.unset();
 		
-		Person.emptyMockDB();
+		cmd3.execute();
+		Person selectedPerson = cmd3.getResult();
+		Person testPerson2 = new Person("testPerson2", "testPerson2PW", "testPerson2DN", -1);
+		Person testPerson3 = new Person("testPerson3", "testPerson3PW", "testPerson3DN", -1);
+		
+		selectedPerson.myOutgoingPendingFriends.outgoingPendingFriends.add(testPerson2); //manually added a person to the list
+		selectedPerson.myOutgoingPendingFriends.outgoingPendingFriends.add(testPerson3); //manually added a person to the list
+		CommandToGetPendingOutgoingFriendList pendingOutgoingCmd = new CommandToGetPendingOutgoingFriendList(selectedPerson.getUserID());
+		pendingOutgoingCmd.execute();
+		String result = pendingOutgoingCmd.toString();
+		
+		assertEquals("testPerson2DN,testPerson3DN", result);
+		
 		SelectedPerson.resetSelectedPerson();
-	}
-	
-	@Test
-	public void testOutgoingPendingFriendListString()
-	{
-		{
-			Person person = new Person("Matt", "pw", "MattyMatt", -2);
-			Person person2 = new Person("Fred", "pw", "FreddyFred", -9);
-			Person person3 = new Person("Josh", "pw", "JoshyJosh", -5);
-			SelectedPerson.initializeSelectedPerson(person); //simulates selecting a person
-			
-			person.myOutgoingPendingFriends.outgoingPendingFriends.add(person2); //manually added a friend to the list
-			person.myOutgoingPendingFriends.outgoingPendingFriends.add(person3);
-			
-			CommandToGetPendingOutgoingFriendList cmd = new CommandToGetPendingOutgoingFriendList(person.getUserID());
-			cmd.testExecute();
-		
-			assertEquals("Fred,Josh", cmd.toString());
-			
-			Person.emptyMockDB();
-			SelectedPerson.resetSelectedPerson();
-		}
+		unit.emptyArrayLists();
 	}
 }

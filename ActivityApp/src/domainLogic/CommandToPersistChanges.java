@@ -27,10 +27,6 @@ public class CommandToPersistChanges implements Command
 
 	}
 	
-	public void testExecute()
-	{
-		person.testPersistChanges();
-	}
 
 	/**
 	 * Nothing needs to be returned here (null). The tests will retrieve

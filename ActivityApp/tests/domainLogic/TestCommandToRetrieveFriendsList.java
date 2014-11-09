@@ -6,26 +6,36 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import dataMappers.MyThreadLocal;
+
 public class TestCommandToRetrieveFriendsList {
 
 	@Test
 	public void testRetrieve() 
 	{
-		Person person1 = new Person("Matt", "","mattyc", 1);
-		Person person2 = new Person("John", "","Jonny", 2);
-		SelectedPerson.initializeSelectedPerson(person1); // simulates creating a person
+		UnitOfWork unit = new UnitOfWork();
+		UnitOfWork.newCurrent();
+		unit = UnitOfWork.getCurrent();
+
+		CommandToSelectUser cmd3 = new CommandToSelectUser("testPerson1", "testPerson1PW");
+		MyThreadLocal.unset();
 		
-		CommandToAcceptFriendRequest cmd = new CommandToAcceptFriendRequest(person1.getUserID(), person2.getUserName());
+		cmd3.execute();
+		Person selectedPerson = cmd3.getResult();
+		Person testPerson2 = new Person("testPerson2", "testPerson2PW", "testPerson2DN", -1);
 		
-		MockUnitOfWork.newCurrent();
-		cmd.testExecute();
-		assertEquals(1, person1.getNumberOfFriends());
-		CommandToRetrieveFriendList cmd1 = new CommandToRetrieveFriendList(person1.getUserID());
-		cmd1.testExecute();
-		assertEquals("John", cmd1.testToString());
+		CommandToAcceptFriendRequest cmd2 = new CommandToAcceptFriendRequest(selectedPerson.getUserID(), testPerson2.getUserName());
+		selectedPerson.myIncomingPendingFriends.incomingPendingFriends.add(testPerson2);
+		cmd2.execute();
 		
-		Person.emptyMockDB();
+		assertEquals(1, selectedPerson.getNumberOfFriends());
+		
+		CommandToRetrieveFriendList cmd1 = new CommandToRetrieveFriendList(selectedPerson.getUserID());
+		cmd1.execute();
+		assertEquals("testPerson2DN", cmd1.toString());
+		
 		SelectedPerson.resetSelectedPerson();
+		unit.emptyArrayLists();
 	}
 
 }

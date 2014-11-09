@@ -45,10 +45,7 @@ public class CommandToCreateUser implements Command
 		person.CreateUser(userName, password, displayName);
 	}
 	
-	public void testExecute()
-	{
-		person.testCreateUser(userName, password, displayName);
-	}
+
 	
 	/**
 	 * Get the display name this user is supposed to get
@@ -80,18 +77,13 @@ public class CommandToCreateUser implements Command
 		result = person.getUser();
 		return result;
 	}
+
 	
-	public Person getTestResult()
-	{
-		result = person.getTestUser();
-		return result;
-	}
-	
-	public String toString()
-	{
-		result = this.getResult();
-		return result.getUserName() + ":" + result.getPassword() + ":" + result.getDisplayName();
-	}
+//	public String toString()
+//	{
+//		result = this.getResult();
+//		return result.getUserName() + ":" + result.getPassword() + ":" + result.getDisplayName();
+//	}
 
 	/**
 	 * Get the username this use will need to enter to log in
