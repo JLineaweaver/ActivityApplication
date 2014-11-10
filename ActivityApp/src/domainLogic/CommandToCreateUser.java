@@ -79,11 +79,11 @@ public class CommandToCreateUser implements Command
 	}
 
 	
-//	public String toString()
-//	{
-//		result = this.getResult();
-//		return result.getUserName() + ":" + result.getPassword() + ":" + result.getDisplayName();
-//	}
+	public String toString()
+	{
+		result = this.getResult();
+		return result.getUserName() + ":" + result.getPassword() + ":" + result.getDisplayName();
+	}
 
 	/**
 	 * Get the username this use will need to enter to log in

@@ -24,13 +24,14 @@ CommandToRetrieveFriendList <userID>;
 CommandToSelectUser bradpitt pittspass;
 CommandToModifyUser <userID> angelina;
 CommandToCancelChanges;
+CommandToPersistChanges;
 ** TestCancelingChanges
 CommandToSelectUser bradpitt pittspass;
 CommandToMakeFriendRequest <userID> snapple;
 CommandToPersistChanges;
 CommandToGetPendingOutgoingFriendList <userID>; snapsmcgee
 CommandToMakeFriendRequest <userID> buttercup;
-CommandToGetPendingOutgoingFriendList <userID>; snapsmcgee optimus
+CommandToGetPendingOutgoingFriendList <userID>; snapsmcgee,optimus
 CommandToCancelChanges;
 CommandToGetPendingOutgoingFriendList <userID>; snapsmcgee
 CommandToSelectUser snapple snappass;
@@ -48,7 +49,7 @@ CommandToPersistChanges;
 CommandToSelectUser bradpitt pittspass;
 CommandToMakeFriendRequest <userID> snapple;
 CommandToPersistChanges;
-CommandToGetPendingOutgoingFriendList <userId>; snapsmcgee
+CommandToGetPendingOutgoingFriendList <userID>; snapsmcgee
 CommandToRejectFriendRequest <userID> snapple;
 CommandToPersistChanges;
 CommandToGetPendingOutgoingFriendList <userID>;
