@@ -1,20 +1,14 @@
 package domainLogic;
 
 import static org.junit.Assert.*;
-import gateways.PersonRowDataGateway;
-
-import java.sql.SQLException;
-import java.util.ArrayList;
-
-import mockGateways.MockPersonRowDataGateway;
-
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
-import dataMappers.DataMapper;
 import dataMappers.MyThreadLocal;
 
+/**
+ * @author josh
+ *
+ */
 public class TestCommandToAcceptFriendRequest 
 {
 	
@@ -34,6 +28,9 @@ public class TestCommandToAcceptFriendRequest
 		assertEquals("userNameOfRequester", cmd.getUserNameOfRequester());	
 	}
 	
+	/**
+	 * 
+	 */
 	@Test
 	public void testFriendRequest()
 	{
@@ -58,6 +55,9 @@ public class TestCommandToAcceptFriendRequest
 		unit.emptyArrayLists();
 	}
 	
+	/**
+	 * 
+	 */
 	@Test
 	public void testMultipleFriendRequests()
 	{

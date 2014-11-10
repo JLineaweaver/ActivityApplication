@@ -16,6 +16,9 @@ public class MyThreadLocal
 	getUserthreadlocal().set(dm);
 	}
 	 
+	/**
+	 * remove the thread local
+	 */
 	public static void unset() {
 	getUserthreadlocal().remove();
 	}
@@ -34,6 +37,9 @@ public class MyThreadLocal
 	return (DataMapper) getUserthreadlocal().get();
 	}
 
+	/**
+	 * @return return a ThreadLocal of type DataMapper
+	 */
 	public static ThreadLocal<DataMapper> getUserthreadlocal()
 	{
 		return userThreadLocal;

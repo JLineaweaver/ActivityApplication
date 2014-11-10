@@ -6,11 +6,20 @@ import java.sql.SQLException;
 
 import org.junit.Test;
 
+import domainLogic.Friend;
 import domainLogic.Person;
 
+/**
+ * @author josh
+ *
+ */
 public class TestDataMapper
 {
 
+	/**
+	 * Simple test testing the multiple findPerson methods
+	 * @throws SQLException
+	 */
 	@Test
 	public void test() throws SQLException
 	{
@@ -25,5 +34,26 @@ public class TestDataMapper
 		//p.setPassword("Woot");
 		pdm.storePerson(p);
 	}
+	
+	@Test
+	public void test2() throws SQLException
+	{
+		DataMapper pdm = MyThreadLocal.get();
+		Friend f = pdm.findFriend(5);
+		Person p = pdm.findDBPerson(2);
+		assertTrue(!f.getUserName().equals(""));
+		assertTrue(!p.getUserName().equals(""));
+		
+	}
 
+	@Test
+	public void test3() throws SQLException
+	{
+		DataMapper pdm = MyThreadLocal.get();
+		Person p = new Person();
+		pdm.createPerson(p);
+		p.setDisplayName("d");
+		pdm.storePerson(p);
+		
+	}
 }

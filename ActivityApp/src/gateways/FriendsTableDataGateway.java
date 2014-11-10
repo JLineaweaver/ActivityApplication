@@ -1,10 +1,12 @@
 package gateways;
-import java.sql.Array;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+/**
+ * @author josh
+ *
+ */
 public class FriendsTableDataGateway
 {
 		
@@ -12,12 +14,20 @@ public class FriendsTableDataGateway
 		ResultSet rs = null;
 		
 
+	/**
+	 * @param con
+	 * @throws SQLException
+	 */
 	public FriendsTableDataGateway(Connection con) throws SQLException {
 		this.con = con;
 			
 	}
 	
-	public ResultSet getFriends(int userID) {
+	/**
+	 * @param userID
+	 * @return ResultSet
+	 */
+	public ResultSet getFriendsRequester(int userID) {
 		ResultSet rs = null;
 		try
 		{
@@ -32,6 +42,30 @@ public class FriendsTableDataGateway
 		}
 		return rs;
 	}
+	
+	/**
+	 * @param userID
+	 * @return ResultSet
+	 */
+	public ResultSet getFriendsRequestee(int userID) {
+		ResultSet rs = null;
+		try
+		{
+			String sql = "SELECT * FROM Friends F WHERE userIDOfRequestee=?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1,userID);
+			rs = ps.executeQuery();
+		} catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rs;
+	}
+	/**
+	 * @param userID
+	 * @param username
+	 */
 	public void addFriend(int userID, String username) {
 		PersonRowDataGateway prdg = null;
 		try
@@ -57,6 +91,11 @@ public class FriendsTableDataGateway
 		}
 	}
 	
+	/**
+	 * @param userID
+	 * @param username
+	 * @throws SQLException
+	 */
 	public void removeFriend(int userID, String username) throws SQLException {
 		PersonRowDataGateway prdg = new PersonRowDataGateway(username, con);
 		int secondID = prdg.getID();

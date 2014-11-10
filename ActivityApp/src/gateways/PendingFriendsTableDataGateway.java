@@ -1,10 +1,12 @@
 package gateways;
-import java.sql.Array;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+/**
+ * @author josh
+ *
+ */
 public class PendingFriendsTableDataGateway
 {
 		
@@ -13,10 +15,18 @@ public class PendingFriendsTableDataGateway
 		
 	
 
+	/**
+	 * @param con
+	 * @throws SQLException
+	 */
 	public PendingFriendsTableDataGateway(Connection con) throws SQLException {
 		this.con = con;
 	}
 	
+	/**
+	 * @param userID
+	 * @return ResultSet
+	 */
 	public ResultSet getOutgoingPendingFriends(int userID) {
 		ResultSet rs = null;
 		try
@@ -33,6 +43,10 @@ public class PendingFriendsTableDataGateway
 		return rs;
 	}
 	
+	/**
+	 * @param userID
+	 * @return ResultSet
+	 */
 	public ResultSet getIncomingPendingFriends(int userID) {
 		ResultSet rs = null;
 		try
@@ -48,6 +62,10 @@ public class PendingFriendsTableDataGateway
 		}
 		return rs;
 	}
+	/**
+	 * @param userID
+	 * @param username
+	 */
 	public void addFriend(int userID, String username) {
 		PersonRowDataGateway prdg = null;
 		try
@@ -73,6 +91,10 @@ public class PendingFriendsTableDataGateway
 		}
 	}
 	
+	/**
+	 * @param userID
+	 * @param username
+	 */
 	public void removeFriend(int userID, String username) {
 		PersonRowDataGateway prdg = null;
 		try

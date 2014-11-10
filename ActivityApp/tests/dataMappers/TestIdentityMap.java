@@ -6,9 +6,16 @@ import org.junit.Test;
 
 import domainLogic.Person;
 
+/**
+ * @author josh
+ *
+ */
 public class TestIdentityMap
 {
 
+	/**
+	 * Simple test making sure you can add to the Identity Map
+	 */
 	@Test
 	public void test()
 	{

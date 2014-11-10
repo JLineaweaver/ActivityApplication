@@ -3,17 +3,14 @@ package gateways;
 
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
-import domainLogic.FriendsList;
-import domainLogic.OutgoingPendingFriendList;
-import domainLogic.Person;
-import domainLogic.Friend;
-
+/**
+ * @author josh
+ *
+ */
 public class PersonRowDataGateway
 {
 	int id = -1;
@@ -25,12 +22,23 @@ public class PersonRowDataGateway
 	
 	
 
+	/**
+	 * @param id
+	 * @param con
+	 * @throws SQLException
+	 */
 	public PersonRowDataGateway(int id, Connection con) throws SQLException {
 	
 		this.id = id;
 		this.con = con;
 	}
 	
+	/**
+	 * @param username
+	 * @param password
+	 * @param con
+	 * @throws SQLException
+	 */
 	public PersonRowDataGateway(String username, String password, Connection con) throws SQLException {
 			this.con = con;
 			this.username = username;
@@ -51,6 +59,11 @@ public class PersonRowDataGateway
 			}
 	}
 	
+	/**
+	 * @param username
+	 * @param con
+	 * @throws SQLException
+	 */
 	public PersonRowDataGateway(String username, Connection con) throws SQLException {
 		
 			this.con = con;
@@ -72,6 +85,9 @@ public class PersonRowDataGateway
 	
 	
 	
+	/**
+	 * @return ResultSet
+	 */
 	public ResultSet findPerson() {
 		ResultSet rs = null;
 		try
@@ -90,12 +106,17 @@ public class PersonRowDataGateway
 		return rs;
 	}
 	
+	/**
+	 * @return id
+	 */
 	public int getID() {
 		return id;
 	}
 	
+	/**
+	 * @param displayName
+	 */
 	public void updateDisplayName(String displayName) {
-		ResultSet rs = null;
 		try
 		{
 			String sql = "UPDATE Person P SET displayName=? WHERE P.userID = ?";
@@ -112,6 +133,11 @@ public class PersonRowDataGateway
 		
 	}
 	
+	/**
+	 * @param userName
+	 * @param displayName
+	 * @param password
+	 */
 	public void createPerson(String userName, String displayName, String password) {
 		try
 		{
