@@ -27,31 +27,11 @@ public class FriendsTableDataGateway
 	 * @param userID
 	 * @return ResultSet
 	 */
-	public ResultSet getFriendsRequester(int userID) {
+	public ResultSet getFriends(int userID) {
 		ResultSet rs = null;
 		try
 		{
 			String sql = "SELECT * FROM Friends F WHERE userIDOfRequester=?";
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1,userID);
-			rs = ps.executeQuery();
-		} catch (SQLException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return rs;
-	}
-	
-	/**
-	 * @param userID
-	 * @return ResultSet
-	 */
-	public ResultSet getFriendsRequestee(int userID) {
-		ResultSet rs = null;
-		try
-		{
-			String sql = "SELECT * FROM Friends F WHERE userIDOfRequestee=?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1,userID);
 			rs = ps.executeQuery();

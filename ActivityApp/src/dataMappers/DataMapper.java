@@ -258,7 +258,7 @@ public class DataMapper
 		{
 			ftdg = new FriendsTableDataGateway(con);
 		
-		ResultSet rs = ftdg.getFriendsRequester(ID);
+		ResultSet rs = ftdg.getFriends(ID);
 		friendList = new ArrayList<Friend>();
 		int requestee;
 		int requester;
@@ -271,19 +271,6 @@ public class DataMapper
 			 else {
 			friendList.add(findFriend(requestee));
 			 }
-		} 
-			 rs = ftdg.getFriendsRequestee(ID);
-				friendList = new ArrayList<Friend>();
-				
-				while(rs.next()) {
-					 requestee = rs.getInt("UserIDOfRequestee");
-					 requester = rs.getInt("UserIDOfRequester");
-					 if(requestee == ID) {
-						 friendList.add(findFriend(requester));
-					 }
-					 else {
-					friendList.add(findFriend(requestee));
-					 }
 		}
 		} catch (SQLException e)
 		{
