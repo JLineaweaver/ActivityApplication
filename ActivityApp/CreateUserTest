@@ -1,3 +1,5 @@
-CommandToSelectUser henry pw2;
-CommandToRetrieveFriendList <userID>; Matthew
+CommandToSelectUser puertorico password3;
+CommandToGetPendingIncomingFriendList <userID>;
+CommandToMakeFriendRequest <userID> russia;
+CommandToMakeFriendRequest <userID> murica;
 CommandToPersistChanges;

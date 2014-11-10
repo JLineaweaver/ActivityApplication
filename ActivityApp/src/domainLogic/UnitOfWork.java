@@ -25,8 +25,8 @@ public class UnitOfWork
 	
 	public void registerDirty(DomainObject obj)
 	{
-		if(!dirtyObjects.contains(obj))
-		{
+//		if(!dirtyObjects.contains(obj))
+//		{
 			if(newObjects.contains(obj))
 			{
 				newObjects.remove(obj);
@@ -35,10 +35,10 @@ public class UnitOfWork
 			{
 				dirtyObjects.add(obj);
 			}
-		}else
-		{
-			dirtyObjects.remove(obj); //Want the most recent object (Person)
-		}
+//		}else
+//		{
+//			dirtyObjects.remove(obj); //Want the most recent object (Person)
+//		}
 	}
 	
 	
@@ -55,7 +55,7 @@ public class UnitOfWork
 		{
 			Person.StorePerson((Person)dirtyObjects.get(i));
 		}
-		
+		Person.resetMap();
 	}
 
 	private void insertNew() throws SQLException 

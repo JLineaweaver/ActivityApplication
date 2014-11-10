@@ -166,7 +166,6 @@ public class Person extends DomainObject
 	{
 		DataMapper pdm = MyThreadLocal.get();
 		pdm.storePerson(p);
-		pdm.resetMap();
 	}
 	
 	/**
@@ -325,6 +324,20 @@ public class Person extends DomainObject
 	/**
 	 * 
 	 * @param userID of the selected person
+	 * Already found that person, so I do not need to find that person again.
+	 * Set user = to the selected person.
+	 * Then I can call getTheOutgoingPendingFriendList to grab the user's/ selected person's 
+	 * outgoing pending friends.
+	 */
+	public void PendingOutgoingFriendList() 
+	{
+		user = SelectedPerson.getSelectedPerson();
+	}
+
+
+	/**
+	 * 
+	 * @param userID of the selected person
 	 * Already found that person, so I don't need to find that person again.
 	 * Goes through that person's pending incoming friend list and toStrings it.
 	 */
@@ -347,6 +360,8 @@ public class Person extends DomainObject
 	{
 		UnitOfWork unit = UnitOfWork.getCurrent();
 		unit.emptyArrayLists();
+		DataMapper pdm = MyThreadLocal.get();
+		pdm.resetMap();
 	}
 	
 
@@ -358,20 +373,6 @@ public class Person extends DomainObject
 	}
 	
 
-	/**
-	 * 
-	 * @param userID of the selected person
-	 * Already found that person, so I do not need to find that person again.
-	 * Set user = to the selected person.
-	 * Then I can call getTheOutgoingPendingFriendList to grab the user's/ selected person's 
-	 * outgoing pending friends.
-	 */
-	public void PendingOutgoingFriendList() 
-	{
-		user = SelectedPerson.getSelectedPerson();
-	}
-	
-	
 	public ArrayList<Person> getTheOutgoingPendingFriendList()
 	{
 		return this.myOutgoingPendingFriends.getPendingFriendList();
@@ -395,6 +396,11 @@ public class Person extends DomainObject
 		myFriends = fl;
 		myIncomingPendingFriends = ipfl;
 		myOutgoingPendingFriends = opfl;
+	}
+
+	public static void resetMap() {
+		DataMapper pdm = MyThreadLocal.get();
+		pdm.resetMap();
 	}
 	
 }
